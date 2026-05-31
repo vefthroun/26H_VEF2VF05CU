@@ -13,15 +13,15 @@
 ---
 
 ### Verkefnalýsing 
-Útfærðu vef sem heldur utan um vörulista (Pizzur) með Flask. Notaðu lista með dictionaries (vörulistinn) sem gagnagrind (datastructure).  Hér fyrir neðan er gagnagrind sem þú getur notað en þú mátt búa til þína eigin.  Hér eru [myndir](https://github.com/vefthroun/Vefforritun1/tree/main/Verkefni2/img) sem þú getur notað.
+Útfærðu vef sem heldur utan um vörulista (Pizzur) með Flask. Notaðu lista með dictionaries (vörulistinn) sem gagnagrind (datastructure).  Hér fyrir neðan er gagnagrind sem þú getur notað en þú mátt búa til þína eigin.  Hér eru [myndir](namsefni/img) sem þú getur notað.
 
 1. Vefurinn er hlutaður niður með **include** í Jinja2; nav (valmynd), footer (höfundur verkefnis) og vörulista. **10%**
-1. Valmynd inniheldur hlekki á forsíðu og **3** flokka úr gagnagrind kjöt / sterk / vegan.  Notaðu [url_for](https://github.com/vefthroun/Vefforritun1/blob/main/Verkefni1/namsefni/urlfor.py) fyrir hlekkina  **10%**
-1. Forsíða birtir vörulistann snyrtilega þar sem fram þarf að koma nafn vöru, verð og mynd. Notandi þarf að geta valið eina vöru til að fá nánari upplýsingar um valda vöru ( næsti liður ).  Sýndu einnig heildarfjölda vara á síðunni. Notaðu [url_for](https://github.com/vefthroun/Vefforritun1/blob/main/Verkefni1/namsefni/urlfor.py) til að birta myndir  **20%**
+1. Valmynd inniheldur hlekki á forsíðu og **3** flokka úr gagnagrind kjöt / sterk / vegan.  Notaðu [url_for](/namsefni/urlfor.py) fyrir hlekkina  **10%**
+1. Forsíða birtir vörulistann snyrtilega þar sem fram þarf að koma nafn vöru, verð og mynd. Notandi þarf að geta valið eina vöru til að fá nánari upplýsingar um valda vöru ( næsti liður ).  Sýndu einnig heildarfjölda vara á síðunni. Notaðu [url_for](/namsefni/urlfor.py) til að birta myndir  **20%**
 1. Vörusíða ( undirsíða ) inniheldur; nafn, verð, álegg (`<ul>`), flokk og mynd.  Notaðu `div` til að halda utan um valda vöru. **25%**
 1. Flokkur (undirsíða). Ef notandi velur t.d. hlekkinn **vegan** úr valmynd þá birtist vefsíða einungis með Pizzum úr þeim flokki. **25%**
 1. Settu upp 404 error route og viðeigandi html vefsíðu sem er birt ef upp kemur 404 villa **5%** 
-1. Notaðu [New.css]([https://new.css/](https://new.css/)) safnið fyrir uppsetningu og framsetningu á vef, eigið safn eða hvað sem þú vilt nota. **5%**
+1. Notaðu [Pico css](https://picocss.com/) safnið fyrir uppsetningu og framsetningu á vef, eigið safn eða hvað sem þú vilt nota. **5%**
 
 Engin harðkóðun!
 
