@@ -11,7 +11,7 @@
 
 Útfærðu innskráningarsíðu til að komast inná admin síðu þar sem notandi getur búið til blogfærslu sem er svo vistuð (bætt við) í gagnagrind (listi af dictionaries í .py skrá). Allar blofærslur birtast á forsíðu.
 
-![v3.svg](https://github.com/vefthroun/Vefforritun1/blob/main/Verkefni3/v3.svg)
+![v3.svg](v3.svg)
 
 1. Innskráningarsíða (login) sem inniheldur: **20%**
     - HTML <!-- [Flask-WTF](https://flask-wtf.readthedocs.io/en/1.2.x/) viðbótina til að búa til --> form með inntaksreitina; notandi (netfang) og lykilorð.
