@@ -11,7 +11,7 @@
 
 ### Verkefni
 
-1. [verkefni. Flask grunnatriði, Jinja: templates.](Verkefni1/README.md)
-1. [verkefni. HTML Form, Form vinnsla, CRUD.](Verkefni2/README.md)
-1. [verkefni. API, JSON skráarvinnsla.](Verkefni3/README.md)
-1. [verkefni. Lokaverkefni.](Verkefni4/README.md)
+1. [verkefni. Flask grunnatriði, Jinja: templates.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni1/namsefni)
+1. [verkefni. HTML Form, Form vinnsla, CRUD.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni2/namsefni)
+1. [verkefni. API, JSON skráarvinnsla.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni13/namsefni)
+1. [verkefni. Lokaverkefni.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni4/namsefnimd)
