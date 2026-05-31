@@ -6,3 +6,12 @@
 
 ### Hvað er Flask
 [Flask](https://flask.palletsprojects.com/en/2.3.x/) er Python veframmi (_web framework_) sem er byggður á litlum kjarna og auðvelt er að framlengja hann með viðbótum í pakkaformi (_package manager_). Flask er talið meira _Pythonic_ en Django veframminn vegna þess að Flask vefforrit er skýrara (_explicit_). 
+
+---
+
+### Verkefni
+
+1. [verkefni. Flask grunnatriði, Jinja: templates.](Verkefni1/README.md)
+1. [verkefni. HTML Form, Form vinnsla, CRUD.](Verkefni2/README.md)
+1. [verkefni. API, JSON skráarvinnsla.](Verkefni3/README.md)
+1. [verkefni. Lokaverkefni.](Verkefni4/README.md)
