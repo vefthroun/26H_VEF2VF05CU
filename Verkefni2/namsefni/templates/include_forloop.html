@@ -1,0 +1,11 @@
+<html>
+  <body>
+  
+    {% for post in posts %}
+    {% if post.author.username == "Susan" %}
+      {% include 'post.html' %}
+    {% endif %}
+  {% endfor %}
+
+  </body>
+</html>

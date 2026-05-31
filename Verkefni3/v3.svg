@@ -1,0 +1,88 @@
+<svg width="1400" height="630" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Styling for wireframes -->
+  <style>
+    .header { font-family: Arial; font-size: 18px; font-weight: bold; fill: black; }
+    .label { font-family: Arial; font-size: 14px; fill: black; }
+    .input { fill: #eaeaea; stroke: #cccccc; }
+    .button { fill: #4CAF50; stroke: #388E3C; }
+    .button-text { font-family: Arial; font-size: 14px; fill: white; font-weight: bold; text-anchor: middle; }
+    .flash { font-family: Arial; font-size: 12px; fill: #d9534f; }
+    .post { fill: #f7f7f7; stroke: #dddddd; }
+    .arrow-text { font-family: Arial; font-size: 12px; fill: black; }
+  </style>
+
+  <!-- Login Page -->
+  <rect x="50" y="50" width="400" height="350" stroke="black" fill="transparent" />
+  <text x="70" y="90" class="header">Login Page</text>
+  <text x="70" y="150" class="label">Email:</text>
+  <rect x="150" y="130" width="250" height="30" class="input" />
+  <text x="70" y="200" class="label">Password:</text>
+  <rect x="150" y="180" width="250" height="30" class="input" />
+  <rect x="150" y="240" width="100" height="40" class="button" />
+  <text x="200" y="267" class="button-text">Login</text>
+  <text x="70" y="320" class="flash">[Flash Message Area]</text>
+
+  <!-- Admin Page -->
+  <rect x="500" y="50" width="400" height="450" stroke="black" fill="transparent" />
+  <text x="520" y="90" class="header">Admin Page</text>
+  <text x="520" y="150" class="label">Title:</text>
+  <rect x="600" y="130" width="250" height="30" class="input" />
+  <text x="520" y="200" class="label">Content:</text>
+  <rect x="600" y="180" width="250" height="150" class="input" />
+  <rect x="600" y="350" width="120" height="40" class="button" />
+  <text x="660" y="377" class="button-text">Submit</text>
+  <text x="520" y="420" class="flash">[Flash Message Area]</text>
+
+  <!-- Front Page -->
+  <rect x="950" y="50" width="400" height="550" stroke="black" fill="transparent" />
+  <text x="970" y="90" class="header">Front Page</text>
+  <text x="970" y="150" class="label">All Blog Posts</text>
+
+  <!-- Blog Post 1 -->
+  <rect x="970" y="180" width="360" height="100" class="post" />
+  <text x="990" y="205" class="label">[Title 1]</text>
+  <text x="990" y="225" class="label">[Content snippet]</text>
+  <text x="990" y="245" class="label">[Author] - [Date]</text>
+
+  <!-- Blog Post 2 -->
+  <rect x="970" y="300" width="360" height="100" class="post" />
+  <text x="990" y="325" class="label">[Title 2]</text>
+  <text x="990" y="345" class="label">[Content snippet]</text>
+  <text x="990" y="365" class="label">[Author] - [Date]</text>
+
+  <!-- Blog Post 3 -->
+  <rect x="970" y="420" width="360" height="100" class="post" />
+  <text x="990" y="445" class="label">[Title 3]</text>
+  <text x="990" y="465" class="label">[Content snippet]</text>
+  <text x="990" y="485" class="label">[Author] - [Date]</text>
+
+  <!-- Decision: Valid/Invalid -->
+  <polygon points="250,450 300,500 250,550 200,500" stroke="black" fill="transparent" />
+  <text x="230" y="485" class="label">Login</text>
+  <text x="220" y="500" class="label">Success?</text>
+
+  <!-- Arrows Connecting the Pages -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000" />
+    </marker>
+  </defs>
+
+  <!-- Arrow from Login to Decision -->
+  <line x1="250" y1="400" x2="250" y2="440" stroke="black" marker-end="url(#arrow)" />
+  <text x="260" y="430" class="arrow-text">Attempt Login</text>
+
+  <!-- Arrow from Decision to Admin (Success) -->
+  <line x1="300" y1="500" x2="500" y2="500" stroke="black" marker-end="url(#arrow)" />
+  <text x="380" y="490" class="arrow-text">Yes</text>
+
+  <!-- Arrow from Decision to Login (Fail) -->
+  <line x1="200" y1="500" x2="200" y2="410" stroke="black" marker-end="url(#arrow)" />
+  <text x="140" y="430" class="arrow-text">No</text>
+
+  <!-- Arrow from Admin to Front Page -->
+  <line x1="900" y1="270" x2="940" y2="270" stroke="black" marker-end="url(#arrow)" />
+  <text x="905" y="260" class="arrow-text">Submit</text>
+
+</svg>
