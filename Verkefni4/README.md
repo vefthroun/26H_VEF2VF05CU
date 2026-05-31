@@ -58,7 +58,6 @@ Eftirfarandi verkþættir eru metnir til einkunna: <br>
 1. Annað sem nemendur skýra frá í Innu, "_Athugasemd til kennara_" **(5%)**
 -->
 
----
 
 ---
 
