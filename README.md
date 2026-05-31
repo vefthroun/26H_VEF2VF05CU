@@ -16,4 +16,4 @@
 1. [verkefni. API, JSON skráarvinnsla.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni3)
 1. [verkefni. Lokaverkefni.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni4)
 
-> Verkefnamöppurnar innihalda verklýsingu og námsefni sem tilheirir því.
+> hver verkefnamappa inniheldur verklýsingu og námsefni sem tilheyrir því.
