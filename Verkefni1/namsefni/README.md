@@ -23,10 +23,10 @@
 ### Jinja
 
 #### Sýnidæmi
-1. [hlekkir og static](static.py)
-1. [breytur og dictionary](breyta_og_dictionary.py)
-1. [for in lykkja með lista](listi.py)
-1. [for in lykkja með dictionary](dictionary_lykkja.py)
+1. [hlekkir og static](1-static.py)
+1. [breytur og dictionary](2-breyta_og_dictionary.py)
+1. [for in lykkja með lista](3-listi.py)
+1. [for in lykkja með dictionary](4-dictionary_lykkja.py)
 
 #### Vefgreinar
 1. [Jinja](https://jinja.palletsprojects.com/en/3.0.x/templates/) 
