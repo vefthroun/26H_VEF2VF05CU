@@ -15,3 +15,5 @@
 1. [verkefni. HTML Form, Form vinnsla, CRUD.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni2/namsefni)
 1. [verkefni. API, JSON skráarvinnsla.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni13/namsefni)
 1. [verkefni. Lokaverkefni.](https://github.com/vefthroun/26H_VEF2VF05CU/tree/main/Verkefni4/namsefnimd)
+
+> Verkefnamöppurnar innihalda verklýsingu og námsefni sem tilheirir því.
