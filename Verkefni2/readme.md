@@ -31,7 +31,11 @@
 
 ---
 
-### Námsmat og skil 
-- Gefið er fullt fyrir hvern lið sem er fullnægjandi, hálft ef hann er að hluta til kominn og ekkert ef hann vantar. 
-- Skilaðu þjappaðri ( zip/rar ) möppu með öllum skrám (ekki venv) á Innu.
+### Námsmat 
+
+Sundurliðun námsmats er í verkefni 2 **í Canvas**
+
+### Verkefnaskil
+
+Skilaðu möppu með öllum skrám verkefnisins í **.zip skrá**  í Canvas (**ath!** ekki skila **venv** möppu).
 
