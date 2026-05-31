@@ -1,4 +1,5 @@
 ## Verkefni 4 
+
 - 25% af heildareinkunn
 - **Lykilmatsþáttur**
 - Viðfangsefni: Allt námsefni
