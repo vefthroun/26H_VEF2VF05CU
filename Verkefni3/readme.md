@@ -1,4 +1,5 @@
 ## Verkefni 3  
+
 - 20% af heildareinkunn
 - Viðfangsefni:
   - CRUD aðgerðir með JSON / [TinyDB](https://tinydb.readthedocs.io/en/latest/getting-started.html)

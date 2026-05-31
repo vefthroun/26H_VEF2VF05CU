@@ -1,4 +1,5 @@
 ## Verkefni 1 
+
 - 15% af heildareinkunn
 - Viðfangsefni: 
    1. Uppsetning á vinnuumverfi ( templates og static möppur ) / VENV
