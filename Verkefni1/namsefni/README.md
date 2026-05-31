@@ -1,5 +1,9 @@
 ### Routing
 
+#### Uppsetning vefþróunarsvæðis
+
+- [How to build a Virtual Environment](how-to-build-venv/README.md)
+
 #### Sýnidæmi
 1. [Flask uppsetning og Halló heimur](namsefni/halloheimur.md)
 1. [Static Routing](namsefni/staticRoutes.py) 
