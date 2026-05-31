@@ -11,7 +11,7 @@
 
 ### Verkefni
 
-1. [verkefni. Flask grunnatriði, Jinja: templates.](Verkefni1/)
-1. [verkefni. HTML Form, Form vinnsla, CRUD.](Verkefni2/)
-1. [verkefni. API, JSON skráarvinnsla.](Verkefni3/)
-1. [verkefni. Lokaverkefni.](Verkefni4/)
+1. [verkefni. Flask grunnatriði, Jinja: templates.](Verkefni1/README.md)
+1. [verkefni. HTML Form, Form vinnsla, CRUD.](Verkefni2/README.md)
+1. [verkefni. API, JSON skráarvinnsla.](Verkefni3/README.md)
+1. [verkefni. Lokaverkefni.](Verkefni4/README.md)
