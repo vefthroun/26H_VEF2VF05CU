@@ -1,32 +1,99 @@
-### Routing
-
-#### Sýnidæmi
-1. [Flask uppsetning og Halló heimur](namsefni/halloheimur.md)
-1. [Static Routing](namsefni/staticRoutes.py) 
-1. [Static files](namsefni/staticFiles.py)
-1. [Error Handling](namsefni/errorHandlingStatusCodes.py)
-1. [url_for fallið](namsefni/urlfor.py)
-1. [Basic Data structure](namsefni/datastructures.py)
-
-#### Vefgreinar
-
-1. [Quick start: Flask Routing](https://flask.palletsprojects.com/en/3.0.x/quickstart/)
-1. [The Art of Routing in Flask](https://hackersandslackers.com/flask-routes)
-1. [Query Strings (pdf)](https://github.com/vefthroun/Namsefni/blob/main/1-HTTPS/QueryString_GETRequest_Routing.pdf)
-2. [The HTTP Protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview)
+## Verkefni 1 
+- 15% af heildareinkunn
+- Viðfangsefni: 
+   1. Uppsetning á vinnuumverfi ( templates og static möppur ) / VENV
+   1. Python gagnagrindur ( list og dict )
+   1. Static / Dynamic Routing
+   1. Static files: CSS og myndir
+   1. Jinja2: templates, include,  if-statement og for-loop
+   1. url_for
+   1. 404 Error route
 
 ---
 
-### Jinja
+### Verkefnalýsing 
+Útfærðu vef sem heldur utan um vörulista (Pizzur) með Flask. Notaðu lista með dictionaries (vörulistinn) sem gagnagrind (datastructure).  Hér fyrir neðan er gagnagrind sem þú getur notað en þú mátt búa til þína eigin.  Hér eru [myndir](https://github.com/vefthroun/Vefforritun1/tree/main/Verkefni2/img) sem þú getur notað.
 
-#### Sýnidæmi
-1. [hlekkir og static](namsefni/static.py)
-1. [breytur og dictionary](namsefni/breyta_og_dictionary.py)
-1. [for in lykkja með lista](namsefni/listi.py)
-1. [for in lykkja með dictionary](namsefni/dictionary_lykkja.py)
+1. Vefurinn er hlutaður niður með **include** í Jinja2; nav (valmynd), footer (höfundur verkefnis) og vörulista. **10%**
+1. Valmynd inniheldur hlekki á forsíðu og **3** flokka úr gagnagrind kjöt / sterk / vegan.  Notaðu [url_for](https://github.com/vefthroun/Vefforritun1/blob/main/Verkefni1/namsefni/urlfor.py) fyrir hlekkina  **10%**
+1. Forsíða birtir vörulistann snyrtilega þar sem fram þarf að koma nafn vöru, verð og mynd. Notandi þarf að geta valið eina vöru til að fá nánari upplýsingar um valda vöru ( næsti liður ).  Sýndu einnig heildarfjölda vara á síðunni. Notaðu [url_for](https://github.com/vefthroun/Vefforritun1/blob/main/Verkefni1/namsefni/urlfor.py) til að birta myndir  **20%**
+1. Vörusíða ( undirsíða ) inniheldur; nafn, verð, álegg (`<ul>`), flokk og mynd.  Notaðu `div` til að halda utan um valda vöru. **25%**
+1. Flokkur (undirsíða). Ef notandi velur t.d. hlekkinn **vegan** úr valmynd þá birtist vefsíða einungis með Pizzum úr þeim flokki. **25%**
+1. Settu upp 404 error route og viðeigandi html vefsíðu sem er birt ef upp kemur 404 villa **5%** 
+1. Notaðu [New.css]([https://new.css/](https://new.css/)) safnið fyrir uppsetningu og framsetningu á vef, eigið safn eða hvað sem þú vilt nota. **5%**
 
-#### Vefgreinar
-1. [Jinja](https://jinja.palletsprojects.com/en/3.0.x/templates/) 
-1. [What is Jinja2?](https://python-web.teclado.com/section07/lectures/03_what_is_jinja2/)
-1. [Variables & dictionary](https://youtu.be/pJ8V51XJuf0?list=PLXmMXHVSvS-ABlT4k4eS3YPJSnPUozw04) (video)
-1. [Primer on Jinja Templating](https://realpython.com/primer-on-jinja-templating/)
+Engin harðkóðun!
+
+#### Skráarskipulag
+- Templateskrár sem í grunninn byggir á HTML geymast í möppu sem nefnist `templates`.
+- Stílsíður (CSS), myndir, JavaScript og önnur `binary` skjöl fara í möppu sem nefnist `static`.
+- Gögn eru ýmist vistuð í lista, dictionary, skrám eða gagnagrunna. Innihald (gögn) eiga aldrei að vera skrifuð beint í html!
+
+#### Gögn
+
+```python
+# Dæmi dictionary í list.
+
+menu =  [
+        {
+            "id": 0,
+            "nafn": "El Peppó Xtra",
+            "mynd": "pizza0.JPG",
+            "verd":1600,
+            "álegg":["Xtra pepperóni", "Xtra ostur", "Xtra Sósa"],
+            "flokkur":"kjöt"
+        },
+        {
+            "id": 1,
+            "nafn": "El Vegó",
+            "mynd": "pizza1.JPG",
+            "verd":1400,
+            "álegg":["Paprika", "Laukur", "Ananas"],
+            "flokkur":"vegan"
+        },
+        {
+            "id": 2,
+            "nafn": "Pizza MOI",
+            "mynd": "pizza2.JPG",
+            "verd":2000,
+            "álegg":["Banani", "Ananas", "Lárviðarlauf"],
+            "flokkur":"vegan"
+        },
+        {
+            "id": 3,
+            "nafn": "El Logos",
+            "mynd": "pizza3.JPG",
+            "verd":1500,
+            "álegg":["Spicy Pepperoni", "Chilli Pepper", "Hot Sauce", "Laukur"],
+            "flokkur":"sterk"
+        },
+                {
+            "id": 4,
+            "nafn": "Pizza Domo",
+            "mynd": "pizza4.JPG",
+            "verd":2500,
+            "álegg":["Nautahakk", "Paprika", "Laukur"],
+            "flokkur":"kjöt"
+        },
+        {
+            "id": 5,
+            "nafn": "El Grande",
+            "mynd": "pizza5.JPG",
+            "verd":3000,
+            "álegg":["Pepperoni", "Skinka", "Nautahakk", "Paprika", "Laukur"],
+            "flokkur":"kjöt"
+        }
+    ]
+
+```
+
+**Punktar**
+-  Notaðu `id` úr gagnagrind fyrir url í dynamic route
+-  dæmi um hlekk með _**url_for**_ `<a href="{{ url_for('flokkur', fl='vegan') }}" ` á dýnamískt route  `@app.route('/flokkur/<fl>')`
+-  Þú gætir þurft að breyta streng í heiltölu t.d. id = int("3")  # breytum "3" í 3 með int()
+
+---
+
+### Námsmat og skil 
+Gefið er fullt fyrir hvern lið sem er fullnægjandi, hálft ef hann er að hluta til kominn og ekkert ef hann vantar. Skilaðu möppu með öllum skrám (ekki venv möppu) á Innu.
+

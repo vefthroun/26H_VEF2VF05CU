@@ -1,102 +1,64 @@
-## JSON
-
-[JSON](https://realpython.com/python-json/) er vinsælt opið gagnaskiptasnið. Uppbygging samanstendur af eigindi (key) og gildi (value) pörum. JSON er notað með ýmsum forritunarmálum. 
-
-<details>
-<summary>JSON málskipan</summary>
-<br>
-  
- * key/value parasamband
- * {}, slaufusvigi eru utan um JSON object og innri objecta
- * key verður að vera með **tvöföldum gæsalöppum** og vera strengur
- * key/value parasambönd eru aðgreind með kommu
- * Ekki hægt að commenta í JSON skrá
- * JSON skráarsnið er með .json endingu
- * Þú getur notað JSONLint til að validate JSON. http://jsonlint.com/ 
-
-</details>
-
-<details>
-<summary> Kóðadæmi</summary>
-<br>
-
-1. [JSON sýnidæmi](JSON/2_JSON_EXAMPLES.json)
-1. [JSON í Dictionary](JSON/3_JsonToDictionary.py)
-1. [Dictionary í JSON](JSON/4_dictionaryToJson.py)
-1. [Að lesa úr JSON skrá](JSON/5_lesa_skra.py)
-1. [Að skrifa í skrá](JSON/6_skrifaSkra.py)
-1. [Að skrifa í JSON skrá](JSON/6_skrifa_Json_skra.py)
-1. [Að lesa úr JSON skrá hýst á Github (https) með urllib](JSON/7_urllib_request.py)
-1. [Að sækja JSON frá API](JSON/API.py) 
-
-<!-- 
-1. Flask: [Að skila JSON](JSON/Flask_return_JSON.py)
-1. Flask: [Að skila JSON með Jsonify](JSON/jsonify.py)
-1. [Að vinna úr dictionary sem kemur frá API](JSON/8_dictionary_API.py)
--->
-
-</details>
-
-<details>
-<summary>Bjargir</summary>
-
-* [CRUD aðgerðir með dictionary](https://www.freecodecamp.org/news/everything-you-need-to-know-about-python-dictionaries/)
-* [CRUD aðgerðir með JSON skrá](https://tecadmin.net/crud-operations-on-json-files-with-python/#google_vignette)
-* [JSON Support in Flask](https://tedboy.github.io/flask/interface_api.json_support.html#module-flask.json)
-* [Python's urllib.request for HTTP Requests](https://realpython.com/urllib-request/)
-* [Working with JSON data](https://www.youtube.com/watch?v=9N6a-VLBa2I) _(YouTube)_
-* [Append to JSON file using Python](https://www.geeksforgeeks.org/append-to-json-file-using-python/)
-* [CRUD aðgerðir með Flask og JSON](https://github.com/oritzio/flask_crud_json)
-* [REST API CRUD operations, beginners guide](https://medium.com/@mathur.danduprolu/building-restful-apis-with-flask-a-beginners-guide-to-crud-operations-part-2-7-4ff74083a3ee)
-* [Fixing the SSL CERTIFICATE_VERIFY_FAILED Error](https://realpython.com/urllib-request/#fixing-the-ssl-certificate_verify_failed-error), hér er dæmi um [kóðalausn](https://github.com/vefthroun/Vefforritun1/blob/main/Verkefni4/JSON/certifi_fix.PNG)
-<!-- 
-og [Certify](https://certifi.io/)
--->
-
-</details>
-
+## Verkefni 4 
+- 25% af heildareinkunn
+- **Lykilmatsþáttur**
+- Viðfangsefni: Allt námsefni
+- Nemendur kynna verkefni sín í síðustu viku spannar
 
 ---
 
-### API
-[API](https://www.youtube.com/watch?v=s7wmiS2mSXY) (application programming interface) stendur fyrir forritunarviðmót. API er notað til að sækja gögn á milli kerfa, [nánar um API](https://zapier.com/learn/apis/chapter-1-introduction-to-apis/). Hér [Postman VSCode viðbót](JSON/VSC_Postman/README.md) til að prófa að gera API fyrirspurnir.
+### Verkefnalýsing
 
-<!--
-> [xmltodict 0.13.0](https://pypi.org/project/xmltodict/) _Makes working with XML feel like you are working with JSON_
--->
-
+Útfærðu vef með Flask tengt áhugamáli þar sem þú notar upplýsingar frá API (TVMaze API er ekki í boði) ásamt því að vera með persónulegt blogg tengt áhugamálinu. Efnisval (texti og myndir) er valfrjálst en nemendur mega ekki vera með sama API. Gert er ráð fyrir sjálfstæðum vinnubrögðum. 
 <details>
-<summary>Að búa til sinn eigin REST API <em>(ítarefni)</em></summary>
-<br>
+<summary>Listi af APIs </summary>
   
-One of the most popular ways to build APIs is the REST architecture style. Python provides some great tools not only to get data from REST APIs but also to build your own Python REST APIs.
-- [Python and REST APIs: Interacting With Web Services](https://realpython.com/api-integration-in-python/)
-- [Creating Web APIs with Python and Flask](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask)
-- [REST API using Flask in 7 minutes](https://towardsdatascience.com/launch-your-own-rest-api-using-flask-python-in-7-minutes-c4373eb34239) 
+<!-- There’s an amazing amount of data available on the Web. Many web services, like YouTube and GitHub, make their data accessible to third-party applications through an API. Here are some examples of available APIs: -->
+- [Public APIs](https://github.com/public-apis/public-apis)  
+- [List of free apis](https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/)
+- [free for dev - apis](https://github.com/ripienaar/free-for-dev#apis-data-and-ml)
 
 </details>
 
+**Ath.** sumir API biðja um að fá kreditkorta upplýsingar, sleppum þeim.
 
 ---
 
+### Námsmat 
+Eftirfarandi verkþættir eru metnir til einkunna: <br>
 
-### Dagsetningar 
+#### Námsefni: verkefni 1-4 (70%)
 
-`'timestampApis': '2021-02-04T22:50:15.468'  # Timestamp format: yy-MM-dd HH:mm:ss,SSS`
+1. Jinja: inheritance, include, skilyrðissetnignar, lykkjunotkun, filter, url_for, breytur. **(10%)**
+1. PicoCSS eða eigið CSS safn fyrir uppsetningu og útlit. **(10%)**
+1. Efnisyfirlit (menu) sýnir hvaða hlekkur er virkur hverju sinni og í efnisyfirlitinu er leitargluggi **(5%)**
+1. API notkun (ekki TVMaze og TMDB) til að sækja gögn sem birtast á vef, lágmark 2 mismunandi fyrirspurnir. **(10%)**
+1. Notkun á dynamic route og errorhandler (404 villa) **(5%)**
+1. Vefsíða sem birtir blogfærslur með röðun (nýjast efst). **(5%)**
+1. Login, sessions, validation og einföld auðkenning fyrir einn notanda (admin@admin.is og lykilorðið 123456), logout. **(5%)**
+1. Admin (dashboard) með töfluuppsetningu, CRUD aðgerðir á JSON skrá höndlað með TinyDB (blogfærslur). **(20%)**
+   * Blog yfirlit í töflu
+   * Hnappur til að búa til blogfærslu -> síða með HTML Form til að skrifa nýja blogfærslu, Flash tilkynning.
+   * Hnappur til að uppfæra blogfærslu -> síða með HTML Form til að uppfæra blogfærslu, Flash tilkynning.
+   * Hnappur til að eyða blogfærslu -> FLash tilkynning birtist á stjórnborði
+   * "Select" innsláttarreitur til að velja flokk (_Category_)
+   * [sýnidæmi](https://blog-admin-ui.netlify.app/)
+1. Nemendur kynna kennara verkefni sitt, útskýra alla helstu ofangreinda virkni, eins og tími gefst. <br> **Ef nemandi getur ekki gert grein fyrir kóða sínum, útskýrt útfærslu / virkni telst það vera fall á lykilmati**  
 
-Dæmi um lausn 
-1. get date (string) from JSON data (Api)
-2. String to Datetime Object with datetime.strptime()
-3. Convert Python Datetime to a String, datetime_string = datetime_object.strftime(format_string)
+#### Nýjungar: (30% í boði)
 
-_Það væri einnig hægt að nota strengjavinnslu og regex til að fá íslenska dagsetningu_
+1. Notendur geta skráð sig í gagnagrunn og síðan loggað sig inn og skrifað pósta sem birtast í blogginu **(10%)** 
+1. [Fileupload](https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/), ljósmyndir fyrir blogfærslur. **(10%)**
+1. Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). **(10%)**
+1. Síða þar sem hægt er að breyta eða bæta við flokkum **(5%)**
+1. [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ).  **(5%)**
+<!--1. Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). **(5%)**-->
+1. Annað sem nemendur skýra frá í Innu, "_Athugasemd til kennara_" **(5%)**
 
-<details>
-<summary>Bjargir</summary>
-<br>
+---
 
-- [Datetime timestamp](https://www.programiz.com/python-programming/datetime/timestamp-datetime)
-- [How to properly use datetime in your Python code](https://medium.com/better-programming/demystifying-python-datetime-module-with-examples-352e6cc72efc)
-- [Python Datetime Tutorial: Manipulate Times, Dates, and Time Spans](https://www.dataquest.io/blog/python-datetime-tutorial/)
+### Skil
+- Þjöppuð (zip/rar) mappa með öllum skrám (ekki venv) á Innu
+- Láttu fylgja með textaskrá með lista af söfnum sem þarf að pip install (dependencies - pip freeze)
+- Vefslóð á hýsingu.
 
-</details>
+
