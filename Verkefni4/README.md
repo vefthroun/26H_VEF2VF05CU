@@ -49,16 +49,16 @@ Sjá matþætti í verkefni 4 **í Canvas**.
    * "Select" innsláttarreitur til að velja flokk (_Category_)
    * [sýnidæmi](https://blog-admin-ui.netlify.app/)
 
-#### Nýjungar: (30% í boði)
+#### Nýjungar: (30%)
 
-> Nemandi býr til eigin kóðalausnir sem henta hans lokaverkefni
+Nemandi býr til eigin kóðalausnir sem henta hans lokaverkefni. Hér eru nokkrir valmöguleikar í boði:
 
 1. Notendur geta skráð sig í gagnagrunn og síðan loggað sig inn og skrifað pósta sem birtast í blogginu **(10%)** 
 1. [Fileupload](https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/), ljósmyndir fyrir blogfærslur. **(10%)**
 1. Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). **(10%)**
 1. Síða þar sem hægt er að breyta eða bæta við flokkum **(5%)**
 1. [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ).  **(5%)**
-1. (val) **HTMX** er framendalausn þar sem vafrinn er í lykilhlutverki í samskiptum við miðlarann  
+1. **HTMX** er framendalausn þar sem vafrinn er í lykilhlutverki í samskiptum við miðlarann  
     - Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). **(5%)**
 1. Annað sem nemendur skýra frá í kynningu lokverkefnis **(5%)**
 
