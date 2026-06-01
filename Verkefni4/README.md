@@ -48,11 +48,9 @@ Sjá matþætti í verkefni 4 **í Canvas**.
    * "Select" innsláttarreitur til að velja flokk (_Category_)
    * [sýnidæmi](https://blog-admin-ui.netlify.app/)
 
-
-
 #### Nýjungar: (30% í boði)
 
-Nemandi býr til eigin kóðalausnir sem henta hans lokaverkefni, 
+> Nemandi býr til eigin kóðalausnir sem henta hans lokaverkefni
 
 1. Notendur geta skráð sig í gagnagrunn og síðan loggað sig inn og skrifað pósta sem birtast í blogginu **(10%)** 
 1. [Fileupload](https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/), ljósmyndir fyrir blogfærslur. **(10%)**
