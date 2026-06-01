@@ -14,6 +14,7 @@
 <summary>Listi af APIs </summary>
   
 <!-- There’s an amazing amount of data available on the Web. Many web services, like YouTube and GitHub, make their data accessible to third-party applications through an API. Here are some examples of available APIs: -->
+
 - [Public APIs](https://github.com/public-apis/public-apis)  
 - [List of free apis](https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/)
 - [free for dev - apis](https://github.com/ripienaar/free-for-dev#apis-data-and-ml)
