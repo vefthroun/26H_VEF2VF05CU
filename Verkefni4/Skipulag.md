@@ -15,17 +15,16 @@
 * Forritun  
 
 ### Vika 2
-* Forritun
-* **Grunnkröfur**. Verkefnaskil í Innu föstudaginn 3. óktóber. Kl. 23:59
+
+* Forritun - **Grunnkröfur ok**
   
 ### Vika 3
 
-* Forritun / kynning lokaverkefnis, gerið grein fyrir eigin hönnun og forritun sem ekki er tiltekin í grunnkröfum verkefnisins
+* Forritun 
+* Kynning lokaverkefnis, gerið grein fyrir eigin hönnun og forritun sem ekki er tiltekin í grunnkröfum verkefnisins
 * Lokaverkefnaskil,  **skilafrestur er tiltekinn í Canvas**
 
----
 
-* Verkefni 4 er _lykilmatsþáttur_. 
 
 <!-- Athugið að ef verkefninu hefur ekki verið skilað fyrir **kl. 8 á mánudagsmorgun 19. maí** (_Deadline_) þá er ekki hægt að fara yfir verkefnið og viðkomandi er _fallinn_ í áfanganum.-->
 
