@@ -40,11 +40,11 @@
 
 ### Kóðasýnidæmi
 
-1. [Dynamic Routing](namsefni/dynamic_routes/dynamic_routes.py)
-1. [include í Jinja2](namsefni/dynamic_routes/include.py)
-1. [Listi með dictionaries, if/else og forlykkja í Jinja2](namsefni/dynamic_routes/listi_dictionaries.py)
-1. [Listi með dictionaries, forlykkja með if og include í Jinja2](namsefni/dynamic_routes/include_forloop.py)
-1. [Listi af tuples, forlykkja með if/else í Jinja2](namsefni/dynamic_routes/listi_tuples.py)
+1. [Dynamic Routing](dynamic_routes/dynamic_routes.py)
+1. [include í Jinja2](dynamic_routes/include.py)
+1. [Listi með dictionaries, if/else og forlykkja í Jinja2](dynamic_routes/listi_dictionaries.py)
+1. [Listi með dictionaries, forlykkja með if og include í Jinja2](dynamic_routes/include_forloop.py)
+1. [Listi af tuples, forlykkja með if/else í Jinja2](dynamic_routes/listi_tuples.py)
 
 ---
 
