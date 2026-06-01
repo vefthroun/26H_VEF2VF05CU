@@ -2,11 +2,11 @@
 
 | Vika | Tími 1  | Tími 2 | Tími 3 | Tími 4 | 
 | --- | --- | --- | --- | --- | 
-| 39 | Gagnaöflun og skipulag | Forritun | Forritun | Forritun | 
-| 40 | Forritun | Forritun | Forritun | Skil á grunnkröfum |
-| 41 | Forritun / viðtöl | Forritun / viðtöl | Forritun | Frágangur og skil |
+| 1 | Gagnaöflun og skipulag | Forritun | Forritun | Forritun | 
+| 2 | Forritun | Forritun | Forritun | Skil á grunnkröfum |
+| 3 | Forritun / viðtöl | Forritun / viðtöl | Forritun | Frágangur og skil |
 
-### Vika 39
+### Vika 1
 
 * Gagnaöflun og skiplag
    * Jason gagnagrunnur
@@ -14,18 +14,18 @@
    * Texti og myndir
 * Forritun  
 
-### Vika 40
+### Vika 2
 * Forritun
 * **Grunnkröfur**. Verkefnaskil í Innu föstudaginn 3. óktóber. Kl. 23:59
   
-### Vika 41
+### Vika 3
 
-* Forritun / kynning með kennara*
-* Lokaverkefnaskil í Innu, **sunnudagur 12. óktóber. Kl. 23:59**
+* Forritun / kynning lokaverkefnis, gerið grein fyrir eigin hönnun og forritun sem ekki er tiltekin í grunnkröfum verkefnisins
+* Lokaverkefnaskil,  **skilafrestur er tiltekinn í Canvas**
 
 ---
 
-* Verkefni 5 er _lykilmatsþáttur_. 
+* Verkefni 4 er _lykilmatsþáttur_. 
 
 <!-- Athugið að ef verkefninu hefur ekki verið skilað fyrir **kl. 8 á mánudagsmorgun 19. maí** (_Deadline_) þá er ekki hægt að fara yfir verkefnið og viðkomandi er _fallinn_ í áfanganum.-->
 

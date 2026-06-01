@@ -70,6 +70,10 @@ Sjá matþætti í verkefni 4 **í Canvas**.
 
 ---
 
+#### [Tímaáætlun lokaverkefnis](Skipulag.md)
+
+---
+
 ### Verkefnaskil
 
 Skilaðu möppu með öllum skrám verkefnisins í **.zip skrá**  í Canvas (**ath!** ekki skila **venv** möppu).
