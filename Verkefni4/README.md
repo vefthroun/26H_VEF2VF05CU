@@ -22,7 +22,7 @@
 
 **Ath.** sumir API biðja um að fá kreditkorta upplýsingar, sleppum þeim.
 
-### [Námsefni](namsefni/README.md)
+- **[hýsing vefs á Py anywhere](py-anywhere/README.md)**
 
 ---
 
