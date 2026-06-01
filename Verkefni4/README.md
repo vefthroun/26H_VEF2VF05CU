@@ -22,12 +22,15 @@
 
 **Ath.** sumir API biðja um að fá kreditkorta upplýsingar, sleppum þeim.
 
+### [Námsefni](namsefni/README.md)
+
+---
 
 ### Námsmat 
-Eftirfarandi verkþættir eru metnir til einkunna: <br>
 
+Sundurliðun námsmats er í verkefni 4 **í Canvas**. 
 
-#### Námsefni: verkefni 1-4 (70%)
+#### Eftirfarandi verkþættir eru metnir til einkunna: verkefni 1-4 (70%)
 
 1. Jinja: inheritance, include, skilyrðissetnignar, lykkjunotkun, filter, url_for, breytur. **(10%)**
 1. PicoCSS eða eigið CSS safn fyrir uppsetningu og útlit. **(10%)**
@@ -56,14 +59,6 @@ Eftirfarandi verkþættir eru metnir til einkunna: <br>
 1. Annað sem nemendur skýra frá í Innu, "_Athugasemd til kennara_" **(5%)**-->
 
 ---
-
-### [Námsefni](namsefni/README.md)
-
----
-
-### Námsmat 
-
-Sundurliðun námsmats er í verkefni 4 **í Canvas**
 
 ### Verkefnaskil
 
