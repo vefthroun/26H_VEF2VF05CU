@@ -11,13 +11,14 @@
 
 Útfærðu vef með Flask tengt áhugamáli þar sem þú notar upplýsingar frá API (TVMaze API er ekki í boði) ásamt því að vera með persónulegt blogg tengt áhugamálinu. Efnisval (texti og myndir) er valfrjálst en nemendur mega ekki vera með sama API. Gert er ráð fyrir sjálfstæðum vinnubrögðum. 
 <details>
-<summary>Listi af APIs </summary>
-  
-<!-- There’s an amazing amount of data available on the Web. Many web services, like YouTube and GitHub, make their data accessible to third-party applications through an API. Here are some examples of available APIs: -->
+   <summary>Listi af APIs </summary>
+   
+   <!-- There’s an amazing amount of data available on the Web. Many web services, like YouTube and GitHub, make their data accessible to third-party applications through an API. Here are some examples of available APIs: -->
+   Margar vefþjónustur, eins og YouTube og GitHub, gera gögn sín aðgengileg fyrir forrit þriðja aðila í gegnum forritaskil (API). Hér eru nokkur dæmi um tiltæk forritaskil:
 
-- [Public APIs](https://github.com/public-apis/public-apis)  
-- [List of free apis](https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/)
-- [free for dev - apis](https://github.com/ripienaar/free-for-dev#apis-data-and-ml)
+   - [Public APIs](https://github.com/public-apis/public-apis)  
+   - [List of free apis](https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/)
+   - [free for dev - apis](https://github.com/ripienaar/free-for-dev#apis-data-and-ml)
 
 </details>
 
