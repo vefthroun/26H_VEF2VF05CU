@@ -31,7 +31,7 @@
 
 ### Námsmat 
 
-Sjá matþætti í verkefni 4 **í Canvas**. 
+Matþættir eru í verkefni 4 **í Canvas**. (_í vinnslu_)
 
 #### Eftirfarandi verkþættir eru metnir til einkunna: verkefni 1-4 (70%)
 
