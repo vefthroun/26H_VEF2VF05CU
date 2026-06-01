@@ -22,8 +22,6 @@
 
 **Ath.** sumir API biðja um að fá kreditkorta upplýsingar, sleppum þeim.
 
-<!-- CANVAS  
----
 
 ### Námsmat 
 Eftirfarandi verkþættir eru metnir til einkunna: <br>
@@ -46,7 +44,6 @@ Eftirfarandi verkþættir eru metnir til einkunna: <br>
    * "Select" innsláttarreitur til að velja flokk (_Category_)
    * [sýnidæmi](https://blog-admin-ui.netlify.app/)
 1. Nemendur kynna kennara verkefni sitt, útskýra alla helstu ofangreinda virkni, eins og tími gefst. <br> **Ef nemandi getur ekki gert grein fyrir kóða sínum, útskýrt útfærslu / virkni telst það vera fall á lykilmati**  
--->
 
 #### Nýjungar: (30% í boði)
 
