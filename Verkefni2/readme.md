@@ -32,6 +32,10 @@
 
 ---
 
+### [Námsefni](namsefni/README.md)
+
+---
+
 ### Námsmat 
 
 Sundurliðun námsmats er í verkefni 2 **í Canvas**

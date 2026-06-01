@@ -110,6 +110,10 @@ Leit að þætti eftir nafni, ekki nákvæm leit (fuzzy).  Hér er leitað eftir
 
 ---
 
+### [Námsefni](namsefni/README.md)
+
+---
+
 ### Námsmat 
 
 Sundurliðun námsmats er í verkefni 3 **í Canvas**
