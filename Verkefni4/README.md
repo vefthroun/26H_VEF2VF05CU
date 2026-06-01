@@ -56,8 +56,9 @@ Sundurliðun námsmats er í verkefni 4 **í Canvas**.
 1. Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). **(10%)**
 1. Síða þar sem hægt er að breyta eða bæta við flokkum **(5%)**
 1. [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ).  **(5%)**
-<!--1. Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). **(5%)**
-1. Annað sem nemendur skýra frá í Innu, "_Athugasemd til kennara_" **(5%)**-->
+1. (val) HTMX er framendalausn þar sem vafrinn er í lykilhlutverki í samskiptum við miðlarann  
+    - Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). **(5%)**
+1. Annað sem nemendur skýra frá í kynningu lokverkefnis **(5%)**-->
 
 ---
 
