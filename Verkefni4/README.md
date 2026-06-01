@@ -46,6 +46,7 @@ Eftirfarandi verkþættir eru metnir til einkunna: <br>
    * "Select" innsláttarreitur til að velja flokk (_Category_)
    * [sýnidæmi](https://blog-admin-ui.netlify.app/)
 1. Nemendur kynna kennara verkefni sitt, útskýra alla helstu ofangreinda virkni, eins og tími gefst. <br> **Ef nemandi getur ekki gert grein fyrir kóða sínum, útskýrt útfærslu / virkni telst það vera fall á lykilmati**  
+-->
 
 #### Nýjungar: (30% í boði)
 
@@ -55,8 +56,7 @@ Eftirfarandi verkþættir eru metnir til einkunna: <br>
 1. Síða þar sem hægt er að breyta eða bæta við flokkum **(5%)**
 1. [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ).  **(5%)**
 <!--1. Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). **(5%)**
-1. Annað sem nemendur skýra frá í Innu, "_Athugasemd til kennara_" **(5%)**
--->
+1. Annað sem nemendur skýra frá í Innu, "_Athugasemd til kennara_" **(5%)**-->
 
 ---
 
