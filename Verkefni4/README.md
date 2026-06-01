@@ -66,7 +66,7 @@ Sjá matþætti í verkefni 4 **í Canvas**.
 #### Kynning á lokaverkefni
 
 1. Nemendur kynna kennara verkefni sitt, útskýra alla helstu ofangreinda virkni, eins og tími gefst. 
-   **Ef nemandi getur ekki gert grein fyrir kóða sínum, útskýrt útfærslu / virkni telst það vera fall á lykilmati**  
+   - **Ef nemandi getur ekki gert grein fyrir kóða sínum, útskýrt útfærslu / virkni telst það vera fall á lykilmati**  
 
 ---
 
