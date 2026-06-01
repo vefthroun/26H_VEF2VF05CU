@@ -95,6 +95,10 @@ menu =  [
 
 ---
 
+### [Námsefni](namsefni/README.md)
+
+---
+
 ### Námsmat 
 
 Sundurliðun námsmats er í verkefni 1 **í Canvas**
