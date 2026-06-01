@@ -1,26 +1,12 @@
-### Kóðasýnidæmi
+### Form og sessions
 
-1. [Dynamic Routing](namsefni/dynamic_routes.py)
-1. [include í Jinja2](namsefni/include.py)
-1. [Listi með dictionaries, if/else og forlykkja í Jinja2](namsefni/listi_dictionaries.py)
-1. [Listi með dictionaries, forlykkja með if og include í Jinja2](namsefni/include_forloop.py)
-1. [Listi af tuples, forlykkja með if/else í Jinja2](namsefni/listi_tuples.py)
+1. [Form](https://github.com/vefthroun/Vefforritun1/blob/main/Verkefni3/FORM/README.md)
+1. [Sessions](https://github.com/vefthroun/Vefforritun1/blob/main/Verkefni3/Sessions/README.md#sessions)
 
----
+### WTForms
 
-### URL routing
+1. [Flask WTForms](https://github.com/vefthroun/Vefforritun1/tree/main/Verkefni3/FORM#5-flask-wtf-og-wtforms)
 
-- [Understanding URL Routing in Flask](https://www.sitepoint.com/flask-url-routing/)
+### CKEditor
 
-### Jinja 
-
-1. [Rendering Pages in Flask Using Jinja](https://hackersandslackers.com/flask-jinja-templates) 
-1. [Jinja templates](https://realpython.com/primer-on-jinja-templating/)
-2. [Base template & Nav bar](https://python-web.teclado.com/section12/lectures/03_base_template_and_nav_bar/)
-1. [Loops & inheritance](https://youtu.be/APh3jdVryF0?list=PLXmMXHVSvS-ABlT4k4eS3YPJSnPUozw04) (video)
-   
-### CSS
-
-- [New CSS](https://newcss.net/)
-- [Pico CSS](https://picocss.com/) 
-
+1. [WYSIWYG HTML editor](https://github.com/vefthroun/Vefforritun1/tree/main/Verkefni3/FORM#4-ckeditor-wysiwyg-html-editor)
