@@ -17,7 +17,9 @@ Við notum **CLI** (_Command Line Interface_) forrit til að búa til vefþróun
 
 Veljið vinnusvæði (möppu) í _Terminal_ (Mac-Linux) eða _Command Prompt_ (PC) þar sem verkefni áfangans VEFÞ2VF verða unnin.
 
-CLI dæmi ` cd ~/Desktop/ ` - ` mkdir VEFÞ2VF ` -` cd ~/Desktop/VEFÞ2VF/ `
+CLI dæmi ` cd ~/Desktop/ ` - ` mkdir VEF2VF ` -` cd ~/Desktop/VEF2VF/ ` 
+
+> Ekki nota íslendska stafi eða hafa bil í skjala og möppuheitum!
 
 ## How to Install Flask on Linux, Windows, and macOS
 
