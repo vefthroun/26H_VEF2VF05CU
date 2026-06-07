@@ -2,7 +2,7 @@
 
 - 15% af heildareinkunn
 - Viðfangsefni: 
-   1. Uppsetning á vinnuumverfi ( templates og static möppur ) / VENV
+   1. [Uppsetning á vinnuumverfi ( templates og static möppur ) / VENV](namsefni/how-to-build-venv)
    1. Python gagnagrindur ( list og dict )
    1. Static / Dynamic Routing
    1. Static files: CSS og myndir
