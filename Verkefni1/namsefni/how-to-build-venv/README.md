@@ -3,6 +3,14 @@
 1. install Python -> hakið við `PATH`
    * ![install python](install-python-1.jpg)
 
+Við notum **CLI** (_Command Line Interface_) forrit til að búa til vefþróunarsvæði, nánari upplýsingar um aðgerðir sem hægt er að framkvæma í CLI eru hér:
+
+- [**Windows Command Promt**](https://serverspace.io/support/help/windows-cmd-commands-cheat-sheet/)
+- [**Linux Terminal**](https://linux-commands.labex.io/)
+- [**Mackintosh Terminal**](https://www.geeksforgeeks.org/linux-unix/complete-mac-terminal-commands-cheat-sheet/)
+- [**Unix** og þróun stýrikerfa (_í stuttu máli_)](https://medium.com/@rajamanii/the-story-of-unix-posix-linux-macos-and-windows-f8252c091be0)
+
+
 Veljið vinnusvæði (möppu) í _Terminal_ (Mac-Linux) eða _Command Prompt_ (PC) þar sem verkefni áfangans VEFÞ2VF verða unnin.
 
 CLI dæmi ` cd ~/Desktop/ ` - ` mkdir VEFÞ2VF ` -` cd ~/Desktop/VEFÞ2VF/ `
