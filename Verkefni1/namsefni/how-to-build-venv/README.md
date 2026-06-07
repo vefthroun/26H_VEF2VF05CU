@@ -19,7 +19,7 @@ Veljið vinnusvæði (möppu) í _Terminal_ (Mac-Linux) eða _Command Prompt_ (P
 
 CLI dæmi ` cd ~/Desktop/ ` - ` mkdir VEF2VF ` -` cd ~/Desktop/VEF2VF/ ` 
 
-> Ekki nota íslendska stafi eða hafa bil í skjala og möppuheitum!
+> Ekki nota íslendska stafi eða hafa bil í skjala- og möppuheitum!
 
 ## How to Install Flask on Linux, Windows, and macOS
 
