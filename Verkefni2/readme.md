@@ -28,7 +28,7 @@
 1. Forsíða sem birtir nýlega búna til blogfærslu ásamt öllum hinum úr gagnagrind, raðað eftir dagsetningu, nýjasta á að vera efst. **10%**
 1. Valmynd með forsíðu, login, logout og admin. Hlekkirnir admin og logout (í stað login) birtast í valmynd þegar notandi er innskráður annars ekki. **10%**
 1. Notaðu [inhertiance](https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheritance/) með Jinja fyrir skipulag. **10%**
-1. Notaðu eigið CSS safn og / eða t.d. [Pico CSS](https://picocss.com/docs/forms) eða [NEW.CSS](https://newcss.net/) fyrir form og aðra framsetningu. **10%**
+1. Notaðu eigið CSS safn og / eða t.d. [Pico CSS](https://picocss.com/docs/forms) fyrir form og aðra framsetningu. **10%**
 
 ---
 
