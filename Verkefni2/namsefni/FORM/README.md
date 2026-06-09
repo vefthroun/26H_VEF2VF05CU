@@ -168,6 +168,45 @@ def create():
 
 ---
 
+Til að sýna listann yfir nemendur í `index.html` þarftu að nota **Jinja2** sniðmátsmál Flask til að ítra í gegnum gögnin sem þú sendir frá Python rásinni (route).
+
+Hér er hvernig þú framkvæmir það skref fyrir skref:
+
+### 1. Senda gögnin úr Flask rásinni
+Í Python skránni þinni þarftu að nota `render_template` fallið og senda orðasafnið (dictionary) með nemendunum sem færibreytu.
+
+```python
+@app.route('/')
+def index():
+    # 'nemendur' er orðasafnið sem geymir gögnin þín
+    return render_template('index.html', nemendur=nemendur)
+```
+
+### 2. Nota Jinja2 lykkju í index.html
+Í HTML skránni notarðu `{% for ... %}` lykkju. Þar sem gögnin eru í orðasafni er best að nota `.items()` aðferðina til að fá bæði lykilinn (ID) og gildið (upplýsingar um nemandann) í hverri ítrun.
+
+Dæmi um **index.html**:
+```html
+<h1>Listi yfir nemendur</h1>
+<ul>
+    {% for id, info in nemendur.items() %}
+        <li>
+            <strong>{{ info.nafn }}</strong> - {{ info.netfang }} 
+            <!-- Hægt er að búa til tengil á nánari upplýsingar með ID -->
+            <a href="{{ url_for('view_student', id=id) }}">Skoða</a>
+        </li>
+    {% endfor %}
+</ul>
+```
+
+### Helstu hugtök:
+*   **`render_template`**: Þetta fall leitar að HTML skránni í `templates` möppunni og gerir Python breyturnar aðgengilegar fyrir Jinja sniðmátið.
+*   **`nemendur.items()`**: Þessi Python aðferð skilar pari af lykli og gildi, sem gerir þér kleift að meðhöndla bæði ID nemandans og upplýsingarnar um hann samtímis.
+*   **`{{ ... }}`**: Tvöfaldir hornklofar eru notaðir í Jinja til að birta gildi breytu beint í HTML kóðann.
+*   **Öryggi**: Flask og Jinja sjá sjálfkrafa um að **hreinsa (escape)** öll gildi sem sett eru inn í sniðmát til að verjast öryggishótunum eins og sprautuhótunum (injection attacks).
+
+---
+
 ### Flask-WTF og WTForms 
 The [Flask-WTF](https://flask-wtf.readthedocs.io/en/1.0.x/) extension provides your Flask application integration with WTForms. It uses Python classes to represent web forms (wrapper). `(venv) $ pip install flask-wtf`.
 
