@@ -36,7 +36,7 @@ Hér er útfærslan skipt í bakenda (Python) og framenda (HTML).
 from flask import Flask, render_template, session, redirect, url_for
 
 app = Flask(__name__)
-app.secret_key = 'mjog-leyndur-lykill' # Nauðsynlegt fyrir session
+app.secret_key = 'Lykillinn_að_vefsíðunni' # Nauðsynlegt fyrir session
 
 # Nemendalistinn (eins og í fyrra dæmi)
 nemendur = {
