@@ -115,7 +115,7 @@ def delete(id):
 
 ---
 
-### 5. Flask-WTF og WTForms 
+### Flask-WTF og WTForms 
 The [Flask-WTF](https://flask-wtf.readthedocs.io/en/1.0.x/) extension provides your Flask application integration with WTForms. It uses Python classes to represent web forms (wrapper). `(venv) $ pip install flask-wtf`.
 
 [WTForms](https://wtforms.readthedocs.io/en/3.0.x/) is a flexible forms validation and rendering library for Python web development. It can work with whatever web framework and template engine you choose. It supports data validation, CSRF protection etc.
