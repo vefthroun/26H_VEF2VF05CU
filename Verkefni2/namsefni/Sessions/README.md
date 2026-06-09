@@ -99,10 +99,14 @@ def login(id):
 
 ### Innskráning
 
-1. HTML Innskráningarform (templates/login.html)
-Formið þarf að nota POST aðferðina svo gögnin sendist ekki í vefslóðinni og inntaksreitirnir þurfa að hafa name eigindi sem Flask notar til að bera kennsl á gögnin
+Til að hanna gott innskráningarform (login) fyrir þetta kerfi er best að nýta samspil á milli HTML-forma, **request** hlutarins í Flask til að sækja gögn og **sessions** til að halda utan um hver er skráður inn.
 
-```
+Hér er besta leiðin til að útfæra þetta miðað við það „nemenda-dictionary“ sem við höfum unnið með:
+
+### 1. HTML Innskráningarform (templates/login.html)
+Formið þarf að nota `POST` aðferðina svo gögnin sendist ekki í vefslóðinni og inntaksreitirnir þurfa að hafa `name` eigindi sem Flask notar til að bera kennsl á gögnin.
+
+```html
 <form method="POST">
     <label for="user_id">Sláðu inn nemenda-ID:</label>
     <input type="text" id="user_id" name="user_id" required>
@@ -117,8 +121,48 @@ Formið þarf að nota POST aðferðina svo gögnin sendist ekki í vefslóðinn
     {% endfor %}
   {% endif %}
 {% endwith %}
-
 ```
+
+### 2. Flask Bakendinn (Python)
+Í bakendanum þarftu að bregðast við `POST` beiðninni, athuga hvort ID-ið sé til í orðasafninu (dictionary) og nota `session` til að vista innskráninguna ef allt er rétt.
+
+```python
+from flask import Flask, render_template, request, session, redirect, url_for, flash
+
+app = Flask(__name__)
+# Mikilvægt: Session krefst leyndarlykils til að skrifa undir kökur (cookies).
+app.secret_key = 'mjog-leyndur-og-raunverulegur-lykill' 
+
+# Gagnagrunnurinn okkar
+nemendur = {
+    "1": {"nafn": "Jón Jónsson", "netfang": "jon@skoli.is"},
+    "2": {"nafn": "Anna Önnu", "netfang": "anna@skoli.is"}
+}
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Sækjum ID úr forminu með 'name' eigindinu
+        user_id = request.form.get('user_id')
+        
+        # Athugum hvort lykillinn sé til í nemenda-dictionary
+        if user_id in nemendur:
+            # Geymum ID í session svo notandinn haldist innskráður á milli síðna
+            session['user_id'] = user_id
+            flash('Innskráning tókst!')
+            return redirect(url_for('profile'))
+        else:
+            # Ef ID finnst ekki, gefum við endurgjöf
+            flash('Villa: Rangt nemenda-ID.')
+            
+    return render_template('login.html')
+```
+
+### Lykilatriði í hönnuninni:
+*   **Öryggi með Session:** Flask geymir session gögn í dulrituðum vafrakökum. Það þýðir að notandinn getur séð innihaldið en ekki breytt því án leyndarlykilsins.
+*   **Endurgjöf (Flashing):** Notaðu `flash()` til að láta notandann vita ef ID-ið var rangt. Þetta er hluti af góðu notendaviðmóti (feedback).
+*   **Vörn gegn KeyError:** Þegar þú athugar hvort notandi sé til er best að nota `in` virkjann eða `.get()` aðferðina á orðasafnið til að koma í veg fyrir að forritið hrynji ef lykillinn er ekki til.
+*   **Redirect eftir Login:** Eftir að innskráning tekst er góð venja að nota `redirect(url_for(...))` til að senda notandann á sína síðu.
 ---
 
 ### Útskráning
