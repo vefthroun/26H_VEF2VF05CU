@@ -115,6 +115,59 @@ def delete(id):
 
 ---
 
+Til að tengja HTML form við Flask kóðann þinn þarf að huga að tveimur hliðum: hvernig formið er uppsett í HTML og hvernig Flask tekur á móti gögnunum með **request** hlutnum.
+
+Hér er ferlið byggt á heimildum:
+
+### 1. HTML hliðin (í templates möppu)
+Í HTML skránni þarf formið að hafa tvo mikilvæga eiginleika:
+*   **`method="POST"`**: Til að senda gögnin á miðlarann (í stað þess að birta þau í vefslóðinni).
+*   **`name` eigindi á inntaksreitum**: Flask notar gildið í `name` til að bera kennsl á gögnin (t.d. `name="nafn"`).
+
+Dæmi um einfalt form (**templates/create_form.html**):
+```html
+<form method="POST">
+    <input type="text" name="nafn" placeholder="Nafn nemanda">
+    <input type="email" name="netfang" placeholder="Netfang">
+    <button type="submit">Vista</button>
+</form>
+```
+
+### 2. Flask hliðin (Python kóðinn)
+Til að vinna með formið í Flask þarftu að gera eftirfarandi:
+
+*   **Skilgreina leyfðar aðferðir**: Sjálfgefið svara rætur (routes) aðeins við GET beiðnum. Þú verður að bæta við `methods=['GET', 'POST']` í decoratorinn.
+*   **Nota `request.form`**: Þegar formið er sent (POST), geturðu nálgast gögnin í gegnum `request.form` orðasafnið.
+*   **Sýna formið**: Notaðu `render_template()` til að birta HTML skrána.
+
+Dæmi um tengingu við CRUD orðasafnið úr fyrra dæmi:
+```python
+from flask import Flask, render_template, request, redirect, url_for
+
+@app.route('/create', methods=['GET', 'POST'])
+def create():
+    if request.method == 'POST':
+        # Gögnin sótt úr forminu með 'name' lyklunum
+        nafn = request.form.get('nafn')
+        netfang = request.form.get('netfang')
+        
+        # Hér væri gögnunum bætt við í dictionary eins og í fyrra dæmi
+        nytt_id = str(len(nemendur) + 1)
+        nemendur[nytt_id] = {"nafn": nafn, "netfang": netfang}
+        
+        return redirect(url_for('index')) # Senda notanda aftur á forsíðu
+        
+    # Ef aðferðin er GET, þá birtum við bara formið
+    return render_template('create_form.html')
+```
+
+### Mikilvæg atriði:
+*   **Öryggi**: Flask notar **Jinja2** sem sér sjálfkrafa um að "escape-a" HTML í sniðmátum til að verjast sprautuhótunum (injection attacks).
+*   **Villa 400**: Ef þú reynir að nálgast lykil í `request.form` sem er ekki til (t.d. `request.form['vitlaus_lykill']`), skilar Flask sjálfkrafa "400 Bad Request" villu. Mælt er með að nota `.get()` aðferðina til að forðast þetta.
+*   **Skrár**: Ef formið á að senda skrár (upload), þarf að muna eftir að bæta við `enctype="multipart/form-data"` í HTML formið.
+
+---
+
 ### Flask-WTF og WTForms 
 The [Flask-WTF](https://flask-wtf.readthedocs.io/en/1.0.x/) extension provides your Flask application integration with WTForms. It uses Python classes to represent web forms (wrapper). `(venv) $ pip install flask-wtf`.
 
