@@ -117,4 +117,54 @@ Formið þarf að nota POST aðferðina svo gögnin sendist ekki í vefslóðinn
   {% endif %}
 {% endwith %}
 
+---
 
+### Útskráning
+
+Að hanna útskráningarhnapp (logout) í Flask er tiltölulega einfalt ferli sem byggir á því að eyða auðkenni notandans úr **session** hlutnum. Þegar upplýsingarnar eru horfnar úr session, þekkir kerfið notandann ekki lengur sem innskráðan og vísar honum frá læstum síðum eins og `profile.html`.
+
+Hér er hvernig þú útfærir þetta skref fyrir skref:
+
+### 1. Bakendinn: Útskráningarrás (Route)
+Þú þarft að búa til nýja rás í Python kóðanum þínum sem sér um að hreinsa session-ið. Best er að nota `.pop()` aðferðina á session orðasafnið til að fjarlægja `user_id`.
+
+```python
+from flask import session, redirect, url_for, flash
+
+@app.route('/logout')
+def logout():
+    # Fjarlægir user_id úr session ef það er til staðar
+    session.pop('user_id', None)
+    
+    # Gefa notanda endurgjöf
+    flash('Þú hefur verið skráð(ur) út.')
+    
+    # Senda notanda aftur á forsíðu eða innskráningarsíðu
+    return redirect(url_for('index'))
+```
+
+### 2. Framendinn: Hnappurinn í HTML
+Þú getur sett útskráningarhnappinn hvar sem er í sniðmátunum þínum, til dæmis í `profile.html` eða í leiðsögustiku (navigation bar). Notaðu `url_for()` til að búa til rétta vefslóð á logout rásina.
+
+**Dæmi í profile.html:**
+```html
+<p>Velkomin(n), {{ nemandi.nafn }}!</p>
+
+<!-- Útskráningarhnappur sem lítur út eins og tengill -->
+<a href="{{ url_for('logout') }}">Skrá út</a>
+
+<!-- Eða sem raunverulegur hnappur inni í formi (öruggara fyrir ríkar aðgerðir) -->
+<form action="{{ url_for('logout') }}">
+    <button type="submit">Útskráning</button>
+</form>
+```
+
+### 3. Hvernig þetta virkar saman
+1.  **Notandi smellir:** Þegar smellt er á hnappinn kallar vafrinn á `/logout` vefslóðina.
+2.  **Session hreinsað:** Flask keyrir `logout()` fallið og eyðir `user_id` úr vafraköku notandans.
+3.  **Tilvísun:** Kerfið notar `redirect()` til að senda notandann á aðra síðu.
+4.  **Aðgangur lokast:** Þar sem `user_id` er ekki lengur í session, mun `if not user_id` skilyrðið í `/profile` rásinni (sem við bjuggum til áðan) nú vísa notandanum frá ef hann reynir að fara þangað aftur.
+
+**Góð ráð:**
+*   **Feedback:** Notaðu `flash()` til að staðfesta útskráningu svo notandinn viti að aðgerðin tókst.
+*   **Clear All:** Ef þú ert með margar breytur í session sem þú vilt hreinsa í einu, geturðu notað `session.clear()` í stað þess að nota `.pop()` fyrir hverja og eina.
