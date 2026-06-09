@@ -101,7 +101,8 @@ def login(id):
 
 1. HTML Innskráningarform (templates/login.html)
 Formið þarf að nota POST aðferðina svo gögnin sendist ekki í vefslóðinni og inntaksreitirnir þurfa að hafa name eigindi sem Flask notar til að bera kennsl á gögnin
-.
+
+```
 <form method="POST">
     <label for="user_id">Sláðu inn nemenda-ID:</label>
     <input type="text" id="user_id" name="user_id" required>
@@ -117,6 +118,7 @@ Formið þarf að nota POST aðferðina svo gögnin sendist ekki í vefslóðinn
   {% endif %}
 {% endwith %}
 
+```
 ---
 
 ### Útskráning
