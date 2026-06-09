@@ -207,6 +207,56 @@ Dæmi um **index.html**:
 
 ---
 
+Flash-skilaboð í Flask eru notuð til að gefa notendum **endurgjöf** (feedback), sem er lykilatriði í góðu notendaviðmóti. Þegar unnið er með HTML form eru þau oftast notuð til að staðfesta að aðgerð hafi tekist (t.d. „Nemandi vistaður“) eða ef eitthvað fór úrskeiðis.
+
+Hér er hvernig flash-skilaboð virka með HTML formum:
+
+### 1. Forsenda: Leyndarlykill (Secret Key)
+Flash-skilaboð eru vistuð í **session** hjá notandanum. Til þess að það virki verður þú að skilgreina `secret_key` í Flask forritinu þínu, annars færðu villu.
+```python
+app.secret_key = 'einhver-mjög-leyndur-lykill'
+```
+
+### 2. Í Python: Skilaboðin send með `flash()`
+Þegar notandi sendir inn form (POST beiðni), vinnur þú úr gögnunum og kallar svo á `flash()` fallið áður en þú notar `redirect()` til að senda notandann á nýja síðu. Skilaboðin eru geymd þar til næsta beiðni á sér stað og eyðast svo.
+
+**Dæmi í Python:**
+```python
+from flask import flash, redirect, url_for, request
+
+@app.route('/create', methods=['POST'])
+def create():
+    nafn = request.form.get('nafn')
+    # ... rökfræði til að vista í gagnagrunn eða dictionary ...
+    
+    flash(f'Nemandinn {nafn} hefur verið skráður!')
+    return redirect(url_for('index'))
+```
+
+### 3. Í HTML: Skilaboðin birt með `get_flashed_messages()`
+Til að skilaboðin birtist raunverulega í vafranum þarf að sækja þau í HTML sniðmátinu (template) með fallinu `get_flashed_messages()`. Þetta er venjulega gert efst í skjalinu eða í grunnskjali (layout) svo skilaboðin sjáist hvar sem er.
+
+**Dæmi í HTML (Jinja2):**
+```html
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+```
+
+### Samantekt á ferlinu:
+1.  **Notandi sendir form:** HTML formið notar `method="POST"`.
+2.  **Bakendinn vinnur gögnin:** Flask tekur við gögnunum, framkvæmir aðgerð og skráir skilaboð með `flash()`.
+3.  **Tilvísun (Redirect):** Miðlarinn skipar vafranum að fara á aðra síðu (t.d. forsíðuna).
+4.  **Birting:** Á nýju síðunni keyrir Jinja2 kóðinn, sækir flash-skilaboðin og birtir þau notandanum. Eftir þetta eyðast skilaboðin úr biðröðinni.
+
+---
+
 ### Flask-WTF og WTForms 
 The [Flask-WTF](https://flask-wtf.readthedocs.io/en/1.0.x/) extension provides your Flask application integration with WTForms. It uses Python classes to represent web forms (wrapper). `(venv) $ pip install flask-wtf`.
 
