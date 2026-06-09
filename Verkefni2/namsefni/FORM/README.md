@@ -202,7 +202,7 @@ Dæmi um **index.html**:
 ### Helstu hugtök:
 *   **`render_template`**: Þetta fall leitar að HTML skránni í `templates` möppunni og gerir Python breyturnar aðgengilegar fyrir Jinja sniðmátið.
 *   **`nemendur.items()`**: Þessi Python aðferð skilar pari af lykli og gildi, sem gerir þér kleift að meðhöndla bæði ID nemandans og upplýsingarnar um hann samtímis.
-*   **`{{ ... }}`**: Tvöfaldir hornklofar eru notaðir í Jinja til að birta gildi breytu beint í HTML kóðann.
+*   **`{{ ... }}`**: Tvöfaldir slaufusvigar eru notaðir í Jinja til að birta gildi breytu beint í HTML kóðann.
 *   **Öryggi**: Flask og Jinja sjá sjálfkrafa um að **hreinsa (escape)** öll gildi sem sett eru inn í sniðmát til að verjast öryggishótunum eins og sprautuhótunum (injection attacks).
 
 ---
