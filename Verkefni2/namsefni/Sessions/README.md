@@ -23,6 +23,8 @@ Sessions in essence are used to remember information from one request to another
 
 ### Aðgangsstýring með Session
 
+> Framhald af Form dæmi
+
 Til að tryggja að aðeins skráðir nemendur hafi aðgang að `profile.html` þarf að nota **session** hlutinn í Flask til að geyma auðkenni notandans á milli beiðna. 
 
 Hér er útfærslan skipt í bakenda (Python) og framenda (HTML).
