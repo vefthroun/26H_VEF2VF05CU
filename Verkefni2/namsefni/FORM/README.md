@@ -15,6 +15,15 @@
 
 ---
 
+### 4. CKEditor (WYSIWYG HTML editor)
+
+WYSIWYG HTML editor has the ability to convert HTML text area fields or other HTML elements to editor instances. WYSIWYG is an acronym for "what you see is what you get."
+
+1. [Flask CKEditor](https://flask-ckeditor.readthedocs.io/en/latest/)
+1. [How To Add A Rich Text Editor and Basic usage](https://www.youtube.com/watch?v=5jnAnnxZGQQ&ab_channel=Codemy.com) _myndband_
+
+---
+
 ### Create, Read, Update, Delete
 
 Til að búa til CRUD (Create, Read, Update, Delete) virkni í Flask er algengt að nota **Python orðasöfn (dictionaries)** sem einfaldan gagnagrunn í minni. CRUD stendur fyrir hinar fjórar grunnaraðgerðir gagnavinnslu: að búa til, lesa, uppfæra og eyða gögnum.
@@ -103,15 +112,6 @@ def delete(id):
 *   **Request Object:** Gögnum úr formum er náð í gegnum `request.form`.
 *   **Dictionaries:** Orðasöfn eru notuð því þau eru **breytanleg (mutable)**, sem gerir okkur kleift að bæta við, breyta og eyða gögnum á auðveldan hátt.
 *   **HTTP Methods:** Mikilvægt er að skilgreina `methods=['POST']` fyrir leiðir sem breyta gögnum.
-
----
-
-### 4. CKEditor (WYSIWYG HTML editor)
-
-WYSIWYG HTML editor has the ability to convert HTML text area fields or other HTML elements to editor instances. WYSIWYG is an acronym for "what you see is what you get."
-
-1. [Flask CKEditor](https://flask-ckeditor.readthedocs.io/en/latest/)
-1. [How To Add A Rich Text Editor and Basic usage](https://www.youtube.com/watch?v=5jnAnnxZGQQ&ab_channel=Codemy.com) _myndband_
 
 ---
 
