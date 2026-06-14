@@ -398,6 +398,8 @@ Með þessari hönnun verður auðveldara að breyta útlitinu á öllum vefnum 
 
 ---
 
+### db.json
+
 Hér er dæmi um hvernig þú setur upp **`db.json`** skrá með TinyDB sem inniheldur notanda, stjórnanda (admin) og póst, miðað við þá uppbyggingu sem við höfum rætt og heimildirnar gefa upp.
 
 TinyDB væntir þess að gögn séu á formi **Python orðasafna (dicts)**. Til að halda gögnunum skipulögðum er best að nota aðskildar töflur fyrir notendur og pósta.
@@ -471,4 +473,47 @@ Eftir að þessi kóði hefur verið keyrður, mun `db.json` skráin þín innih
 
 ---
 
+### datetime.now()
+
+Til að bæta tímastimpli við nýja pósta þarftu einfaldlega að bæta nýju lykil-gildi pari (key-value pair) við það orðasafn (dictionary) sem þú sendir í gagnagrunninn. Þar sem TinyDB geymir gögn sem hefðbundin Python orðasöfn er mjög auðvelt að bæta við auka upplýsingum eins og dagsetningu og tíma áður en pósturinn er vistaður.
+
+Hér er hvernig þú útfærir þetta í Flask rásinni (route) þinni:
+
+### 1. Nota Python `datetime` (utan heimilda)
+Þótt heimildirnar fjalli ekki beint um `datetime` safnið, þá er það staðlaða leiðin í Python til að ná í rauntíma. Þú myndir flytja það inn efst í skjalið þitt:
+```python
+from datetime import datetime
+```
+
+### 2. Uppfæra `insert` aðgerðina
+Þegar þú tekur á móti gögnum úr forminu notarðu `request.form` og bætir svo tímastimplinum við áður en þú kallar á `insert()`.
+
+**Dæmi um útfærslu:**
+```python
+@app.route('/create_post', methods=['POST'])
+def create_post():
+    if 'user_id' in session:
+        # 1. Sækja gögn úr formi og session
+        content = request.form.get('content')
+        author_id = session.get('user_id')
+        
+        # 2. Búa til tímastimpil (t.d. á sniðinu Dagur-Mán-Ár kl:mm)
+        timi_nuna = datetime.now().strftime("%d-%m-%Y %H:%M")
+        
+        # 3. Setja saman orðasafnið fyrir póstinn
+        nyr_postur = {
+            'author_id': author_id,
+            'content': content,
+            'timestamp': timi_nuna  # Hér er tímastimplinum bætt við
+        }
+        
+        # 4. Vista í TinyDB
+        posts_table.insert(nyr_postur)
+        return redirect(url_for('index'))
+```
+
+### Lykilatriði:
+*   **Sveigjanleiki orðasafna:** Dictionaries í Python eru breytanleg (mutable), svo þú getur bætt við hvaða lyklum sem er hvenær sem er með assignment virkjanum (`=`).
+*   **Gagnageymsla:** TinyDB vistar þessi gögn beint í JSON skrána þína, sem gerir það auðvelt að birta tímastimpilinn síðar í `index.html` eða á prófílsíðunni.
+*   **Birting:** Í HTML sniðmátinu geturðu svo birt stimpilinn með Jinja2 málfræðinni: `{{ post.timestamp }}` [Conversation].
 
