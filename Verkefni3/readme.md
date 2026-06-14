@@ -24,6 +24,7 @@ Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
 6. Notandi getur síðan skráð sig inn á eigin **prófíl**
 7. Notendur geta skrifað nýja pósta, breytt eigin póstum eða eytt þeim
 8. Prófílsíðan er varin með **session** aðgangsvörn
+9. Vefstjóri (admin) getur eytt póstum og notendum 
 
 #### JSON API 10%
  
