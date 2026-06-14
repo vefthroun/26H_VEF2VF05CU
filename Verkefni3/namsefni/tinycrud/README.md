@@ -144,3 +144,129 @@ Með því að nota `url_for()` í þessum skrám tryggir þú að tenglar á mi
 *   **HTML Escaping:** Flask og Jinja2 sjá sjálfkrafa um að hreinsa (escape) það sem notendur skrifa í póstana sína til að koma í veg fyrir sprautuhótanir (injection attacks).
 *   **Secret Key:** Mikilvægt er að hafa sterkan `secret_key` svo notendur geti ekki falsað session-kökurnar sínar og gefið sér admin-réttindi.
 *   **TinyDB Query:** Notaðu `Query()` hlutinn frá TinyDB til að gera leitirnar öruggar og skýrar.
+
+---
+
+Til að uppfæra póst í TinyDB, til dæmis á „profile“ síðunni þinni, er aðalskipunin **`db.update(fields, query)`**. 
+
+Hér er nánari útskýring á þeim skipunum sem þarf að nota:
+
+*   **`db.update(fields, query)`**: Þessi skipun uppfærir alla þá skjöl (pósta) sem passa við gefna fyrirspurn (query). 
+    *   **`fields`**: Hér setur þú inn Python orðasafn (dict) með þeim gögnum sem þú vilt breyta eða bæta við. Til dæmis: `{'content': 'Hér er uppfærður texti'}`.
+    *   **`query`**: Þetta skilgreinir hvaða póst á að uppfæra.
+*   **`Query()`**: Þú þarft að búa til fyrirspurnarhlut (query object) til að finna rétta póstinn. 
+
+### Dæmi um útfærslu í „profile“ samhengi:
+Þar sem þú vilt að notendur geti aðeins uppfært sína eigin pósta, væri öruggast að nota skipunina þannig að hún síaði bæði eftir **ID póstsins** og **ID notandans** úr session-inu:
+
+```python
+from tinydb import Query
+Post = Query()
+
+# Uppfærir póstinn þar sem ID póstsins passar OG höfundurinn er sá sem er innskráður
+db.update(
+    {'content': nyr_texti}, 
+    (Post.doc_id == valinn_id) & (Post.author_id == session['user_id'])
+)
+```
+
+**Lykilatriði:**
+*   Skipunin skilar lista yfir ID þeirra skjala sem var breytt.
+*   Hægt er að nota hvers kyns samanburð í fyrirspurninni (t.d. `==`, `!=`, `>`, osfrv.) til að finna réttu gögnin.
+*   Ef þú ert með ID skjalsins beint (t.d. `doc_id`), getur þú einnig notað `db.update(fields, doc_ids=[id])`.
+
+---
+
+Til að tengja nýja spjallpósta við ákveðinn notanda í TinyDB er algengasta og öruggasta leiðin að geyma **notanda-ID** í **session** þegar notandinn skráir sig inn, og bæta því ID-i svo við sem sérstökum reit í póst-orðasafnið þegar þú vistar það í gagnagrunninn.
+
+Hér er ferlið skref fyrir skref:
+
+### 1. Geyma notanda-ID í Session
+Þegar notandi skráir sig inn þarftu að vista auðkenni hans (t.d. `user_id`) í session svo hægt sé að nálgast það síðar. 
+*Athugið að Flask krefst þess að `app.secret_key` sé stilltur til að nota sessions.*
+
+### 2. Sækja gögn úr formi og Session
+Þegar notandinn sendir nýjan póst í gegnum HTML-form (POST beiðni), notarðu `request.form` til að sækja póstinn sjálfan og `session` til að sækja auðkenni höfundarins.
+
+### 3. Vista í TinyDB með `insert()`
+TinyDB væntir þess að gögn séu á formi Python orðasafna (dictionaries). Þú býrð til orðasafn sem inniheldur bæði texta póstsins og notanda-ID-ið og notar svo `insert()` aðferðina.
+
+**Dæmi um útfærslu í Flask:**
+
+```python
+from flask import request, session, redirect, url_for
+from tinydb import TinyDB
+
+db = TinyDB('db.json')
+posts_table = db.table('posts')
+
+@app.route('/create_post', methods=['POST'])
+def create_post():
+    # 1. Athugum hvort notandi sé innskráður
+    if 'user_id' in session:
+        # 2. Sækjum gögnin (post-innihald og notanda-id)
+        post_content = request.form.get('content') # Úr HTML formi
+        author_id = session['user_id']             # Úr session
+        
+        # 3. Búum til orðasafn og vistum í TinyDB
+        new_post = {
+            'author_id': author_id,
+            'content': post_content,
+            'timestamp': '2026-06-14' # Dæmi um aukagögn
+        }
+        
+        posts_table.insert(new_post)
+        return redirect(url_for('index'))
+    
+    return "Þú verður að vera innskráður", 401
+```
+
+### Helstu kostir þessarar aðferðar:
+*   **Tenging gagna:** Með því að geyma `author_id` með hverjum pósti geturðu síðar notað `db.search()` til að finna alla pósta sem tiltekinn notandi hefur skrifað.
+*   **Öryggi:** Þar sem Flask skrifar undir session-kökur með leyndarlykli, getur notandinn ekki auðveldlega falsað `author_id` sitt til að þykjast vera annar notandi þegar hann sendir inn póst.
+*   **Einfaldleiki:** TinyDB meðhöndlar þessi tengsl sjálfkrafa þar sem þetta eru bara venjuleg JSON gögn í skrá.
+
+---
+
+Til þess að takmarka eyðingu pósts þannig að aðeins höfundur hans geti eytt honum þarf að nota samspil á milli **session-stýringar** í Flask og **fyrirspurna** í TinyDB.
+
+Hér er ferlið útskýrt í þremur skrefum:
+
+### 1. Geyma notanda-ID í Session
+Þegar notandi skráir sig inn þarf að vista einkvæmt auðkenni hans í `session`. Þetta gerir kerfinu kleift að vita hvaða notandi er að reyna að framkvæma eyðinguna.
+```python
+session['user_id'] = logged_in_user_id
+```
+
+### 2. Skilgreina tengingu í gagnagrunni
+Hver póstur í TinyDB verður að innihalda reit sem vísar í höfundinn (t.d. `author_id`). Þegar póstur er búinn til er hann vistaður sem orðasafn (dict) með þessum upplýsingum.
+
+### 3. Nota samsetta fyrirspurn við eyðingu
+Í stað þess að eyða pósti eingöngu eftir ID-i póstsins, þá notarðu skipunina `db.remove(query)` með **og-skilyrði** (`&`) í TinyDB. Þannig er pósti aðeins eytt ef bæði ID póstsins og ID notandans úr session-inu passa saman.
+
+**Dæmi um útfærslu í Flask rás (route):**
+```python
+from flask import session, redirect, url_for
+from tinydb import TinyDB, Query
+
+db = TinyDB('db.json')
+Post = Query()
+
+@app.route('/delete/<int:post_id>')
+def delete_post(post_id):
+    # 1. Athuga hvort notandi sé yfirhöfuð innskráður
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    # 2. Keyra eyðingu með tvöföldu skilyrði
+    # Póstinum er aðeins eytt ef hann hefur rétt ID OG höfundurinn er réttur
+    db.remove((Post.doc_id == post_id) & (Post.author_id == session['user_id']))
+    
+    return redirect(url_for('profile'))
+```
+
+### Helstu kostir þessarar nálgunar:
+*   **Öryggi:** Jafnvel þótt notandi reyni að kalla beint á eyðingar-slóð annars notanda (t.d. `/delete/50`), þá mun TinyDB ekki finna neinn póst sem passar við bæði ID 50 og `user_id` þess sem reynir eyðinguna.
+*   **Einfaldleiki:** Þú þarft ekki að sækja póstinn fyrst til að athuga hver á hann; TinyDB sér um síuna í einni skipun.
+*   **Gagnaöryggi:** Með því að nota `session` eru notendaupplýsingarnar dulkóðaðar í vafrakökum, sem kemur í veg fyrir að notandinn geti breytt ID-inu sínu handvirkt.
+
