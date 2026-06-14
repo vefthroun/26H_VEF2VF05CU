@@ -95,6 +95,50 @@ def admin_delete_user(user_id):
         posts_table.remove(Post.author_id == user_id)
     return redirect(url_for('index'))
 ```
+---
+
+Fyrir spjallforrit af þessari stærðargráðu er besta leiðin að nýta **erfðir í sniðmátum** (e. template inheritance) í gegnum Jinja2 vélina í Flask. Þetta gerir þér kleift að halda sameiginlegum hlutum síðunnar (eins og haus, valmynd og fæti) á einum stað og forðast endurtekningu á kóða.
+
+Hér er mælt með eftirfarandi skiptingu í `templates` möppunni:
+
+### 1. Grunnskjalið: `layout.html`
+Þetta er mikilvægasta skráin þar sem hún hýsir alla grunn-HTML uppsetninguna. Hér myndir þú setja:
+*   `<head>` hlutann með tengingum í CSS í `static` möppuna.
+*   **Nav-bar:** Valmynd sem breytist eftir því hvort notandi er innskráður (með því að skoða `session` hlutinn beint í sniðmátinu).
+*   **Flash-skilaboð:** Stað þar sem villu- eða staðfestingarskilaboð birtast með `get_flashed_messages()`.
+*   **`{% block content %}`:** Svæði þar sem hinar síðurnar munu „skrifa“ sitt eigið innihald.
+
+### 2. Forsíðan: `index.html`
+Þessi síða á að **erfa** frá `layout.html` (með `{% extends 'layout.html' %}`).
+*   Hún inniheldur lykkju sem fer í gegnum alla pósta úr TinyDB og birtir þá í tímaröð.
+*   Hér er engin eyðingar- eða breytingarvirkni sýnileg venjulegum notendum [Conversation].
+
+### 3. Innskráning: `login.html`
+*   Inniheldur einfalt HTML form með `method="POST"` til að senda notandanafn og lykilorð á miðlarann.
+*   Nýtir sömu grunnútlitshönnun og aðrar síður.
+
+### 4. Notendasíða: `profile.html`
+Þetta er „lokaða“ svæðið þitt þar sem:
+*   Notandinn sér listann yfir sína eigin pósta.
+*   **CRUD aðgerðir:** Hér birtast sérstakir „eyða“ og „breyta“ hnappar sem nota `url_for()` til að kalla á réttar rætur (routes) í Flask [35, Conversation].
+*   Hér er form til að skrifa nýja pósta.
+
+### 5. (Valfrjálst) Vefstjórasíða: `admin.html`
+*   Ef kerfið er umfangsmikið er gott að hafa sérstaka síðu fyrir vefstjóra þar sem hann sér yfirlit yfir alla notendur og pósta með möguleika á að fjarlægja þá [Conversation].
+
+### Möppuskipan
+Skipulagið ætti að líta svona út í verkefninu þínu:
+*   `/app.py` (Aðalskráin þín)
+*   `/db.json` (TinyDB gagnagrunnurinn - geymdur utan static svo hann sé ekki aðgengilegur beint) [Conversation]
+*   `/static/` (Fyrir CSS og myndir)
+*   `/templates/`
+    *   `layout.html`
+    *   `index.html`
+    *   `login.html`
+    *   `profile.html`
+    *   `admin.html`
+
+Með því að nota `url_for()` í þessum skrám tryggir þú að tenglar á milli síðna og í static skrár virki alltaf rétt, óháð því hvernig vefslóðirnar breytast.
 
 ### Öryggisatriði úr heimildum:
 *   **HTML Escaping:** Flask og Jinja2 sjá sjálfkrafa um að hreinsa (escape) það sem notendur skrifa í póstana sína til að koma í veg fyrir sprautuhótanir (injection attacks).
