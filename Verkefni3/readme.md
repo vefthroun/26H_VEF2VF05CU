@@ -43,7 +43,7 @@ Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
 1. Þegar valin er einn flokkur (genre) úr valmynd birtir kerfið vefsíðu með þáttaröðum sem tilheyra völdum flokki. Sömu upplýsingar og á forsíðu nafn og mynd **2%**
 1. Þegar leitað er að þáttaröð er nafn slegið inn í leitarreit og ýtt á hnapp / takka.  Þá fer kerfið á vefsíðu sem birtir helstu upplýsingar um þáttaraðir sem tilheyra nafninu í leitarstregnum ( helstu upplýsingar nafn og mynd ).**2%**
 
-> Notaðu PicoCSS fyrir uppsetningu (layout). <br> Notið Jinja erfðir (_Jinja2: inheritance_) og innsetningu skráa (_include: nav, footer_) á vefsíðum.
+> Notaðu PicoCSS fyrir uppsetningu (_layout_). <br> Notið Jinja erfðir (_Jinja2: inheritance_) og innsetningu skráa (_include: nav, footer_) á vefsíðum.
 
 
 #### Að sækja gögn frá API
