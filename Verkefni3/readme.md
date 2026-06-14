@@ -3,7 +3,7 @@
 - 20% af heildareinkunn
 - Viðfangsefni:
   - CRUD aðgerðir með JSON / [TinyDB](https://tinydb.readthedocs.io/en/latest/getting-started.html)
-  - API, requests
+  - API, beiðnir (_requests_) frá [TVMaze API](https://www.tvmaze.com/api)
   - Jinja2: Template inheritance, Include
   - HTML Form
   - Uppsetning (_Layout_) 
