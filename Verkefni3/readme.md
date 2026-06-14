@@ -12,7 +12,7 @@
 
 ### Verkefnalýsing
 
-#### JSON Tinydb
+#### JSON Tinydb 10%
 
 Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
 
@@ -25,12 +25,12 @@ Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
 7. Notendur geta skrifað nýja pósta, breytt eigin póstum eða eytt þeim
 8. Prófílsíðan er varin með **session** aðgangsvörn
 
-#### JSON API
+#### JSON API 10%
  
 Útfærðu vefforrit í Flask sem nýtir JSON skrá og API. Notum [TVMaze API](https://www.tvmaze.com/api)
 
-1. Á forsíðu (index) skal birta grunnupplýsingar um 20 random þætti ur _TVMaze API_ gagnagrunninum. Birta skal nafn og mynd þáttaraða  **20%**
-1. Þegar valin er ein þáttaröð af forsíðu er farið á síðu sem birtir nánari upplýsingar um valda þáttaröð. **20%**
+1. Á forsíðu (index) skal birta grunnupplýsingar um 20 random þætti ur _TVMaze API_ gagnagrunninum. Birta skal nafn og mynd þáttaraða  **2%**
+1. Þegar valin er ein þáttaröð af forsíðu er farið á síðu sem birtir nánari upplýsingar um valda þáttaröð. **3%**
     - nafn þáttaraðar (name)
     - mynd (image/medium)
     - textalýsing þáttaraðar (summary)
@@ -38,12 +38,11 @@ Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
     - útgáfudagur þáttaraðar (premiered), íslensk dagsetning
     - dagsetning síðasta þáttar (ended)
     - flokkar þáttaraðar (genres)
-1. Í valmynd er hlekkur á forsíðu, alla flokka (má vera í fellivalslista - select field), Um mig og leitarreitur þar sem hægt er að leita að ákveðinni þáttaröð úr TVMaze gagnagrunninum.  **10%**
-1. Þegar valin er einn flokkur (genre) úr valmynd birtir kerfið vefsíðu með þáttaröðum sem tilheyra völdum flokki. Sömu upplýsingar og á forsíðu nafn og mynd **15%**
-1. Þegar leitað er að þáttaröð er nafn slegið inn í leitarreit og ýtt á hnapp / takka.  Þá fer kerfið á vefsíðu sem birtir helstu upplýsingar um þáttaraðir sem tilheyra nafninu í leitarstregnum ( helstu upplýsingar nafn og mynd ).**15%**
-1. Hægt er að uppfæra upplýsingar (edit) í Um mig (_profile_), gögn eru skráð og sótt í JSON skrá, notum TinyDB til að höndla þetta. **10%**
-1. Notaðu eigið CSS Grids fyrir uppsetningu (layout) og Pico CSS / NEW.CSS / .... **5%**
-1. Notið erfðir (Jinja2:inheritance) og include (nav og footer) á vefsíðum. **5%**
+1. Í valmynd er hlekkur á forsíðu, alla flokka (má vera í fellivalslista - select field), leitarreitur þar sem hægt er að leita að ákveðinni þáttaröð úr TVMaze gagnagrunninum.  **1%**
+1. Þegar valin er einn flokkur (genre) úr valmynd birtir kerfið vefsíðu með þáttaröðum sem tilheyra völdum flokki. Sömu upplýsingar og á forsíðu nafn og mynd **2%**
+1. Þegar leitað er að þáttaröð er nafn slegið inn í leitarreit og ýtt á hnapp / takka.  Þá fer kerfið á vefsíðu sem birtir helstu upplýsingar um þáttaraðir sem tilheyra nafninu í leitarstregnum ( helstu upplýsingar nafn og mynd ).**2%**
+
+> Notaðu eigið CSS Grids fyrir uppsetningu (layout) og Pico CSS. <br> Notið erfðir (Jinja2:inheritance) og include (nav og footer) á vefsíðum.
 
 
 #### Að sækja gögn frá API
