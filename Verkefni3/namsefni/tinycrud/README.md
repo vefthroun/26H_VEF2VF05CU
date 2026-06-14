@@ -28,7 +28,7 @@ Post = Query()
 ```
 
 ### 2. Forsíða (index.html) - Birta alla pósta
-Á forsíðunni notarðu `db.all()` til að sækja alla pósta úr TinyDB og birta þá. Samkvæmt kröfunni er enginn breytingahnappur hér, heldur aðeins lestur.
+Á forsíðunni notarðu `db.all()` til að sækja alla pósta úr TinyDB og birta þá.  Aðeins er hægt að lesa póstana á síðunni.
 
 ```python
 @app.route('/')
@@ -515,5 +515,5 @@ def create_post():
 ### Lykilatriði:
 *   **Sveigjanleiki orðasafna:** Dictionaries í Python eru breytanleg (mutable), svo þú getur bætt við hvaða lyklum sem er hvenær sem er með assignment virkjanum (`=`).
 *   **Gagnageymsla:** TinyDB vistar þessi gögn beint í JSON skrána þína, sem gerir það auðvelt að birta tímastimpilinn síðar í `index.html` eða á prófílsíðunni.
-*   **Birting:** Í HTML sniðmátinu geturðu svo birt stimpilinn með Jinja2 málfræðinni: `{{ post.timestamp }}` [Conversation].
+*   **Birting:** Í HTML sniðmátinu geturðu svo birt stimpilinn með Jinja2 málfræðinni: `{{ post.timestamp }}`.
 
