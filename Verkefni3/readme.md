@@ -11,6 +11,21 @@
 ---
 
 ### Verkefnalýsing
+
+#### JSON Tinydb
+
+Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
+
+1. Búðu til **JSON skrá** sem inniheldur sama efni og eru notaðir í orðasöfnum (_dictionaries_) 3. verkefnis
+2. Notaðu TinyDB pakkann til að framkvæma CRUD aðgerðir í appinu
+3. Allar færslur og breytingar eru vistaðar í JSON skránni
+4. Á forsíðu birtast póstar frá öllum notendum
+5. Nýskráning býr til nýjan notanda
+6. Notandi getur síðan skráð sig inn á eigin **prófíl**
+7. Notendur geta skrifað nýja pósta, breytt eigin póstum eða eytt þeim
+8. Prófílsíðan er varin með **session** aðgangsvörn
+
+#### JSON API
  
 Útfærðu vefforrit í Flask sem nýtir JSON skrá og API. Notum [TVMaze API](https://www.tvmaze.com/api)
 
