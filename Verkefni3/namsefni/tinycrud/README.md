@@ -272,6 +272,62 @@ def delete_post(post_id):
 
 ---
 
+Að búa til sérstakt **„admin“** hlutverk í TinyDB felst ekki í því að stilla gagnagrunninn sjálfan, heldur að geyma upplýsingar um hlutverk (e. role) sem sérstakan reit (key) í orðasafni (dict) notandans. TinyDB geymir öll gögn sem Python orðasöfn, svo þú einfaldlega bætir við reitnum `'role': 'admin'` þegar þú býrð til notandann.
+
+Hér er ferlið byggt á heimildum og fyrri samskiptum:
+
+### 1. Skilgreina hlutverkið í gagnagrunni
+Þegar þú setur notanda inn í `users` töflu TinyDB með `insert()` aðferðinni, bætirðu við hlutverkinu:
+
+```python
+from tinydb import TinyDB, Query
+db = TinyDB('db.json')
+users_table = db.table('users')
+
+# Búa til admin notanda
+users_table.insert({
+    'username': 'vefstjori',
+    'role': 'admin',
+    'password': '...' 
+})
+```
+
+### 2. Sækja hlutverkið við innskráningu
+Þegar notandi skráir sig inn notarðu `Query()` til að finna hann og geymir svo hlutverkið í **Flask session**. Þetta gerir kerfinu kleift að muna réttindi notandans á milli síðna.
+
+```python
+from flask import session
+
+User = Query()
+user = users_table.get(User.username == form_username)
+
+if user:
+    session['user_id'] = user.doc_id # doc_id er sjálfkrafa ID í TinyDB
+    session['role'] = user.get('role', 'user') # Sækir 'admin' eða sjálfgefið 'user'
+```
+
+### 3. Aðgangsstýring í Flask rás (Route)
+Til að verja sérstakar aðgerðir (eins og að eyða póstum eða öðrum notendum) notarðu einfalda `if` skilyrðingu til að athuga hvaða hlutverk er vistað í session-inu [Conversation].
+
+```python
+@app.route('/admin/delete_user/<int:user_id>')
+def delete_user(user_id):
+    # Athugum hvort hlutverkið í session sé 'admin'
+    if session.get('role') == 'admin':
+        users_table.remove(doc_ids=[user_id]) # Eyða notanda
+        return "Notanda eytt"
+    else:
+        # Ef ekki admin, þá sýna villu eða neita aðgangi
+        return "Aðgangur aðeins fyrir vefstjóra", 401
+```
+
+### Lykilatriði:
+*   **Sveigjanleiki:** Þar sem TinyDB geymir orðasöfn geturðu auðveldlega bætt við eða breytt hlutverkum með `update()` skipuninni, t.d. `db.update({'role': 'admin'}, User.username == 'jon')`.
+*   **Öryggi:** Gættu þess að hafa sterkan `app.secret_key` í Flask svo notendur geti ekki sjálfir breytt hlutverkinu sínu í session-inu í vafranum.
+*   **Sjálfgefin gildi:** Notaðu `.get('role', 'user')` þegar þú sækir hlutverkið svo forritið hrynji ekki ef einhvern notanda vantar hlutverka-reitinn í gagnagrunninum.
+
+---
+
 Til að hanna **`layout.html`** þannig að það nýti erfðir (e. template inheritance) í Flask, þarftu að búa til grunnskjal sem inniheldur þá þætti sem eiga að vera eins á öllum síðum forritsins. Þetta sparar vinnu þar sem þú þarft ekki að endurtaka sama HTML kóðann fyrir hverja síðu.
 
 Hér er hvernig þú hannar þetta skref fyrir skref:
