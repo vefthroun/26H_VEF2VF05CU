@@ -270,3 +270,72 @@ def delete_post(post_id):
 *   **Einfaldleiki:** Þú þarft ekki að sækja póstinn fyrst til að athuga hver á hann; TinyDB sér um síuna í einni skipun.
 *   **Gagnaöryggi:** Með því að nota `session` eru notendaupplýsingarnar dulkóðaðar í vafrakökum, sem kemur í veg fyrir að notandinn geti breytt ID-inu sínu handvirkt.
 
+---
+
+Til að hanna **`layout.html`** þannig að það nýti erfðir (e. template inheritance) í Flask, þarftu að búa til grunnskjal sem inniheldur þá þætti sem eiga að vera eins á öllum síðum forritsins. Þetta sparar vinnu þar sem þú þarft ekki að endurtaka sama HTML kóðann fyrir hverja síðu.
+
+Hér er hvernig þú hannar þetta skref fyrir skref:
+
+### 1. Uppsetning á `layout.html`
+Þetta skjal virkar sem „skelin“ fyrir vefinn þinn. Þú skilgreinir sérstök **blokkir** (e. blocks) þar sem undirsíðurnar munu setja sitt eigið innihald.
+
+**Dæmi um uppbyggingu:**
+```html
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Vefforritun 1{% endblock %}</title>
+    <!-- Tenging við CSS skrá í static möppu með url_for -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <!-- Sameiginleg valmynd fyrir allar síður -->
+        <a href="{{ url_for('index') }}">Forsíða</a>
+        <a href="{{ url_for('login') }}">Innskrá</a>
+    </nav>
+
+    <main>
+        <!-- Birting á flash-skilaboðum (feedback) -->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="flash">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Hér kemur innihald undirsíðna -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2026 Tækniskólinn - Vefforritun 1</p>
+    </footer>
+</body>
+</html>
+```
+
+### 2. Lykilatriði í hönnuninni
+*   **`{% block content %}`**: Þetta er mikilvægasta skipunin. Hún segir Jinja að hér eigi að setja innihald frá öðrum síðum.
+*   **Sameiginlegir þættir**: Þú setur haus (header), valmynd (navigation) og fót (footer) beint í `layout.html` svo þeir birtist alls staðar.
+*   **Static skrár**: Notaðu `url_for('static', filename='...')` til að tengja CSS og JavaScript svo slóðirnar séu alltaf réttar, óháð því hvar notandinn er staddur á síðunni.
+*   **Flash skilaboð**: Best er að setja `get_flashed_messages()` í grunnskjalið svo að endurgjöf til notandans (t.d. „Innskráning tókst“) birtist alltaf á réttum stað.
+
+### 3. Hvernig undirsíður (t.d. `index.html`) nýta erfðirnar
+Þegar þú býrð til nýja síðu byrjarðu hana á því að „erfa“ frá grunnskjalinu með **`extends`** skipuninni og fyllir svo í blokkirnar.
+
+**Dæmi um `index.html`:**
+```html
+{% extends "layout.html" %}
+
+{% block title %}Forsíða - Spjallborð{% endblock %}
+
+{% block content %}
+    <h1>Velkomin á spjallborðið</h1>
+    <p>Hér er listi yfir nýjustu póstana...</p>
+{% endblock %}
+```
+
+Með þessari hönnun verður auðveldara að breyta útlitinu á öllum vefnum í einu; þú breytir einfaldlega `layout.html` og allar undirsíður fylgja með sjálfkrafa.
