@@ -395,3 +395,80 @@ Hér er hvernig þú hannar þetta skref fyrir skref:
 ```
 
 Með þessari hönnun verður auðveldara að breyta útlitinu á öllum vefnum í einu; þú breytir einfaldlega `layout.html` og allar undirsíður fylgja með sjálfkrafa.
+
+---
+
+Hér er dæmi um hvernig þú setur upp **`db.json`** skrá með TinyDB sem inniheldur notanda, stjórnanda (admin) og póst, miðað við þá uppbyggingu sem við höfum rætt og heimildirnar gefa upp.
+
+TinyDB væntir þess að gögn séu á formi **Python orðasafna (dicts)**. Til að halda gögnunum skipulögðum er best að nota aðskildar töflur fyrir notendur og pósta.
+
+### Python kóði til að búa til gögnin
+Þessi kóði býr til gagnagrunninn, skilgreinir töflurnar og setur inn fyrstu gildin.
+
+```python
+from tinydb import TinyDB
+
+# 1. Uppsetning: Býr til db.json ef hún er ekki til
+db = TinyDB('db.json')
+users_table = db.table('users')
+posts_table = db.table('posts')
+
+# 2. Setja inn Admin (stjórnanda)
+# insert() skilar sjálfkrafa ID-inu sem skjalið fær
+admin_id = users_table.insert({
+    'username': 'vefstjori',
+    'role': 'admin',
+    'password': 'hashed_password_123'
+})
+
+# 3. Setja inn almennan notanda
+user_id = users_table.insert({
+    'username': 'jon_jonsson',
+    'role': 'user',
+    'password': 'hashed_password_456'
+})
+
+# 4. Setja inn spjallpóst sem tengist notanda-IDinu
+posts_table.insert({
+    'author_id': user_id,  # Tenging við notandann [Conversation]
+    'content': 'Hæ öll! Þetta er minn fyrsti póstur.',
+    'timestamp': '2026-06-14'
+})
+```
+
+### Hvernig db.json skráin mun líta út
+Eftir að þessi kóði hefur verið keyrður, mun `db.json` skráin þín innihalda gögnin á þessu sniði. TinyDB geymir hverja töflu sem sérstakan hlut inni í JSON skránni:
+
+```json
+{
+    "users": {
+        "1": {
+            "username": "vefstjori",
+            "role": "admin",
+            "password": "hashed_password_123"
+        },
+        "2": {
+            "username": "jon_jonsson",
+            "role": "user",
+            "password": "hashed_password_456"
+        }
+    },
+    "posts": {
+        "1": {
+            "author_id": 2,
+            "content": "Hæ öll! Þetta er minn fyrsti póstur.",
+            "timestamp": "2026-06-14"
+        }
+    }
+}
+```
+
+### Lykilatriði í þessari uppsetningu:
+*   **Töflur (Tables):** Með því að skipta í `users` og `posts` verður mun auðveldara að framkvæma CRUD aðgerðir og leitir seinna meir.
+*   **Document IDs:** Lyklarnir `"1"` og `"2"` í JSON skránni eru sjálfkrafa búnir til af TinyDB og eru notaðir til að bera kennsl á hvert skjal.
+*   **Hlutverk (Roles):** Með því að hafa `'role': 'admin'` eða `'user'` geturðu notað Flask session til að stýra því hver má eyða hverju.
+*   **JSON Vinnsla:** Eins og fram kemur í verklýsingum áfanga þíns, þá er JSON skráarvinnsla miðlæg í gerð API og vefja með miðlaramáli.
+
+---
+
+
