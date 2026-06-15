@@ -155,3 +155,68 @@ def search():
 *   **Enginn API lykill:** Epguides API er opið og ókeypis, svo þú getur byrjað strax að gera beiðnir.
 *   **Öryggi:** Flask og Jinja2 sjá sjálfkrafa um að **hreinsa (escape)** leitarorðið og gögnin úr API-inu áður en þau eru birt, sem verndar gegn sprautuhótunum (injection attacks).
 *   **Notendavænt:** Með því að nota `request.args` (GET) getur notandinn notað „Back“ hnappinn í vafranum og farið aftur í leitarniðurstöðurnar án þess að fá villuboð um að senda þurfi formgögn aftur.
+
+Til að birta myndir og lýsingar (summaries) frá TVMaze í gegnum Epguides API þarftu að nýta þau gögn sem API-ið skilar sjálfkrafa í JSON svari sínu. Þar sem TVMaze veitir lýsingar á þáttum og myndir (svo sem veggspjöld og kyrrmyndir), eru þessar upplýsingar aðgengilegar sem lyklar í þeim orðasöfnum (dicts) sem þú færð til baka.
+
+Hér er hvernig þú útfærir þetta í Jinja2 sniðmátinu þínu:
+
+### 1. Birting á lýsingu (Summary)
+Lýsingar frá TVMaze innihalda oft HTML-tög (eins og `<p>` eða `<b>`). Flask og Jinja2 **hreinsa (escape)** öll gögn sjálfkrafa til að tryggja öryggi. Til að lýsingin birtist rétt en ekki sem hrár texti með tögum, þarftu að nota **`|safe`** síuna.
+
+```html
+<div class="show-summary">
+    <h4>Um þáttinn:</h4>
+    {# Notum |safe svo HTML tög frá TVMaze virki rétt #}
+    {{ show.summary | safe }}
+</div>
+```
+---
+
+### 2. Birting á myndum (Images)
+Myndirnar koma sem vefslóðir (URL). Þú setur þær í `src` eigindi `<img>` tagsins. Gott er að nota `if` skilyrði til að athuga hvort mynd sé til staðar áður en reynt er að birta hana [45, Conversation].
+
+```html
+{% if show.image %}
+    <div class="show-poster">
+        <img src="{{ show.image }}" alt="Veggspjald fyrir {{ show.title }}" style="max-width: 200px;">
+    </div>
+{% else %}
+    <p>Engin mynd fáanleg.</p>
+{% endif %}
+```
+
+### 3. Heildardæmi í `search_results.html`
+Hér er hvernig þetta lítur út þegar þú vinnur með listann af niðurstöðum sem við ræddum áðan [Conversation]:
+
+```html
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Leitarniðurstöður</h1>
+    <div class="results">
+        {% for show in shows %}
+            <div class="show-item">
+                <h2>{{ show.title }}</h2>
+                
+                {# Mynd frá TVMaze #}
+                {% if show.image %}
+                    <img src="{{ show.image }}" alt="{{ show.title }}">
+                {% endif %}
+                
+                {# Lýsing frá TVMaze #}
+                <div class="description">
+                    {{ show.summary | safe }}
+                </div>
+                
+                <p><strong>Frumsýnt:</strong> {{ show.start_date }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}
+```
+
+### Mikilvæg atriði:
+*   **Gagnauppspretta:** Epguides API sameinar gögn frá mörgum stöðum; titlar koma frá epguides.com en lýsingar og myndir eru sóttar beint frá TVMaze.
+*   **Öryggi:** Þótt þú notir `|safe` fyrir lýsinguna, þá er það óhætt í þessu tilfelli þar sem gögnin koma frá traustum API-endapunkti, en almennt ættirðu að fara varlega með þá síu á gögn sem notendur slá inn sjálfir.
+*   **Snið gagna:** Þar sem TinyDB og API-ið skila báðir gögnum sem Python orðasöfnum (dicts), er málfræðin í Jinja2 sú sama fyrir bæði (`show.lykill` eða `show['lykill']`) [4, 19, Conversation].
