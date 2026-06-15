@@ -14,17 +14,16 @@
 
 #### JSON Tinydb 10%
 
-Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
 
-1. Búðu til **JSON skrá** sem inniheldur sama efni og eru notaðir í orðasöfnum (_dictionaries_) 3. verkefnis
-2. Notaðu TinyDB pakkann til að framkvæma CRUD aðgerðir í appinu
-3. Allar færslur og breytingar eru vistaðar í JSON skránni
-4. Á forsíðu birtast allir póstar úr json skránni
-5. Nýskráning býr til nýjan notanda
-6. Notandi getur síðan skráð sig inn á eigin **prófíl**
-7. Notendur geta skrifað nýja pósta, breytt eigin póstum eða eytt þeim
-8. Prófílsíðan er varin með **session** aðgangsvörn
-9. Vefstjóri (admin) getur eytt póstum og notendum 
+1. Notaðu uppsetninguna sem þú hannaðir í 2. verkefni, taktu út orðasöfnin (_dictonaries_) úr appinu og settu innihaldið í JSON skrá.
+1. Notaðu TinyDB pakkann til að framkvæma CRUD aðgerðir 
+   * Allar færslur og breytingar eru vistaðar í JSON skránni
+1. Á forsíðu birtast allir póstar úr json skránni
+1. Nýskráning býr til nýjan notanda
+1. Notandi getur síðan skráð sig inn á eigin **prófíl**
+1. Notendur geta skrifað nýja pósta, breytt eigin póstum eða eytt þeim
+1. Prófílsíðan er varin með **session** aðgangsvörn
+1. Vefstjóri (admin) getur eytt póstum og notendum 
 
 #### JSON API 10%
  
