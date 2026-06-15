@@ -38,30 +38,32 @@ Matþættir eru í verkefni 4 **í Canvas**. (_í vinnslu_)
 1. Jinja: inheritance, include, skilyrðissetnignar, lykkjunotkun, filter, url_for, breytur. **(10%)**
 1. PicoCSS eða eigið CSS safn fyrir uppsetningu og útlit. **(10%)**
 1. Efnisyfirlit (menu) sýnir hvaða hlekkur er virkur hverju sinni og í efnisyfirlitinu er leitargluggi **(5%)**
-1. API notkun (ekki TVMaze og TMDB) til að sækja gögn sem birtast á vef, lágmark 2 mismunandi fyrirspurnir. **(10%)**
+1. API notkun (_ekki Epguides API_) til að sækja gögn sem birtast á vef, lágmark 2 mismunandi fyrirspurnir. **(10%)**
 1. Notkun á dynamic route og errorhandler (404 villa) **(5%)**
 1. Vefsíða sem birtir blogfærslur með röðun (nýjast efst). **(5%)**
 1. Login, sessions, validation og einföld auðkenning fyrir einn notanda (admin@admin.is og lykilorðið 123456), logout. **(5%)**
-1. Admin (dashboard) með töfluuppsetningu, CRUD aðgerðir á JSON skrá höndlað með TinyDB (blogfærslur). **(20%)**
+1. Admin (dashboard) með töfluuppsetningu [sýnidæmi](https://blog-admin-ui.netlify.app/), CRUD aðgerðir á JSON skrá höndlað með TinyDB (blogfærslur). **(20%)**
    * Blog yfirlit í töflu
    * Hnappur til að búa til blogfærslu -> síða með HTML Form til að skrifa nýja blogfærslu, Flash tilkynning.
    * Hnappur til að uppfæra blogfærslu -> síða með HTML Form til að uppfæra blogfærslu, Flash tilkynning.
    * Hnappur til að eyða blogfærslu -> FLash tilkynning birtist á stjórnborði
    * "Select" innsláttarreitur til að velja flokk (_Category_)
-   * [sýnidæmi](https://blog-admin-ui.netlify.app/)
+   * Notendur geta skráð sig í gagnagrunn og síðan loggað sig inn og skrifað pósta sem birtast í blogginu
 
 #### Nýjungar: (30%)
 
 Nemandi býr til eigin kóðalausnir sem henta hans lokaverkefni. Hér eru nokkrir valmöguleikar í boði:
 
-1. Notendur geta skráð sig í gagnagrunn og síðan loggað sig inn og skrifað pósta sem birtast í blogginu **(10%)** 
-1. [Fileupload](https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/), ljósmyndir fyrir blogfærslur. **(10%)**
-1. Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). **(10%)**
-1. Síða þar sem hægt er að breyta eða bæta við flokkum **(5%)**
-1. [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ).  **(5%)**
+#### **(10%)** vægi
+1. [Fileupload](https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/), ljósmyndir fyrir blogfærslur. 
+1. Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). 
+
+#### **(5%)** vægi
+1. Síða þar sem hægt er að breyta eða bæta við flokkum 
+1. [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ).  
 1. **HTMX** er framendalausn þar sem vafrinn er í lykilhlutverki í samskiptum við miðlarann  
-    - Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). **(5%)**
-1. Annað sem nemendur skýra frá í kynningu lokverkefnis **(5%)**
+    - Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). 
+1. **Annað** sem nemendur skýra frá í kynningu lokverkefnis 
 
 ---
 
