@@ -223,6 +223,79 @@ Hér er hvernig þetta lítur út þegar þú vinnur með listann af niðurstö�
 
 ---
 
+### Flokkun eftir greinum (_genres_)
+
+Til þess að sýna **flokka (genres)** á vefsíðunni þinni þarftu að nýta það að Epguides API skilar ítarlegum lýsigögnum (metadata) um sjónvarpsþætti. Þó að flokkar séu ekki sérstaklega tilgreindir í grunn-töflunni yfir gögn frá epguides.com, þá fylgja þeir oft með í þeim gögnum sem API-ið dregur saman (t.d. frá TVMaze) [3, Conversation].
+
+Hér er hvernig þú útfærir þetta tæknilega:
+
+### 1. Meðhöndlun gagna í bakenda (Python)
+Þegar þú færð svar frá API-inu er það á JSON sniði, sem Flask breytir í Python orðasafn (dicts). Flokkar eru yfirleitt geymdir sem **listi af strengjum** (t.d. `['Drama', 'Action', 'Sci-Fi']`) inni í hverjum þætti.
+
+Þú ættir að nota `.get()` aðferðina til að sækja flokkana svo forritið hrynji ekki ef þeir vanta í gögnin.
+
+```python
+# Dæmi um hvernig gögnin gætu litið út í 'show' orðasafninu:
+# show = {'title': 'The Flash', 'genres': ['Action', 'Drama', 'Sci-Fi'], ...}
+
+# Í rásinni þinni (route):
+@app.route('/show/<id>')
+def show_details(id):
+    # (Sækja gögn úr API hér...)
+    show = response.json()
+    return render_template('show.html', show=show)
+```
+
+### 2. Birting í Jinja2 sniðmáti (HTML)
+Inni í `show.html` (eða sambærilegu skjali sem erfir frá `layout.html`) notarðu **`{% for %}` lykkju** til að ítreka í gegnum listann af flokkum og birta þá [45, Conversation].
+
+```html
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>{{ show.title }}</h1>
+
+    <div class="genres">
+        <strong>Flokkar:</strong>
+        {# Athugum hvort genres sé til staðar og sé listi #}
+        {% if show.genres %}
+            {% for genre in show.genres %}
+                <span class="genre-tag">{{ genre }}</span>
+            {% endfor %}
+        {% else %}
+            <span>Engir flokkar skráðir</span>
+        {% endif %}
+    </div>
+
+    <p>{{ show.summary | safe }}</p>
+{% endblock %}
+```
+
+### 3. Útlit og hönnun (CSS)
+Til að gera flokkana meira áberandi er gott að hanna þá sem litla miða (tags) í `static/style.css` skránni þinni.
+
+```css
+.genre-tag {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-right: 5px;
+    font-size: 0.9em;
+    display: inline-block;
+}
+```
+
+### 4. Geymsla í TinyDB
+Ef þú vistar þátt í uppáhald í **TinyDB**, þá vistar þú allan listann af flokkum beint í `db.json` skrána [5, Conversation]. Þar sem TinyDB vinnur með Python orðasöfn og lista bókstaflega, þarftu enga sérstaka vinnslu til að geyma listann.
+
+**Lykilatriði:**
+*   **Gagnagerð:** Mundu að flokkar eru listi. Þú getur ekki notað þá beint eins og titil (streng), heldur þarftu að nota lykkju til að birta hvern flokk fyrir sig.
+*   **API-svör:** Ef þú notar leitarvél Epguides API eins og við ræddum áður, þá fylgja flokkarnir oft með í hverri niðurstöðu [2, Conversation].
+*   **Sjálfgefin gildi:** Alltaf er öruggast að nota `show.get('genres', [])` í bakenda eða `{% if show.genres %}` í sniðmáti til að forðast villur ef gögn vantar.
+
+---
+
 ### Tinydb og Epguides samþætting
 
 það er hægt að vista uppáhalds þætti úr Epguides API í TinyDB. Þar sem bæði API-ið skilar gögnum á JSON sniði og TinyDB geymir gögn sem Python orðasöfn (dicts), þá smellpassa þessi kerfi saman [2, 5, Conversation].
