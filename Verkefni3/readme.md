@@ -28,9 +28,9 @@ Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
 
 #### JSON API 10%
  
-Útfærðu vefforrit í Flask sem nýtir JSON skrá og API. Notum [TVMaze API](https://www.tvmaze.com/api)
+Útfærðu vefforrit í Flask sem nýtir JSON skrá og API. Notum [Epguides API](https://epguides.frecar.no/docs)
 
-1. Á forsíðu (index) skal birta grunnupplýsingar um 20 random þætti ur _TVMaze API_ gagnagrunninum. Birta skal nafn og mynd þáttaraða  **2%**
+1. Á forsíðu (index) skal birta grunnupplýsingar um 20 random þætti ur _Epguides API_ gagnagrunninum. Birta skal nafn og mynd þáttaraða  **2%**
 1. Þegar valin er ein þáttaröð af forsíðu er farið á síðu sem birtir nánari upplýsingar um valda þáttaröð. **3%**
     - nafn þáttaraðar (name)
     - mynd (image/medium)
@@ -39,7 +39,7 @@ Notaðu uppsetninguna sem þú hannaðir í 3. verkefni.
     - útgáfudagur þáttaraðar (premiered), íslensk dagsetning
     - dagsetning síðasta þáttar (ended)
     - flokkar þáttaraðar (genres)
-1. Í valmynd er hlekkur á forsíðu, alla flokka (má vera í fellivalslista - select field), leitarreitur þar sem hægt er að leita að ákveðinni þáttaröð úr TVMaze gagnagrunninum.  **1%**
+1. Í valmynd er hlekkur á forsíðu, alla flokka (má vera í fellivalslista - select field), leitarreitur þar sem hægt er að leita að ákveðinni þáttaröð úr Epguides gagnagrunninum.  **1%**
 1. Þegar valin er einn flokkur (genre) úr valmynd birtir kerfið vefsíðu með þáttaröðum sem tilheyra völdum flokki. Sömu upplýsingar og á forsíðu nafn og mynd **2%**
 1. Þegar leitað er að þáttaröð er nafn slegið inn í leitarreit og ýtt á hnapp / takka.  Þá fer kerfið á vefsíðu sem birtir helstu upplýsingar um þáttaraðir sem tilheyra nafninu í leitarstregnum ( helstu upplýsingar nafn og mynd ).**2%**
 
