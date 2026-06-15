@@ -535,3 +535,43 @@ Hér er dæmi um hvernig þú hantar **`shows.html`** til að birta upplýsingar
 *   **Gagnauppspretta:** Inni í þessu eina orðasafni (dict) ertu að blanda saman gögnum frá **epguides.com** (titill og stöð) og **TVMaze** (myndir og samantektir).
 *   **Sveigjanleiki:** Með því að nota `{% if show.image %}` kemurðu í veg fyrir að vefsíðan sýni brotnar myndir ef API-ið vantar mynd fyrir tiltekinn þátt [Conversation].
 *   **Skipulag:** Með því að setja þetta í `shows-grid` klasa geturðu notað CSS Flexbox eða Grid til að raða þáttunum hlið við hlið á fallegan hátt [42, Conversation].
+
+Til þess að birta mismunandi gerðir mynda, svo sem **veggspjöld (posters)** eða **kyrrmyndir (stills)**, þarftu að nýta gögnin sem Epguides API sækir frá TVMaze. API-ið flokkar myndirnar eftir því hvort þú ert að skoða upplýsingar um heila þáttaröð, eina seríu eða einstaka þætti.
+
+Hér er hvernig þú nálgast og birtir þessar mismunandi myndgerðir:
+
+### 1. Tegundir mynda í boði
+Samkvæmt tæknilýsingu API-ins eru þrjár megingerðir mynda fáanlegar:
+*   **Show Posters:** Aðal-veggspjöld fyrir sjónvarpsþáttinn (notað í almennri leit og yfirliti).
+*   **Season Posters:** Veggspjöld sem eru sértæk fyrir hverja seríu (season).
+*   **Episode Stills:** Kyrrmyndir úr hverjum einstökum þætti.
+
+### 2. Birting í Jinja2 sniðmáti
+Í fyrri dæmum okkar notuðum við `show.image` til að birta aðalveggspjaldið [Conversation]. Ef þú ert að birta lista yfir einstaka þætti eða seríur mun orðasafnið (dict) sem API-ið skilar innihalda mismunandi lykla fyrir myndirnar.
+
+**Dæmi um hvernig á að birta kyrrmyndir úr þáttum:**
+Ef þú ert að ítra í gegnum lista af þáttum (`episodes`) þá fylgir kyrrmynd oft með hverjum þætti.
+
+```html
+{% for episode in episodes %}
+    <div class="episode-box">
+        <h4>{{ episode.title }} (S{{ episode.season }}E{{ episode.number }})</h4>
+        
+        {# Birta kyrrmynd (still) ef hún er til staðar #}
+        {% if episode.image %}
+            <img src="{{ episode.image }}" alt="Kyrrmynd úr {{ episode.title }}" class="episode-still">
+        {% else %}
+            <p>Engin mynd fáanleg fyrir þennan þátt.</p>
+        {% endif %}
+        
+        <p>{{ episode.summary | safe }}</p>
+    </div>
+{% endfor %}
+```
+
+### 3. Meðhöndlun gagnanna
+*   **Heimild gagna:** Allar þessar myndir eru hýstar hjá TVMaze en Epguides API sér um að tengja þær við réttan þátt eða seríu.
+*   **Varnir gegn villum:** Mikilvægt er að nota `if` skilyrði í HTML-inu (eins og sýnt er hér að ofan) því API-ið gæti vantað kyrrmyndir fyrir mjög nýja eða gamla þætti [Conversation].
+*   **Geymsla í TinyDB:** Ef þú vilt að notendur geti vistað ákveðna kyrrmynd í uppáhald, þarftu að geyma viðeigandi myndaslóð í `db.json` skránni þinni undir nýjum lykli, t.d. `'image_type': 'still'` e'a `'image_type': 'poster'` [5, Conversation].
+
+**Samantekt:** Þú velur myndgerðina með því að kalla á rétta rás (endpoint) í API-inu. Ef þú kallar á `/show/` færðu veggspjöld, en ef þú kallar á `/show/episode/` færðu kyrrmyndir.
