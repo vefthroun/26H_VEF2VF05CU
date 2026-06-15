@@ -122,10 +122,24 @@ Post = Query()
 Á forsíðunni notarðu `db.all()` til að sækja alla pósta úr TinyDB og birta þá.  Aðeins er hægt að lesa póstana á síðunni.
 
 ```python
-@app.route('/')
-def index():
-    all_posts = posts_table.all() # Sækir alla pósta
-    return render_template('index.html', posts=all_posts)
+    <div>
+        {% if posts %}
+            {% for post in posts %}
+                <article>
+                    {# Birta innihald póstsins #}
+                    <p>{{ post.content  | safe }}</p>
+                    <hr>
+                        {# Birta notendanafn (höfund) og tímastimpil #}
+                        <small>
+                            Höfundur: <strong>{{ post.username }}</strong>. Dags: {{ post.timestamp }}
+                        </small>
+                </article>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <p>Engar færslur fundust í gagnagrunni.</p>
+        {% endif %}
+    </div>
 ```
 
 ### 3. Session Aðgangsstýring og Innskráning
