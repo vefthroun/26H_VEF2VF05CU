@@ -220,3 +220,4 @@ Hér er hvernig þetta lítur út þegar þú vinnur með listann af niðurstö�
 *   **Gagnauppspretta:** Epguides API sameinar gögn frá mörgum stöðum; titlar koma frá epguides.com en lýsingar og myndir eru sóttar beint frá TVMaze.
 *   **Öryggi:** Þótt þú notir `|safe` fyrir lýsinguna, þá er það óhætt í þessu tilfelli þar sem gögnin koma frá traustum API-endapunkti, en almennt ættirðu að fara varlega með þá síu á gögn sem notendur slá inn sjálfir.
 *   **Snið gagna:** Þar sem TinyDB og API-ið skila báðir gögnum sem Python orðasöfnum (dicts), er málfræðin í Jinja2 sú sama fyrir bæði (`show.lykill` eða `show['lykill']`) [4, 19, Conversation].
+
