@@ -9,7 +9,7 @@
 
 ### Verkefnalýsing
 
-Útfærðu vef með Flask tengt áhugamáli þar sem þú notar upplýsingar frá API (TVMaze API er ekki í boði) ásamt því að vera með persónulegt blogg tengt áhugamálinu. Efnisval (texti og myndir) er valfrjálst en nemendur mega ekki vera með sama API. Gert er ráð fyrir sjálfstæðum vinnubrögðum. 
+Útfærðu vef með Flask tengt áhugamáli þar sem þú notar upplýsingar frá API (_Epguides API er ekki í boði_) ásamt því að vera með persónulegt blogg tengt áhugamálinu. Efnisval (texti og myndir) er valfrjálst en nemendur mega ekki vera með sama API. Gert er ráð fyrir sjálfstæðum vinnubrögðum. 
 
 <details>
    <summary>Listi af APIs </summary>
