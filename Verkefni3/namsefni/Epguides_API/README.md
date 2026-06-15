@@ -10,6 +10,7 @@ Hér er hvernig þú getur útfært þetta:
 Epguides API er ókeypis REST þjónusta sem krefst ekki API-lykils. Þú getur notað Python-safnið `requests` til að sækja JSON gögn um þætti. Þar sem þú vilt aðeins birta 20 þætti geturðu notað skurð (e. slicing) í Python á listann sem API-ið skilar.
 
 **Dæmi um Flask rás (route):**
+
 ```python
 import requests
 from flask import render_template
@@ -60,3 +61,97 @@ Til að síðan passi inn í vefinn þinn á hún að nota `{% extends "layout.h
 
 **Af hverju þessi leið?**
 Með því að nota API-ið beint þarftu ekki að skrá gögnin handvirkt í gagnagrunn. Með því að nota `render_template` og Jinja2 lykkjur (`{% for ... %}`) geturðu birt mikið magn af gögnum á skipulegan hátt með lágmarks kóðun.
+
+---
+
+Til þess að nota leitarvél **Epguides API** þarftu ekki sérstakan API-lykil, þar sem þjónustan er ókeypis og krefst engrar auðkenningar. Samkvæmt heimildum býður API-ið upp á tvær meginleiðir til að leita að sjónvarpsþáttum:
+
+1.  **Hefðbundin leit (Search Shows):** Þessi virkni gerir þér kleift að finna sjónvarpsþætti eftir **titli** og skilar niðurstöðum samstundis. Hún er tilvalin til að nálgast lýsigögn (metadata) fyrir þúsundir þáttaraða.
+2.  **Gervigreindardrifin leit (AI-Powered Search):** Hægt er að nota náttúrulegt mál til að leita að sértækum upplýsingum, svo sem „finale episodes“ (lokaþættir), til að fá nákvæmari niðurstöður.
+
+### Framkvæmd leitarinnar:
+Þar sem þetta er **REST API** fer leitin fram í gegnum HTTP-beiðnir (yfirleitt GET beiðnir). Eins og við ræddum í fyrra dæmi um að sækja 20 þætti, myndir þú nota Python `requests` safnið til að senda leitina á viðeigandi enda punkt (endpoint) sem tilgreindur er í tækniskjölun API-ins [1, 3, Conversation].
+
+**Gögnin sem leitin skilar:**
+Þegar þú leitar færðu gögn úr mörgum áttum í einum JSON pakka:
+*   **Frá epguides.com:** Titill, sjónvarpsstöð, land og dagsetningar.
+*   **Frá TVMaze:** Samantektir á þáttum og myndir (póstar og kyrrmyndir).
+*   **Frá IMDB:** ID-númer til að geta tengt gögnin við IMDB gagnagrunninn.
+
+Ef þú vilt samþætta þetta við Flask forritið þitt sem við höfum verið að vinna með, geturðu búið til nýja rás (route) þar sem notandi slær inn leitarorð í HTML form, og bakendinn sendir það orð áfram í Epguides API-ið til að birta niðurstöðurnar á undirsíðu sem notar `layout.html` [31, 44, Conversation].
+
+Til að útfæra leitarform í Flask sem notar Epguides API þarftu að búa til HTML form sem sendir leitarorð á bakendann, þar sem Flask notar `requests` safnið til að spyrja API-ið og birta svo niðurstöðurnar [2, 50, Conversation].
+
+Hér er skref-fyrir-skref útfærsla:
+
+### 1. Búa til leitarformið (HTML)
+Best er að setja leitarformið í `layout.html` svo það sé alltaf aðgengilegt, eða á sérstaka leitarsíðu. Við notum `GET` aðferðina fyrir leit svo notendur geti deilt niðurstöðunum með vefslóð.
+
+```html
+<form action="{{ url_for('search') }}" method="GET">
+    <input type="text" name="q" placeholder="Leita að þætti..." required>
+    <button type="submit">Leita</button>
+</form>
+```
+
+### 2. Flask rásin (Route)
+Í bakendanum notum við `request.args.get('q')` til að ná í leitarorðið úr vefslóðinni og sendum það áfram á Epguides API-ið. Epguides API krefst engrar auðkenningar, sem gerir þetta mjög einfalt.
+
+```python
+import requests
+from flask import render_template, request
+
+@app.route('/search')
+def search():
+    # 1. Sækjum leitarorðið úr forminu (?q=eitthvað)
+    query = request.args.get('q')
+    
+    if query:
+        # 2. Köllum í Epguides API leitarvélina
+        # Ath: Endapunkturinn fyrir leit er yfirleitt /search/show?q=
+        api_url = f"https://epguides.frecar.no/search/show?q={query}"
+        response = requests.get(api_url)
+        
+        if response.status_code == 200:
+            results = response.json()
+        else:
+            results = []
+    else:
+        results = []
+
+    return render_template('search_results.html', shows=results, query=query)
+```
+
+### 3. Birta niðurstöður (`search_results.html`)
+Þessi síða erfir frá `layout.html` og birtir gögnin sem API-ið skilar, eins og titil, stöð og myndir frá TVMaze [3, 45, Conversation].
+
+```html
+{% extends "layout.html" %}
+
+{% block title %}Leitarnrstöður: {{ query }}{% endblock %}
+
+{% block content %}
+    <h1>Leitarniðurstöður fyrir "{{ query }}"</h1>
+    
+    {% if shows %}
+        <div class="results-grid">
+            {% for show in shows %}
+                <div class="show-card">
+                    <h3>{{ show.title }}</h3>
+                    <p><strong>Stöð:</strong> {{ show.network }}</p>
+                    {% if show.image %}
+                        <img src="{{ show.image }}" alt="{{ show.title }}" width="150">
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Engir þættir fundust með þessu nafni.</p>
+    {% endif %}
+{% endblock %}
+```
+
+### Af hverju þessi aðferð?
+*   **Enginn API lykill:** Epguides API er opið og ókeypis, svo þú getur byrjað strax að gera beiðnir.
+*   **Öryggi:** Flask og Jinja2 sjá sjálfkrafa um að **hreinsa (escape)** leitarorðið og gögnin úr API-inu áður en þau eru birt, sem verndar gegn sprautuhótunum (injection attacks).
+*   **Notendavænt:** Með því að nota `request.args` (GET) getur notandinn notað „Back“ hnappinn í vafranum og farið aftur í leitarniðurstöðurnar án þess að fá villuboð um að senda þurfi formgögn aftur.
