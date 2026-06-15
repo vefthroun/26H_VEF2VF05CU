@@ -24,8 +24,8 @@ TinyDB væntir þess að gögn séu á formi **Python orðasafna (dicts)**. Til 
 ```python
 from tinydb import TinyDB
 
-# 1. Uppsetning: Býr til db.json ef hún er ekki til
-db = TinyDB('db.json')
+# 1. Uppsetning: Býr til db.json ef hún er ekki til með indent og utf-8 stuðningi
+db = TinyDB('db.json', indent=2, encoding='utf-8', ensure_ascii=False)
 users_table = db.table('users')
 posts_table = db.table('posts')
 
