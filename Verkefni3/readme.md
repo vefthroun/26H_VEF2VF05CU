@@ -44,7 +44,7 @@
 
 > Notaðu PicoCSS fyrir uppsetningu (_layout_). <br> Notið Jinja erfðir (_Jinja2: inheritance_) og innsetningu skráa (_include: nav, footer_) á vefsíðum.
 
-
+<!-- nýtt efni
 #### Að sækja gögn frá API
 Hlekkurinn / API endpoint [https://api.tvmaze.com/shows](https://api.tvmaze.com/shows) skilar upplýsingum um 250 fyrstu þáttarraðir í API gagnasettinu.  Til að fá næstu 250 þætti þarftu að bæta við skilyrðinu / flagginu ?page=1 fyrir aftan shows eða [https://api.tvmaze.com/shows?page=1](https://api.tvmaze.com/shows?page=1) og svo framvegis 
 
@@ -122,9 +122,16 @@ Leit að þætti eftir nafni, ekki nákvæm leit (fuzzy).  Hér er leitað eftir
 
 </details>
 
+-->
 ---
 
-### [Námsefni](namsefni/README.md)
+### Námsefni
+
+- [JSON málskipan](namsefni/README.md)
+- [JSON & Python CRUD dæmi](namsefni/pyCrudExamples/README.md)
+- [Epguides API](namsefni/Epguides_API/README.md)
+- [Tinydb](namsefni/Tinydb/README.md)
+
 
 ---
 

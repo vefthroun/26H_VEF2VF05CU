@@ -1,4 +1,4 @@
-## JSON
+## JSON málskipan
 
 [JSON](https://realpython.com/python-json/) er vinsælt opið gagnaskiptasnið. Uppbygging samanstendur af eigindi (key) og gildi (value) pörum. JSON er notað með ýmsum forritunarmálum. 
 
