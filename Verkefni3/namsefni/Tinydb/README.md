@@ -467,3 +467,54 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
 
 
 **Samantekt:** `admin_panel.html` er öflugt tæki þar sem þú notar **Jinja2 lykkjur** til að lesa úr **TinyDB** og **URL building** til að framkvæma CRUD aðgerðir á notendagrunninum.
+
+---
+
+Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að passa við appið sem við höfum verið að smíða. TinyDB geymir gögnin í flokkuðum töflum þar sem hver færsla fær sjálfvirkt númer (ID) sem lykil [5, 6, Conversation].
+
+```json
+{
+    "users": {
+        "1": {
+            "username": "admin",
+            "password": "lykill_123",
+            "role": "admin"
+        },
+        "2": {
+            "username": "jon_jonsson",
+            "password": "psw456",
+            "role": "user"
+        }
+    },
+    "posts": {
+        "1": {
+            "content": "Hæ öll! Þetta er fyrsti pósturinn minn á nýja spjallinu.",
+            "author_id": 1,
+            "timestamp": "2026-06-18 10:30"
+        },
+        "2": {
+            "content": "Mér finnst Epguides API-ið virka mjög vel með Flask.",
+            "author_id": 2,
+            "timestamp": "2026-06-18 11:45"
+        }
+    },
+    "favorites": {
+        "1": {
+            "user_id": 2,
+            "show_id": "the-flash",
+            "title": "The Flash",
+            "image": "https://static.tvmaze.com/uploads/images/medium_portrait/448/1121792.jpg"
+        }
+    }
+}
+```
+
+### Útskýring á uppbyggingunni:
+
+1.  **`users` taflan:** Hér eru notendurnir geymdir. Lykillinn `"1"` eða `"2"` er það sem við köllum **doc_id**. Við höfum bætt við `role` lyklinum til að stýra aðgangi að stjórnborðinu (admin panel) eins og við ræddum áðan [Conversation].
+2.  **`posts` taflan:** Hver póstur hefur `content`, `timestamp` (tímastimpil) og `author_id`. **`author_id`** verður að passa við lykilinn í `users` töflunni (t.d. póstur 1 er eftir notanda 1) svo appið geti flett upp réttu nafni á forsíðunni [6, Conversation].
+3.  **`favorites` taflan:** Hér geymum við þætti sem notendur hafa valið úr Epguides API. Við vistar titilinn og myndaslóðina frá **TVMaze** beint í skrána svo við þurfum ekki að kalla aftur í API-ið þegar notandinn skoðar prófílinn sinn [3, 20, Conversation].
+
+**Athugið:** Ef þú ert að byrja með tóman gagnagrunn mun TinyDB búa þessa skrá til sjálfkrafa þegar þú notar `insert()` í fyrsta skipti í Python.
+
+**Mikilvægt:** Vistaðu JSON skrána með **UTF-8** kóðun til að íslenskir stafir eins og „þ“ og „ð“ birtist rétt [Conversation].
