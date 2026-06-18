@@ -331,11 +331,11 @@ Formið þarf að nota `method="POST"` til að flytja gögnin á öruggan hátt 
     *   Ef notandanafnið er þegar til í **TinyDB**, mun bakendinn nota `flash()` til að gefa skilaboð [60, Conversation]. Gakktu úr skugga um að `layout.html` skjalið þitt sé með lykkju til að birta þessi skilaboð með `get_flashed_messages()`.
 *   **Vefslóðir**: Notaðu alltaf **`url_for()`** til að búa til hlekki á milli síðna (t.d. yfir á innskráningu). Það er öruggara en að harðkóða slóðir eins og `/login`.
 
-Með þessari uppsetningu smellpassar síðan við bakendann sem við bjuggum til áðan og vistar nýja notendur sem orðasöfn í **`db.json`** skránni [5, Conversation].
+Með þessari uppsetningu smellpassar síðan við bakendann sem við bjuggum til áðan og vistar nýja notendur sem orðasöfn (dictionaries) í **`db.json`** skránni [5, Conversation].
 
 ---
 
-Já, það er mjög einfalt að bæta við **'admin'** hlutverki (role) í bakendanum þar sem TinyDB geymir gögn sem sveigjanleg Python orðasöfn (dictionaries). Þú getur bætt við hvaða lykli sem er í notandagögnin án þess að breyta uppsetningu gagnagrunnsins sérstaklega [20, Conversation].
+Það er einfalt að bæta við **'admin'** hlutverki (role) í bakendanum þar sem TinyDB geymir gögn sem sveigjanleg Python orðasöfn. Þú getur bætt við hvaða lykli sem er í notandagögnin án þess að breyta uppsetningu gagnagrunnsins sérstaklega [20, Conversation].
 
 Hér er hvernig þú útfærir hlutverkakerfi:
 
