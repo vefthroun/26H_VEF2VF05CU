@@ -61,7 +61,7 @@ Notandi skrifar texta í form. Við bætum við `author_id` úr session og tíma
 new_post = {
     'content': request.form.get('content'),
     'author_id': session['user_id'],
-    'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M")
+    'timestamp': datetime.now().strftime("%d-%m-%Y %H:%M") # íslensk tímaröð
 }
 posts_table.insert(new_post)
 ```
