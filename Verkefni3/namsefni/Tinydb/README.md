@@ -158,7 +158,8 @@ def logout():
 
 @app.route('/profile')
 def profile():
-    if 'user_id' not in session: return redirect(url_for('login'))
+    if 'user_id' not in session: 
+        return redirect(url_for('login'))
     # Sækja aðeins pósta þessa notanda [7, Conversation]
     my_posts = posts_table.search(Post.author_id == session['user_id'])
     for p in my_posts: p['id'] = p.doc_id
