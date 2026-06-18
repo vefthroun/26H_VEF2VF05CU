@@ -16,7 +16,7 @@ Til að búa til þessa spjallsíðu þurfum við að tengja saman **Flask** fyr
 Ferlið við að smíða vefkerfi sem styður nýskráningu, innskráningu og CRUD aðgerðir (Create, Read, Update, Delete) fyrir spjallpósta með **TinyDB** sem gagnagrunn.
 
 ## 1. Uppsetning Gagnagrunns
-TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](#Gagnagrunnurinn db.json)
+TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](https://github.com/vefthroun/26H_VEF2VF05CU/blob/main/Verkefni3/namsefni/Tinydb/README.md#gagnagrunnurinn-dbjson)
 
 ## 2. Nýskráning og Innskráning (Create & Authenticate)
 Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. Við notum **Flask session** til að muna eftir innskráðum notendum.
