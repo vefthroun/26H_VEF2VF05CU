@@ -1,6 +1,6 @@
 # TinyDB 
 
-Í stuttu máli: Ef þú þarft einfaldan  API gagnagrunn sem virkar án mikillar fyrirhafnar þá gæti TinyDB verið rétti kosturinn fyrir þig.
+Ef þú þarft einfaldan API gagnagrunn sem virkar án mikillar fyrirhafnar þá gæti TinyDB verið rétti kosturinn fyrir þig.
 
 * https://tinydb.readthedocs.io/en/latest/
 * https://www.tutorialspoint.com/tinydb/index.htm
@@ -16,14 +16,7 @@ Til að búa til þessa spjallsíðu þurfum við að tengja saman **Flask** fyr
 Ferlið við að smíða vefkerfi sem styður nýskráningu, innskráningu og CRUD aðgerðir (Create, Read, Update, Delete) fyrir spjallpósta með **TinyDB** sem gagnagrunn.
 
 ## 1. Uppsetning Gagnagrunns
-TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. Við skiptum gagnagrunninum í tvær töflur til að halda skipulagi: `users` og `posts`.
-
-```python
-from tinydb import TinyDB, Query
-db = TinyDB('db.json')
-users_table = db.table('users')
-posts_table = db.table('posts')
-```
+TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](#Gagnagrunnurinn db.json)
 
 ## 2. Nýskráning og Innskráning (Create & Authenticate)
 Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. Við notum **Flask session** til að muna eftir innskráðum notendum.
@@ -410,7 +403,7 @@ users_table.update({'role': 'admin'}, Query().username == 'gummi')
 
 Hönnunin á **`admin_panel.html`** byggir á því að sýna yfirlit yfir alla notendur kerfisins og bjóða upp á aðgerðir til að stýra þeim. Síðan nýtir erfðir frá `layout.html` til að viðhalda samræmdu útliti og fær gögnin send sem lista af orðasöfnum (dictionaries) frá Flask bakendanum [44, 45, Conversation].
 
-Hér er hvernig þú hantar síðuna:
+Hér er uppsetning stjórnborðsíðunnar:
 
 ### 1. Grunnur og tafla
 Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt. Við ítrum í gegnum `users` listann sem TinyDB skilar [6, 25, Conversation].
@@ -469,6 +462,8 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
 **Samantekt:** `admin_panel.html` er öflugt tæki þar sem þú notar **Jinja2 lykkjur** til að lesa úr **TinyDB** og **URL building** til að framkvæma CRUD aðgerðir á notendagrunninum.
 
 ---
+
+### Gagnagrunnurinn db.json
 
 Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að passa við appið sem við höfum verið að smíða. TinyDB geymir gögnin í flokkuðum töflum þar sem hver færsla fær sjálfvirkt númer (ID) sem lykil [5, 6, Conversation].
 
