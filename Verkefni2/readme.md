@@ -2,10 +2,9 @@
 
 - 15% af heildareinkunn
 - Viðfangsefni:
-  1. Formvinnsla / CKEditor
-  1. CRUD
   1. Sessions
   1. Jinja: inheritance
+  1. Create, Read, Update, Delete
 
 ### Verkefnalýsing
 
