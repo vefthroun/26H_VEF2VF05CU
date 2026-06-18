@@ -12,525 +12,462 @@ Til að búa til þessa spjallsíðu þurfum við að tengja saman **Flask** fyr
 Hér er hvernig þú getur útfært þetta verkefni:
 
 
-### Gagnagrunnur (TinyDB)
-
-Hér er dæmi um hvernig þú setur upp **`db.json`** skrá með TinyDB sem inniheldur notanda, stjórnanda (admin) og póst, miðað við þá uppbyggingu sem við höfum rætt og heimildirnar gefa upp.
-
-TinyDB væntir þess að gögn séu á formi **Python orðasafna (dicts)**. Til að halda gögnunum skipulögðum er best að nota aðskildar töflur fyrir notendur og pósta.
-
-### Python kóði til að búa til gögnin
-Þessi kóði býr til gagnagrunninn, skilgreinir töflurnar og setur inn fyrstu gildin.
-
-```python
-from tinydb import TinyDB
-
-# 1. Uppsetning: Býr til db.json ef hún er ekki til með indent og utf-8 stuðningi
-db = TinyDB('db.json', indent=2, encoding='utf-8', ensure_ascii=False)
-users_table = db.table('users')
-posts_table = db.table('posts')
-
-# 2. Setja inn Admin (stjórnanda)
-# insert() skilar sjálfkrafa ID-inu sem skjalið fær
-admin_id = users_table.insert({
-    'username': 'vefstjori',
-    'role': 'admin',
-    'password': 'hashed_password_123'
-})
-
-# 3. Setja inn almennan notanda
-user_id = users_table.insert({
-    'username': 'jon_jonsson',
-    'role': 'user',
-    'password': 'hashed_password_456'
-})
-
-# 4. Setja inn spjallpóst sem tengist notanda-IDinu
-posts_table.insert({
-    'author_id': user_id,  # Tenging við notandann [Conversation]
-    'content': 'Hæ öll! Þetta er minn fyrsti póstur.',
-    'timestamp': '2026-06-14'
-})
-```
-
-### Hvernig db.json skráin mun líta út
-Eftir að þessi kóði hefur verið keyrður, mun `db.json` skráin þín innihalda gögnin á þessu sniði. TinyDB geymir hverja töflu sem sérstakan hlut inni í JSON skránni:
-
-```json
-{
-    "users": {
-        "1": {
-            "username": "vefstjori",
-            "role": "admin",
-            "password": "hashed_password_123"
-        },
-        "2": {
-            "username": "jon_jonsson",
-            "role": "user",
-            "password": "hashed_password_456"
-        }
-    },
-    "posts": {
-        "1": {
-            "author_id": 2,
-            "content": "Hæ öll! Þetta er minn fyrsti póstur.",
-            "timestamp": "2026-06-14"
-        }
-    }
-}
-```
-
-### Lykilatriði í þessari uppsetningu:
-*   **Töflur (Tables):** Með því að skipta í `users` og `posts` verður mun auðveldara að framkvæma CRUD aðgerðir og leitir seinna meir.
-*   **Document IDs:** Lyklarnir `"1"` og `"2"` í JSON skránni eru sjálfkrafa búnir til af TinyDB og eru notaðir til að bera kennsl á hvert skjal.
-*   **Hlutverk (Roles):** Með því að hafa `'role': 'admin'` eða `'user'` geturðu notað Flask session til að stýra því hver má eyða hverju.
-*   **JSON Vinnsla:** Eins og fram kemur í verklýsingum áfanga þíns, þá er JSON skráarvinnsla miðlæg í gerð API og vefja með miðlaramáli.
+Hér er uppfærð og rökrétt útgáfa af leiðbeiningum fyrir **README.md** sem samþættir Flask og TinyDB fyrir verkefnið þitt. Þessi útgáfa leiðréttir ósamræmi og bætir við þeim hlutum sem vantaði, svo sem innskráningu og meðhöndlun pósts.
 
 ---
 
-### 1. Uppsetning Flask
+# Leiðbeiningar: Flask & TinyDB Samþætting
 
-TinyDB geymir gögnin í hreinni JSON skrá (`db.json`). Til að tryggja að hún sé óaðgengileg öðrum en appinu, er hún geymd í rótarmöppu verkefnisins en **ekki** í `static` möppunni, því Flask þjónar aðeins skrám úr `static` beint til notenda.
+Ferlið við að smíða vefkerfi sem styður nýskráningu, innskráningu og CRUD aðgerðir (Create, Read, Update, Delete) fyrir spjallpósta með **TinyDB** sem gagnagrunn.
 
-### Möppuskipan
-Skipulagið ætti að líta svona út í verkefninu þínu:
-*   `/app.py` (Aðalskráin þín)
-*   `/db.json` (TinyDB gagnagrunnurinn - geymdur utan static svo hann sé ekki aðgengilegur beint) [Conversation]
-*   `/static/` (Fyrir CSS og myndir)
-*   `/templates/`
-    *   `layout.html`
-    *   `index.html`
-    *   `login.html`
-    *   `profile.html`
-    *   `admin.html`
-
-Með því að nota `url_for()` í þessum skrám tryggir þú að tenglar á milli síðna og í static skrár virki alltaf rétt, óháð því hvernig vefslóðirnar breytast.
+## 1. Uppsetning Gagnagrunns
+TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. Við skiptum gagnagrunninum í tvær töflur til að halda skipulagi: `users` og `posts`.
 
 ```python
-from flask import Flask, render_template, request, session, redirect, url_for, flash
 from tinydb import TinyDB, Query
+db = TinyDB('db.json')
+users_table = db.table('users')
+posts_table = db.table('posts')
+```
+
+## 2. Nýskráning og Innskráning (Create & Authenticate)
+Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. Við notum **Flask session** til að muna eftir innskráðum notendum.
+
+### Nýskráning (`/signup`)
+Gögnum er safnað úr formi og vistuð í `users` töfluna með `insert()`.
+1. Sækja `username` og `password` úr `request.form`.
+2. Vista í TinyDB. `insert()` skilar sjálfkrafa einstöku ID (doc_id).
+
+### Innskráning (`/login`)
+1. Leita að notanda með `Query()` þar sem notandanafn passar.
+2. Ef notandi finnst, vistum við `user_id` hans í `session['user_id']` [57, Conversation].
+3. **login.html:** Þetta skjal þarf að innihalda form með `method="POST"` sem sendir gögnin á viðeigandi rás.
+
+## 3. Forsíða: Lesa gögn (Read on Index)
+Á forsíðunni viljum við birta alla pósta ásamt upplýsingum um höfund og tímasetningu [Conversation].
+
+1. Sækjum alla pósta með `posts_table.all()`.
+2. Fyrir hvern póst flettum við upp höfundi í `users_table` með því að nota `author_id` póstsins [6, Conversation].
+3. Sendum listann á `index.html` með `render_template()`.
+
+**Mikilvægt:** Til að íslenskir stafir birtist rétt þarf `layout.html` að innihalda `<meta charset="UTF-8">` [Conversation].
+
+## 4. Prófílsíða og Aðgangsstýring
+Prófílsíðan sýnir aðeins þá pósta sem tilheyra innskráðum notanda.
+
+1. Athugum hvort `user_id` sé í `session`.
+2. Notum `posts_table.search(Query().author_id == session['user_id'])` til að sía gögnin [6, 7, Conversation].
+
+## 5. Stjórnun pósta (Create, Update, Delete)
+
+### Búa til póst (Create)
+Notandi skrifar texta í form. Við bætum við `author_id` úr session og tímastimpli áður en við vistum [20, Conversation].
+```python
+new_post = {
+    'content': request.form.get('content'),
+    'author_id': session['user_id'],
+    'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M")
+}
+posts_table.insert(new_post)
+```
+
+### Uppfæra póst (Update)
+Til að breyta pósti notum við `update()` aðferðina þar sem við skilgreinum nýju gögnin og hvaða póst á að uppfæra.
+```python
+posts_table.update({'content': nyr_texti}, Query().doc_id == post_id)
+```
+
+### Eyða pósti (Delete)
+Til að eyða notum við `remove()`. Gættu þess að notandi geti aðeins eytt sínum eigin póstum (nema hann sé með **admin** hlutverk) [6, 7, Conversation].
+```python
+posts_table.remove(doc_ids=[int(post_id)])
+```
+
+> **Athugið:** Allar skrár (`.py`, `.html`, `.json`) skulu vistaðar með **UTF-8** kóðun til að tryggja að íslenskir sérstafir skili sér rétt frá bakenda yfir í Jinja sniðmát [Conversation].
+
+---
+
+Hér er grunnkóðinn fyrir Flask forritið og HTML sniðmátin sem fylgja þeirri rökréttu uppbyggingu sem við ræddum: **Innskráning, nýskráning, forsíða með póstum og prófílsíða með CRUD virkni**.
+
+Gættu þess að vista allar skrár með **UTF-8** kóðun svo íslenskir stafir birtist rétt [Conversation].
+
+### 1. Bakendinn: `app.py`
+
+Þessi skrá stýrir flæðinu, notar **TinyDB** fyrir gögnin og **session** fyrir auðkenningu [5, 57, Conversation].
+
+```python
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from tinydb import TinyDB, Query
+from datetime import datetime
+import requests
 
 app = Flask(__name__)
-app.secret_key = 'mjog-leyndur-lykill' # Nauðsynlegt fyrir session
+app.secret_key = 'leynilykill_fyrir_session' # Nauðsynlegt fyrir session
+
+# Uppsetning TinyDB
 db = TinyDB('db.json')
-posts_table = db.table('posts')
 users_table = db.table('users')
+posts_table = db.table('posts')
+fav_table = db.table('favorites')
 User = Query()
 Post = Query()
+
+# --- HJÁLPARFÖLL ---
+def get_posts_with_users():
+    all_posts = posts_table.all()
+    for post in all_posts:
+        # Nota author_id til að finna notanda [6, Conversation]
+        user = users_table.get(doc_id=post['author_id'])
+        post['username'] = user['username'] if user else "Óþekktur"
+        post['id'] = post.doc_id # Ná í doc_id fyrir eyðingu/uppfærslu
+    return all_posts
+
+# --- RÁSIR (ROUTES) ---
+
+@app.route('/')
+def index():
+    posts = get_posts_with_users()
+    return render_template('index.html', posts=posts)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password') # Í alvöru kerfi þarf að hasha þetta!
+        
+        if not users_table.search(User.username == username):
+            users_table.insert({'username': username, 'password': password, 'role': 'user'})
+            flash("Nýskráning tókst! Skráðu þig inn.")
+            return redirect(url_for('login'))
+        flash("Notandanafn er frátekið.")
+    return render_template('signup.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = users_table.get((User.username == username) & (User.password == password))
+        
+        if user:
+            session['user_id'] = user.doc_id # Vista ID í session
+            session['username'] = user['username']
+            return redirect(url_for('profile'))
+        flash("Rangt notandanafn eða lykilorð.")
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+@app.route('/profile')
+def profile():
+    if 'user_id' not in session: return redirect(url_for('login'))
+    # Sækja aðeins pósta þessa notanda [7, Conversation]
+    my_posts = posts_table.search(Post.author_id == session['user_id'])
+    for p in my_posts: p['id'] = p.doc_id
+    return render_template('profile.html', posts=my_posts)
+
+@app.route('/create_post', methods=['POST'])
+def create_post():
+    if 'user_id' in session:
+        content = request.form.get('content')
+        posts_table.insert({
+            'content': content,
+            'author_id': session['user_id'],
+            'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M")
+        })
+    return redirect(url_for('profile'))
+
+@app.route('/delete_post/<int:post_id>')
+def delete_post(post_id):
+    post = posts_table.get(doc_id=post_id)
+    if post and post['author_id'] == session.get('user_id'):
+        posts_table.remove(doc_ids=[post_id])
+        flash("Pósti eytt.")
+    return redirect(url_for('profile'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
 ```
 
-### 2. Forsíða (index.html) - Birta alla pósta
-Á forsíðunni notarðu `db.all()` til að sækja alla pósta úr TinyDB og birta þá.  Aðeins er hægt að lesa póstana á síðunni.
+### 2. Sniðmát (Templates)
+
+#### `templates/layout.html`
+Grunnskjalið sem öll önnur erfa frá. Hér er **UTF-8** stillingin [Conversation].
+```html
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8"> <!-- Mikilvægt fyrir íslenska stafi! -->
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Forsíða</a>
+        {% if session.user_id %}
+            <a href="{{ url_for('profile') }}">Mín síða ({{ session.username }})</a>
+            <a href="{{ url_for('logout') }}">Útskrá</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Innskrá</a>
+            <a href="{{ url_for('signup') }}">Nýskrá</a>
+        {% endif %}
+    </nav>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}<p>{{ msg }}</p>{% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <main>{% block content %}{% endblock %}</main>
+</body>
+</html>
+```
+
+#### `templates/index.html`
+Birtir alla pósta með notendanafni og tíma [Conversation].
+```html
+{% extends "layout.html" %}
+{% block title %}Spjallborð{% endblock %}
+{% block content %}
+    <h1>Nýjustu færslur</h1>
+    {% for post in posts %}
+        <div class="post">
+            <p>{{ post.content }}</p>
+            <small>Sent af: {{ post.username }} | {{ post.timestamp }}</small>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
+```
+
+#### `templates/login.html`
+```html
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Innskráning</h2>
+    <form method="POST">
+        Notandanafn: <input type="text" name="username" required><br>
+        Lykilorð: <input type="password" name="password" required><br>
+        <button type="submit">Innskrá</button>
+    </form>
+{% endblock %}
+```
+
+#### `templates/profile.html`
+Hér getur notandi búið til nýjan póst og eytt sínum eigin [6, 20, Conversation].
+```html
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Velkomin(n), {{ session.username }}</h1>
+    
+    <h3>Búa til nýjan póst</h3>
+    <form action="{{ url_for('create_post') }}" method="POST">
+        <textarea name="content" required></textarea><br>
+        <button type="submit">Senda póst</button>
+    </form>
+
+    <hr>
+    <h3>Mínir póstar</h3>
+    {% for post in posts %}
+        <div class="my-post">
+            <p>{{ post.content }}</p>
+            <small>{{ post.timestamp }}</small> | 
+            <a href="{{ url_for('delete_post', post_id=post.id) }}" onclick="return confirm('Eyða?')">Eyða</a>
+        </div>
+    {% endfor %}
+{% endblock %}
+```
+
+### Lykilatriði:
+1.  **UTF-8**: Meta-tagið í `layout.html` kemur í veg fyrir skrípi-stafi eins og „Ã¦“ [Conversation].
+2.  **Tenging gagna**: Í `index()` rásinni flettum við upp notanda í hvert sinn sem póstur er birtur til að sýna nafn en ekki bara ID-tölu [6, Conversation].
+3.  **CRUD**: `profile.html` sýnir hvernig á að eyða (`remove`) og búa til (`insert`) gögn í TinyDB.
+
+---
+
+Til að útfæra **`signup.html`** þarftu að búa til HTML-form sem sendir gögnin (notandanafn og lykilorð) á bakendann með `POST` aðferðinni. Sniðmátið á að nota Jinja2 erfðir til að fylgja útliti vefsins þíns og birta endurgjöf ef eitthvað fer úrskeiðis.
+
+Hér er hvernig þú setur síðuna upp:
+
+### 1. Nota erfðir (`{% extends %}`)
+Eins og rætt hefur verið í fyrri samtölum okkar á síðan að byrja á því að erfa frá **`layout.html`** [Conversation]. Þetta tryggir að hún hafi sömu valmynd og útlit og aðrar síður.
+
+### 2. Uppsetning formsins
+Formið þarf að nota `method="POST"` til að flytja gögnin á öruggan hátt í `request.form` safnið í Flask. Við notum `url_for('signup')` í `action` eigindinu til að vísa á rétta rás í bakendanum.
+
+### Dæmi um `signup.html`:
+```html
+{% extends "layout.html" %}
+
+{% block title %}Nýskráning{% endblock %}
+
+{% block content %}
+    <h2>Búa til nýjan aðgang</h2>
+
+    {# Formið sendir gögnin á /signup rásina með POST #}
+    <form action="{{ url_for('signup') }}" method="POST">
+        <div>
+            <label for="username">Notandanafn:</label>
+            {# 'name' eigindið verður að passa við request.form.get('username') í Python #}
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div>
+            <label for="password">Lykilorð:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">Nýskrá</button>
+    </form>
+
+    <p>Áttu þegar aðgang? <a href="{{ url_for('login') }}">Innskráning hér</a></p>
+{% endblock %}
+```
+
+### Mikilvæg atriði við útfærsluna:
+
+*   **`name` eigindið**: Þetta er mikilvægasti hlutinn. Gildin í `name="username"` og `name="password"` verða að vera nákvæmlega þau sömu og þú notar í Python kóðanum þegar þú kallar í `request.form.get()` [49, Conversation].
+*   **Öryggi og endurgjöf**:
+    *   Flask og Jinja2 sjá sjálfkrafa um að **hreinsa (escape)** gögnin sem notandinn slær inn til að verjast sprautuhótunum (injection attacks).
+    *   Ef notandanafnið er þegar til í **TinyDB**, mun bakendinn nota `flash()` til að gefa skilaboð [60, Conversation]. Gakktu úr skugga um að `layout.html` skjalið þitt sé með lykkju til að birta þessi skilaboð með `get_flashed_messages()`.
+*   **Vefslóðir**: Notaðu alltaf **`url_for()`** til að búa til hlekki á milli síðna (t.d. yfir á innskráningu). Það er öruggara en að harðkóða slóðir eins og `/login`.
+
+Með þessari uppsetningu smellpassar síðan við bakendann sem við bjuggum til áðan og vistar nýja notendur sem orðasöfn í **`db.json`** skránni [5, Conversation].
+
+---
+
+Já, það er mjög einfalt að bæta við **'admin'** hlutverki (role) í bakendanum þar sem TinyDB geymir gögn sem sveigjanleg Python orðasöfn (dictionaries). Þú getur bætt við hvaða lykli sem er í notandagögnin án þess að breyta uppsetningu gagnagrunnsins sérstaklega [20, Conversation].
+
+Hér er hvernig þú útfærir hlutverkakerfi:
+
+### 1. Sjálfgefið hlutverk við nýskráningu
+Í `signup` rásinni (route) bætirðu við `'role': 'user'` sem sjálfgefnu gildi þegar nýr notandi er búinn til [20, Conversation].
 
 ```python
-    <div>
-        {% if posts %}
-            {% for post in posts %}
-                <article>
-                    {# Birta innihald póstsins #}
-                    <p>{{ post.content  | safe }}</p>
-                    <hr>
-                        {# Birta notendanafn (höfund) og tímastimpil #}
-                        <small>
-                            Höfundur: <strong>{{ post.username }}</strong>. Dags: {{ post.timestamp }}
-                        </small>
-                </article>
-                <hr>
-            {% endfor %}
-        {% else %}
-            <p>Engar færslur fundust í gagnagrunni.</p>
-        {% endif %}
-    </div>
+@app.route('/signup', methods=['POST'])
+def signup():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    
+    # Við bætum 'role' lyklinum við orðasafnið
+    nyr_notandi = {
+        'username': username, 
+        'password': password, 
+        'role': 'user'  # Allir byrja sem venjulegir notendur
+    }
+    users_table.insert(nyr_notandi)
+    return redirect(url_for('login'))
 ```
 
-### 3. Session Aðgangsstýring og Innskráning
-Til að verja prófílsíðuna notarðu `session` til að geyma `user_id` og `role` (notandi eða vefstjóri).
+### 2. Vista hlutverk í Session
+Þegar notandi skráir sig inn er gott að geyma hlutverkið í `session` svo þú þurfir ekki að fletta því upp í gagnagrunninum í hvert sinn sem notandinn hleður síðu.
 
 ```python
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')
-    # Hér myndir þú leita að notanda í users_table
-    user = users_table.get(User.username == username)
+    user = users_table.get(Query().username == username)
+    
     if user:
-        session['user_id'] = user.doc_id # doc_id er sjálfkrafa ID hjá TinyDB
-        session['role'] = user.get('role', 'user')
-        return redirect(url_for('profile'))
-    return "Innskráning mistókst", 401
-```
-
-### 4. Prófílsíða (profile.html) - CRUD fyrir eigin pósta
-Hér geta notendur búið til nýja pósta með `insert()`, uppfært þá með `update()` eða eytt þeim með `remove()`. Lykilatriðið er að sía póstana þannig að notandi sjái aðeins sína eigin.
-
-```python
-@app.route('/profile')
-def profile():
-    if 'user_id' not in session:
+        session['user_id'] = user.doc_id
+        session['role'] = user.get('role', 'user') # Sækjum hlutverkið
         return redirect(url_for('index'))
-    
-    # Sækja aðeins pósta þessa notanda
-    user_posts = posts_table.search(Post.author_id == session['user_id'])
-    return render_template('profile.html', posts=user_posts)
-
-@app.route('/post/new', methods=['POST'])
-def new_post():
-    if 'user_id' in session:
-        posts_table.insert({
-            'author_id': session['user_id'],
-            'content': request.form.get('content')
-        })
-    return redirect(url_for('profile'))
 ```
 
-### 5. Aðgangur Vefstjóra (Admin)
-Vefstjórinn hefur sérstaka rás þar sem athugað er hvort `session['role'] == 'admin'`. Hann getur eytt hvaða pósti eða notanda sem er.
+### 3. Aðgangsstýring í rás (Admin check)
+Þú getur nú búið til rásir sem aðeins 'admin' hefur aðgang að með því að nota einfalda `if` skilyrðingu [Conversation].
 
 ```python
-@app.route('/admin/delete_post/<int:post_id>')
-def admin_delete_post(post_id):
+@app.route('/admin_panel')
+def admin_panel():
+    # Athugum hvort notandi sé innskráður OG sé admin
     if session.get('role') == 'admin':
-        posts_table.remove(doc_ids=[post_id])
-        flash("Pósti eytt af vefstjóra")
-    return redirect(url_for('index'))
-
-@app.route('/admin/delete_user/<int:user_id>')
-def admin_delete_user(user_id):
-    if session.get('role') == 'admin':
-        users_table.remove(doc_ids=[user_id])
-        # Einnig mætti eyða öllum póstum notandans
-        posts_table.remove(Post.author_id == user_id)
+        allir_notendur = users_table.all()
+        return render_template('admin.html', users=allir_notendur)
+    
+    # Ef ekki admin, sendum hann burt með villuboðum
+    flash("Þú hefur ekki aðgang að þessari síðu.")
     return redirect(url_for('index'))
 ```
----
 
-Fyrir spjallforrit af þessari stærðargráðu er besta leiðin að nýta **erfðir í sniðmátum** (e. template inheritance) í gegnum Jinja2 vélina í Flask. Þetta gerir þér kleift að halda sameiginlegum hlutum síðunnar (eins og haus, valmynd og fæti) á einum stað og forðast endurtekningu á kóða.
-
-Hér er mælt með eftirfarandi skiptingu í `templates` möppunni:
-
-### 1. Grunnskjalið: `layout.html`
-Þetta er mikilvægasta skráin þar sem hún hýsir alla grunn-HTML uppsetninguna. Hér myndir þú setja:
-*   `<head>` hlutann með tengingum í CSS í `static` möppuna.
-*   **Nav-bar:** Valmynd sem breytist eftir því hvort notandi er innskráður (með því að skoða `session` hlutinn beint í sniðmátinu).
-*   **Flash-skilaboð:** Stað þar sem villu- eða staðfestingarskilaboð birtast með `get_flashed_messages()`.
-*   **`{% block content %}`:** Svæði þar sem hinar síðurnar munu „skrifa“ sitt eigið innihald.
-
-### 2. Forsíðan: `index.html`
-Þessi síða á að **erfa** frá `layout.html` (með `{% extends 'layout.html' %}`).
-*   Hún inniheldur lykkju sem fer í gegnum alla pósta úr TinyDB og birtir þá í tímaröð.
-*   Hér er engin eyðingar- eða breytingarvirkni sýnileg venjulegum notendum [Conversation].
-
-### 3. Innskráning: `login.html`
-*   Inniheldur einfalt HTML form með `method="POST"` til að senda notandanafn og lykilorð á miðlarann.
-*   Nýtir sömu grunnútlitshönnun og aðrar síður.
-
-### 4. Notendasíða: `profile.html`
-Þetta er „lokaða“ svæðið þitt þar sem:
-*   Notandinn sér listann yfir sína eigin pósta.
-*   **CRUD aðgerðir:** Hér birtast sérstakir „eyða“ og „breyta“ hnappar sem nota `url_for()` til að kalla á réttar rætur (routes) í Flask [35, Conversation].
-*   Hér er form til að skrifa nýja pósta.
-
-### 5. (Valfrjálst) Vefstjórasíða: `admin.html`
-*   Ef kerfið er umfangsmikið er gott að hafa sérstaka síðu fyrir vefstjóra þar sem hann sér yfirlit yfir alla notendur og pósta með möguleika á að fjarlægja þá [Conversation].
-
-
-### Öryggisatriði úr heimildum:
-*   **HTML Escaping:** Flask og Jinja2 sjá sjálfkrafa um að hreinsa (escape) það sem notendur skrifa í póstana sína til að koma í veg fyrir sprautuhótanir (injection attacks).
-*   **Secret Key:** Mikilvægt er að hafa sterkan `secret_key` svo notendur geti ekki falsað session-kökurnar sínar og gefið sér admin-réttindi.
-*   **TinyDB Query:** Notaðu `Query()` hlutinn frá TinyDB til að gera leitirnar öruggar og skýrar.
-
----
-
-Til að uppfæra póst í TinyDB, til dæmis á „profile“ síðunni þinni, er aðalskipunin **`db.update(fields, query)`**. 
-
-Hér er nánari útskýring á þeim skipunum sem þarf að nota:
-
-*   **`db.update(fields, query)`**: Þessi skipun uppfærir alla þá skjöl (pósta) sem passa við gefna fyrirspurn (query). 
-    *   **`fields`**: Hér setur þú inn Python orðasafn (dict) með þeim gögnum sem þú vilt breyta eða bæta við. Til dæmis: `{'content': 'Hér er uppfærður texti'}`.
-    *   **`query`**: Þetta skilgreinir hvaða póst á að uppfæra.
-*   **`Query()`**: Þú þarft að búa til fyrirspurnarhlut (query object) til að finna rétta póstinn. 
-
-### Dæmi um útfærslu í „profile“ samhengi:
-Þar sem þú vilt að notendur geti aðeins uppfært sína eigin pósta, væri öruggast að nota skipunina þannig að hún síaði bæði eftir **ID póstsins** og **ID notandans** úr session-inu:
+### 4. Uppfæra notanda í Admin
+Til að gera venjulegan notanda að admin geturðu notað `update()` aðferðina í TinyDB. Þetta er hægt að gera handvirkt í Python eða í gegnum sérstaka stjórnunarsíðu.
 
 ```python
-from tinydb import Query
-Post = Query()
-
-# Uppfærir póstinn þar sem ID póstsins passar OG höfundurinn er sá sem er innskráður
-db.update(
-    {'content': nyr_texti}, 
-    (Post.doc_id == valinn_id) & (Post.author_id == session['user_id'])
-)
-```
-
-**Lykilatriði:**
-*   Skipunin skilar lista yfir ID þeirra skjala sem var breytt.
-*   Hægt er að nota hvers kyns samanburð í fyrirspurninni (t.d. `==`, `!=`, `>`, osfrv.) til að finna réttu gögnin.
-*   Ef þú ert með ID skjalsins beint (t.d. `doc_id`), getur þú einnig notað `db.update(fields, doc_ids=[id])`.
-
----
-
-Til að tengja nýja spjallpósta við ákveðinn notanda í TinyDB er algengasta og öruggasta leiðin að geyma **notanda-ID** í **session** þegar notandinn skráir sig inn, og bæta því ID-i svo við sem sérstökum reit í póst-orðasafnið þegar þú vistar það í gagnagrunninn.
-
-Hér er ferlið skref fyrir skref:
-
-### 1. Geyma notanda-ID í Session
-Þegar notandi skráir sig inn þarftu að vista auðkenni hans (t.d. `user_id`) í session svo hægt sé að nálgast það síðar. 
-*Athugið að Flask krefst þess að `app.secret_key` sé stilltur til að nota sessions.*
-
-### 2. Sækja gögn úr formi og Session
-Þegar notandinn sendir nýjan póst í gegnum HTML-form (POST beiðni), notarðu `request.form` til að sækja póstinn sjálfan og `session` til að sækja auðkenni höfundarins.
-
-### 3. Vista í TinyDB með `insert()`
-TinyDB væntir þess að gögn séu á formi Python orðasafna (dictionaries). Þú býrð til orðasafn sem inniheldur bæði texta póstsins og notanda-ID-ið og notar svo `insert()` aðferðina.
-
-**Dæmi um útfærslu í Flask:**
-
-```python
-from flask import request, session, redirect, url_for
-from tinydb import TinyDB
-
-db = TinyDB('db.json')
-posts_table = db.table('posts')
-
-@app.route('/create_post', methods=['POST'])
-def create_post():
-    # 1. Athugum hvort notandi sé innskráður
-    if 'user_id' in session:
-        # 2. Sækjum gögnin (post-innihald og notanda-id)
-        post_content = request.form.get('content') # Úr HTML formi
-        author_id = session['user_id']             # Úr session
-        
-        # 3. Búum til orðasafn og vistum í TinyDB
-        new_post = {
-            'author_id': author_id,
-            'content': post_content,
-            'timestamp': '2026-06-14' # Dæmi um aukagögn
-        }
-        
-        posts_table.insert(new_post)
-        return redirect(url_for('index'))
-    
-    return "Þú verður að vera innskráður", 401
-```
-
-### Helstu kostir þessarar aðferðar:
-*   **Tenging gagna:** Með því að geyma `author_id` með hverjum pósti geturðu síðar notað `db.search()` til að finna alla pósta sem tiltekinn notandi hefur skrifað.
-*   **Öryggi:** Þar sem Flask skrifar undir session-kökur með leyndarlykli, getur notandinn ekki auðveldlega falsað `author_id` sitt til að þykjast vera annar notandi þegar hann sendir inn póst.
-*   **Einfaldleiki:** TinyDB meðhöndlar þessi tengsl sjálfkrafa þar sem þetta eru bara venjuleg JSON gögn í skrá.
-
----
-
-Til þess að takmarka eyðingu pósts þannig að aðeins höfundur hans geti eytt honum þarf að nota samspil á milli **session-stýringar** í Flask og **fyrirspurna** í TinyDB.
-
-Hér er ferlið útskýrt í þremur skrefum:
-
-### 1. Geyma notanda-ID í Session
-Þegar notandi skráir sig inn þarf að vista einkvæmt auðkenni hans í `session`. Þetta gerir kerfinu kleift að vita hvaða notandi er að reyna að framkvæma eyðinguna.
-```python
-session['user_id'] = logged_in_user_id
-```
-
-### 2. Skilgreina tengingu í gagnagrunni
-Hver póstur í TinyDB verður að innihalda reit sem vísar í höfundinn (t.d. `author_id`). Þegar póstur er búinn til er hann vistaður sem orðasafn (dict) með þessum upplýsingum.
-
-### 3. Nota samsetta fyrirspurn við eyðingu
-Í stað þess að eyða pósti eingöngu eftir ID-i póstsins, þá notarðu skipunina `db.remove(query)` með **og-skilyrði** (`&`) í TinyDB. Þannig er pósti aðeins eytt ef bæði ID póstsins og ID notandans úr session-inu passa saman.
-
-**Dæmi um útfærslu í Flask rás (route):**
-```python
-from flask import session, redirect, url_for
-from tinydb import TinyDB, Query
-
-db = TinyDB('db.json')
-Post = Query()
-
-@app.route('/delete/<int:post_id>')
-def delete_post(post_id):
-    # 1. Athuga hvort notandi sé yfirhöfuð innskráður
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-
-    # 2. Keyra eyðingu með tvöföldu skilyrði
-    # Póstinum er aðeins eytt ef hann hefur rétt ID OG höfundurinn er réttur
-    db.remove((Post.doc_id == post_id) & (Post.author_id == session['user_id']))
-    
-    return redirect(url_for('profile'))
-```
-
-### Helstu kostir þessarar nálgunar:
-*   **Öryggi:** Jafnvel þótt notandi reyni að kalla beint á eyðingar-slóð annars notanda (t.d. `/delete/50`), þá mun TinyDB ekki finna neinn póst sem passar við bæði ID 50 og `user_id` þess sem reynir eyðinguna.
-*   **Einfaldleiki:** Þú þarft ekki að sækja póstinn fyrst til að athuga hver á hann; TinyDB sér um síuna í einni skipun.
-*   **Gagnaöryggi:** Með því að nota `session` eru notendaupplýsingarnar dulkóðaðar í vafrakökum, sem kemur í veg fyrir að notandinn geti breytt ID-inu sínu handvirkt.
-
----
-
-Að búa til sérstakt **„admin“** hlutverk í TinyDB felst ekki í því að stilla gagnagrunninn sjálfan, heldur að geyma upplýsingar um hlutverk (e. role) sem sérstakan reit (key) í orðasafni (dict) notandans. TinyDB geymir öll gögn sem Python orðasöfn, svo þú einfaldlega bætir við reitnum `'role': 'admin'` þegar þú býrð til notandann.
-
-Hér er ferlið byggt á heimildum og fyrri samskiptum:
-
-### 1. Skilgreina hlutverkið í gagnagrunni
-Þegar þú setur notanda inn í `users` töflu TinyDB með `insert()` aðferðinni, bætirðu við hlutverkinu:
-
-```python
-from tinydb import TinyDB, Query
-db = TinyDB('db.json')
-users_table = db.table('users')
-
-# Búa til admin notanda
-users_table.insert({
-    'username': 'vefstjori',
-    'role': 'admin',
-    'password': '...' 
-})
-```
-
-### 2. Sækja hlutverkið við innskráningu
-Þegar notandi skráir sig inn notarðu `Query()` til að finna hann og geymir svo hlutverkið í **Flask session**. Þetta gerir kerfinu kleift að muna réttindi notandans á milli síðna.
-
-```python
-from flask import session
-
-User = Query()
-user = users_table.get(User.username == form_username)
-
-if user:
-    session['user_id'] = user.doc_id # doc_id er sjálfkrafa ID í TinyDB
-    session['role'] = user.get('role', 'user') # Sækir 'admin' eða sjálfgefið 'user'
-```
-
-### 3. Aðgangsstýring í Flask rás (Route)
-Til að verja sérstakar aðgerðir (eins og að eyða póstum eða öðrum notendum) notarðu einfalda `if` skilyrðingu til að athuga hvaða hlutverk er vistað í session-inu [Conversation].
-
-```python
-@app.route('/admin/delete_user/<int:user_id>')
-def delete_user(user_id):
-    # Athugum hvort hlutverkið í session sé 'admin'
-    if session.get('role') == 'admin':
-        users_table.remove(doc_ids=[user_id]) # Eyða notanda
-        return "Notanda eytt"
-    else:
-        # Ef ekki admin, þá sýna villu eða neita aðgangi
-        return "Aðgangur aðeins fyrir vefstjóra", 401
+# Uppfærum notanda með ákveðið notendanafn í admin
+users_table.update({'role': 'admin'}, Query().username == 'gummi')
 ```
 
 ### Lykilatriði:
-*   **Sveigjanleiki:** Þar sem TinyDB geymir orðasöfn geturðu auðveldlega bætt við eða breytt hlutverkum með `update()` skipuninni, t.d. `db.update({'role': 'admin'}, User.username == 'jon')`.
-*   **Öryggi:** Gættu þess að hafa sterkan `app.secret_key` í Flask svo notendur geti ekki sjálfir breytt hlutverkinu sínu í session-inu í vafranum.
-*   **Sjálfgefin gildi:** Notaðu `.get('role', 'user')` þegar þú sækir hlutverkið svo forritið hrynji ekki ef einhvern notanda vantar hlutverka-reitinn í gagnagrunninum.
+*   **Sveigjanleiki**: Þar sem orðasöfn í Python eru breytanleg (mutable) er auðvelt að bæta við fleiri hlutverkum síðar, t.d. 'moderator'.
+*   **Öryggi**: Mundu að athuga alltaf `session.get('role')` á bakendanum (í Python) en ekki bara fela hnappa í HTML-inu, þar sem tæknilega þenkjandi notendur gætu reynt að skrifa slóðina handvirkt í vafrann [31, Conversation].
+*   **Jinja2**: Í HTML sniðmátum geturðu notað hlutverkið til að sýna eða fela hluti:
+    ```html
+    {% if session.role == 'admin' %}
+        <a href="/admin_panel">Stjórnborð</a>
+    {% endif %}
+    ```
 
----
+Hönnunin á **`admin_panel.html`** byggir á því að sýna yfirlit yfir alla notendur kerfisins og bjóða upp á aðgerðir til að stýra þeim. Síðan nýtir erfðir frá `layout.html` til að viðhalda samræmdu útliti og fær gögnin send sem lista af orðasöfnum (dictionaries) frá Flask bakendanum [44, 45, Conversation].
 
-Til að hanna **`layout.html`** þannig að það nýti erfðir (e. template inheritance) í Flask, þarftu að búa til grunnskjal sem inniheldur þá þætti sem eiga að vera eins á öllum síðum forritsins. Þetta sparar vinnu þar sem þú þarft ekki að endurtaka sama HTML kóðann fyrir hverja síðu.
+Hér er hvernig þú hantar síðuna:
 
-Hér er hvernig þú hannar þetta skref fyrir skref:
+### 1. Grunnur og tafla
+Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt. Við ítrum í gegnum `users` listann sem TinyDB skilar [6, 25, Conversation].
 
-### 1. Uppsetning á `layout.html`
-Þetta skjal virkar sem „skelin“ fyrir vefinn þinn. Þú skilgreinir sérstök **blokkir** (e. blocks) þar sem undirsíðurnar munu setja sitt eigið innihald.
-
-**Dæmi um uppbyggingu:**
-```html
-<!DOCTYPE html>
-<html lang="is">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Vefforritun 1{% endblock %}</title>
-    <!-- Tenging við CSS skrá í static möppu með url_for -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <nav>
-        <!-- Sameiginleg valmynd fyrir allar síður -->
-        <a href="{{ url_for('index') }}">Forsíða</a>
-        <a href="{{ url_for('login') }}">Innskrá</a>
-    </nav>
-
-    <main>
-        <!-- Birting á flash-skilaboðum (feedback) -->
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class="flash">{{ message }}</div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-
-        <!-- Hér kemur innihald undirsíðna -->
-        {% block content %}{% endblock %}
-    </main>
-
-    <footer>
-        <p>© 2026 Tækniskólinn - Vefforritun 1</p>
-    </footer>
-</body>
-</html>
-```
-
-### 2. Lykilatriði í hönnuninni
-*   **`{% block content %}`**: Þetta er mikilvægasta skipunin. Hún segir Jinja að hér eigi að setja innihald frá öðrum síðum.
-*   **Sameiginlegir þættir**: Þú setur haus (header), valmynd (navigation) og fót (footer) beint í `layout.html` svo þeir birtist alls staðar.
-*   **Static skrár**: Notaðu `url_for('static', filename='...')` til að tengja CSS og JavaScript svo slóðirnar séu alltaf réttar, óháð því hvar notandinn er staddur á síðunni.
-*   **Flash skilaboð**: Best er að setja `get_flashed_messages()` í grunnskjalið svo að endurgjöf til notandans (t.d. „Innskráning tókst“) birtist alltaf á réttum stað.
-
-### 3. Hvernig undirsíður (t.d. `index.html`) nýta erfðirnar
-Þegar þú býrð til nýja síðu byrjarðu hana á því að „erfa“ frá grunnskjalinu með **`extends`** skipuninni og fyllir svo í blokkirnar.
-
-**Dæmi um `index.html`:**
 ```html
 {% extends "layout.html" %}
 
-{% block title %}Forsíða - Spjallborð{% endblock %}
+{% block title %}Stjórnborð{% endblock %}
 
 {% block content %}
-    <h1>Velkomin á spjallborðið</h1>
-    <p>Hér er listi yfir nýjustu póstana...</p>
+    <h1>Stjórnun notenda</h1>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Notendanafn</th>
+                <th>Hlutverk</th>
+                <th>Aðgerðir</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        <span class="role-tag {{ user.role }}">
+                            {{ user.role }}
+                        </span>
+                    </td>
+                    <td>
+                        {# Aðgerð 1: Breyta hlutverki #}
+                        {% if user.role != 'admin' %}
+                            <a href="{{ url_for('make_admin', user_id=user.doc_id) }}" class="btn-small">Gera að admin</a>
+                        {% endif %}
+
+                        {# Aðgerð 2: Eyða notanda (Conversation) #}
+                        <a href="{{ url_for('delete_user', user_id=user.doc_id) }}" 
+                           class="btn-danger" 
+                           onclick="return confirm('Ertu viss um að þú viljir eyða þessum notanda?')">
+                           Eyða
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
 ```
 
-Með þessari hönnun verður auðveldara að breyta útlitinu á öllum vefnum í einu; þú breytir einfaldlega `layout.html` og allar undirsíður fylgja með sjálfkrafa.
+### 2. Lykilatriði í hönnuninni
+*   **Aðgangur að gögnum**: Inni í lykkjunni nálgast þú gildi eins og `user.username` og `user.role` með punkt-málfræði Jinja2, sem svarar til lykla í Python orðasafni.
+*   **doc_id**: Við notum `user.doc_id` (sjálfgefið auðkenni í TinyDB) í `url_for` til að vita nákvæmlega hvaða notanda við ætlum að eyða eða uppfæra [6, 39, Conversation].
+*   **Skilyrt birting**: Með því að nota `{% if user.role != 'admin' %}` tryggjum við að við séum ekki að bjóða upp á að gera einhvern að admin sem er það þegar.
 
----
 
-### datetime.now()
-
-Til að bæta tímastimpli við nýja pósta þarftu einfaldlega að bæta nýju lykil-gildi pari (key-value pair) við það orðasafn (dictionary) sem þú sendir í gagnagrunninn. Þar sem TinyDB geymir gögn sem hefðbundin Python orðasöfn er mjög auðvelt að bæta við auka upplýsingum eins og dagsetningu og tíma áður en pósturinn er vistaður.
-
-Hér er hvernig þú útfærir þetta í Flask rásinni (route) þinni:
-
-### 1. Nota Python `datetime` (utan heimilda)
-Þótt heimildirnar fjalli ekki beint um `datetime` safnið, þá er það staðlaða leiðin í Python til að ná í rauntíma. Þú myndir flytja það inn efst í skjalið þitt:
-```python
-from datetime import datetime
-```
-
-### 2. Uppfæra `insert` aðgerðina
-Þegar þú tekur á móti gögnum úr forminu notarðu `request.form` og bætir svo tímastimplinum við áður en þú kallar á `insert()`.
-
-**Dæmi um útfærslu:**
-```python
-@app.route('/create_post', methods=['POST'])
-def create_post():
-    if 'user_id' in session:
-        # 1. Sækja gögn úr formi og session
-        content = request.form.get('content')
-        author_id = session.get('user_id')
-        
-        # 2. Búa til tímastimpil (t.d. á sniðinu Dagur-Mán-Ár kl:mm)
-        timi_nuna = datetime.now().strftime("%d-%m-%Y %H:%M")
-        
-        # 3. Setja saman orðasafnið fyrir póstinn
-        nyr_postur = {
-            'author_id': author_id,
-            'content': content,
-            'timestamp': timi_nuna  # Hér er tímastimplinum bætt við
-        }
-        
-        # 4. Vista í TinyDB
-        posts_table.insert(nyr_postur)
-        return redirect(url_for('index'))
-```
-
-### Lykilatriði:
-*   **Sveigjanleiki orðasafna:** Dictionaries í Python eru breytanleg (mutable), svo þú getur bætt við hvaða lyklum sem er hvenær sem er með assignment virkjanum (`=`).
-*   **Gagnageymsla:** TinyDB vistar þessi gögn beint í JSON skrána þína, sem gerir það auðvelt að birta tímastimpilinn síðar í `index.html` eða á prófílsíðunni.
-*   **Birting:** Í HTML sniðmátinu geturðu svo birt stimpilinn með Jinja2 málfræðinni: `{{ post.timestamp }}`.
-
+**Samantekt:** `admin_panel.html` er öflugt tæki þar sem þú notar **Jinja2 lykkjur** til að lesa úr **TinyDB** og **URL building** til að framkvæma CRUD aðgerðir á notendagrunninum.
