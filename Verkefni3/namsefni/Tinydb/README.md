@@ -485,12 +485,12 @@ Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að pa
         "1": {
             "content": "Hæ öll! Þetta er fyrsti pósturinn minn á nýja spjallinu.",
             "author_id": 1,
-            "timestamp": "2026-06-18 10:30"
+            "timestamp": "06/18, 2026 10:30"
         },
         "2": {
             "content": "Mér finnst Epguides API-ið virka mjög vel með Flask.",
             "author_id": 2,
-            "timestamp": "2026-06-18 11:45"
+            "timestamp": "06/18, 2026 11:45"
         }
     },
     "favorites": {
