@@ -11,7 +11,7 @@ Til að búa til þessa spjallsíðu þurfum við að tengja saman **Flask** fyr
 
 ---
 
-# Leiðbeiningar: Flask & TinyDB Samþætting
+# Flask & TinyDB Samþætting
 
 Ferlið við að smíða vefkerfi sem styður nýskráningu, innskráningu og CRUD aðgerðir (Create, Read, Update, Delete) fyrir spjallpósta með **TinyDB** sem gagnagrunn.
 
