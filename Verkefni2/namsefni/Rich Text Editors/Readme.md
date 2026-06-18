@@ -2,10 +2,5 @@
 
 Best fully free choices
 
-* Quill: https://quilljs.com/
-* Trumbowyg: https://alex-d.github.io/Trumbowyg/
-* Summernote: https://summernote.org/
-
-> Quill í Flask app sýnidæmi er hér 
-
-![RTE](RTE.jpg)
+* Flask CKeditor: https://flask-ckeditor.readthedocs.io/en/latest/
+* Quill JS: https://quilljs.com/
