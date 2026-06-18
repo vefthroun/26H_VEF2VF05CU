@@ -9,11 +9,6 @@
 
 Til að búa til þessa spjallsíðu þurfum við að tengja saman **Flask** fyrir vefumgjörðina, **sessions** fyrir örugga aðgangsstýringu og **TinyDB** sem JSON gagnagrunn.
 
-Hér er hvernig þú getur útfært þetta verkefni:
-
-
-Hér er uppfærð og rökrétt útgáfa af leiðbeiningum fyrir **README.md** sem samþættir Flask og TinyDB fyrir verkefnið þitt. Þessi útgáfa leiðréttir ósamræmi og bætir við þeim hlutum sem vantaði, svo sem innskráningu og meðhöndlun pósts.
-
 ---
 
 # Leiðbeiningar: Flask & TinyDB Samþætting
