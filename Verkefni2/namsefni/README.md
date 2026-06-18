@@ -1,7 +1,7 @@
 ### Form og sessions
 
-1. [Form](FORM/README.md)
 1. [Sessions](Sessions/README.md#sessions)
+1. [Form](FORM/README.md)
 
 <!--
 ### WTForms
