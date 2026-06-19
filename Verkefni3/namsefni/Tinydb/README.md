@@ -463,6 +463,91 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
 
 ---
 
+Til þess að notandi geti breytt eigin póstum þarftu að nýta **`update()`** aðferðina í TinyDB og búa til nýja rás (route) í Flask sem birtir breytingarform og vistar nýja textann. Ferlið krefst þess að við staðfestum að sá sem reynir að breyta sé örugglega höfundur póstsins með því að bera saman `user_id` úr session við `author_id` póstsins.
+
+Hér er hvernig þú bætir þessari virkni við:
+
+### 1. Flask rásin: `edit_post` í `app.py`
+Þessi rás þarf að styðja bæði `GET` (til að sýna formið með gamla textanum) og `POST` (til að vista breytingarnar).
+
+```python
+@app.route('/edit_post/<int:post_id>', methods=['GET', 'POST'])
+def edit_post(post_id):
+    # 1. Athugum hvort notandi sé innskráður
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    # 2. Sækjum póstinn úr TinyDB með doc_id
+    post = posts_table.get(doc_id=post_id)
+
+    # 3. Öryggisathugun: Má notandinn breyta þessum pósti?
+    if not post or post['author_id'] != session['user_id']:
+        flash("Þú getur aðeins breytt þínum eigin póstum!")
+        return redirect(url_for('profile'))
+
+    if request.method == 'POST':
+        # 4. Sækjum nýja textann úr forminu
+        new_content = request.form.get('content')
+        
+        # 5. Uppfærum póstinn í gagnagrunninum
+        posts_table.update({'content': new_content}, doc_ids=[post_id])
+        
+        flash("Pósti hefur verið breytt!")
+        return redirect(url_for('profile'))
+
+    # Ef GET: Sýnum síðu með formi og gamla textanum
+    return render_template('edit_post.html', post=post)
+```
+
+### 2. Uppfæra `profile.html`
+Bættu við hlekk við hvern póst í listanum þínum svo notandinn geti smellt á „Breyta“. Notaðu **`url_for`** til að búa til slóðina með réttu `post_id`.
+
+```html
+{# Inni í for-lykkjunni í profile.html #}
+{% for post in posts %}
+    <div class="post">
+        <p>{{ post.content }}</p>
+        <small>{{ post.timestamp }}</small> | 
+        
+        {# Hlekkur á breytingasíðuna #}
+        <a href="{{ url_for('edit_post', post_id=post.id) }}">Breyta pósti</a> |
+        
+        <a href="{{ url_for('delete_post', post_id=post.id) }}" 
+           onclick="return confirm('Ertu viss?')">Eyða</a>
+    </div>
+{% endfor %}
+```
+
+### 3. Nýtt sniðmát: `templates/edit_post.html`
+Þetta skjal birtir form þar sem gamli textinn er þegar inni í `textarea` svo notandinn geti lagfært hann.
+
+```html
+{% extends "layout.html" %}
+
+{% block title %}Breyta pósti{% endblock %}
+
+{% block content %}
+    <h1>Breyta pósti</h1>
+    
+    <form method="POST">
+        <label for="content">Innihald:</label><br>
+        {# Birtum gamla textann inni í textarea #}
+        <textarea name="content" rows="5" cols="40" required>{{ post.content }}</textarea><br>
+        
+        <button type="submit">Vista breytingar</button>
+        <a href="{{ url_for('profile') }}">Hætta við</a>
+    </form>
+{% endblock %}
+```
+
+### Lykilatriði:
+*   **Update í TinyDB**: Við notum `db.update(fields, query)` eða `doc_ids` til að breyta aðeins ákveðnum reitum í skjalinu án þess að eyða því.
+*   **doc_id**: Þegar við birtum póstana á prófílsíðunni verðum við að muna að geyma `doc_id` (t.d. sem `post.id`) svo rásin viti hvaða póst á að uppfæra.
+*   **Aðgangsstýring**: Það er mikilvægt að athuga `author_id` á bakendanum (Python) en ekki bara fela hlekkinn í HTML, því annars gæti einhver breytt póstum annarra með því að giska á `post_id` í vefslóðinni.
+*   **Sjálfvirk hreinsun**: Jinja2 sér um að **hreinsa (escape)** textann sjálfkrafa þegar hann er birtur í forminu, sem verndar gegn öryggisvandanum.
+
+---
+
 ### Gagnagrunnurinn db.json
 
 Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að passa við appið sem við höfum verið að smíða. TinyDB geymir gögnin í flokkuðum töflum þar sem hver færsla fær sjálfvirkt númer (ID) sem lykil [5, 6, Conversation].
