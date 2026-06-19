@@ -463,6 +463,8 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
 
 ---
 
+### Uppfærsla eigin pósta
+
 Til þess að notandi geti breytt eigin póstum þarftu að nýta **`update()`** aðferðina í TinyDB og búa til nýja rás (route) í Flask sem birtir breytingarform og vistar nýja textann. Ferlið krefst þess að við staðfestum að sá sem reynir að breyta sé örugglega höfundur póstsins með því að bera saman `user_id` úr session við `author_id` póstsins.
 
 Hér er hvernig þú bætir þessari virkni við:
