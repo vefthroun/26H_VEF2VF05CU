@@ -374,32 +374,34 @@ Hér er hvernig þú getur breytt rásinni til að tryggja að notandinn „admi
 ### Uppfærð `/login` rás
 
 ```python
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST']) # 1. Skilgreinum báðar aðferðir 
 def login():
-    # 1. Sækjum gögn úr forminu með request.form
-    username = request.form.get('username')
-    password = request.form.get('password')
-    
-    # 2. Leitum að notanda í TinyDB
-    user = users_table.get((User.username == username) & (User.password == password))
-    
-    if user:
-        # 3. Vistum doc_id í session
-        session['user_id'] = user.doc_id
+    # 2. Ef aðferðin er POST, þá vinnum við úr gögnunum úr forminu 
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
         
-        # 4. Bætum við skilyrðinu fyrir administrator
-        # Ef notandanafnið er 'admin', fær hann hlutverkið 'admin' í session
-        if username == 'admin':
-            session['role'] = 'admin'
-        else:
-            # Annars fær hann hlutverkið sem er skráð í DB eða 'user' sem sjálfgefið
-            session['role'] = user.get('role', 'user')
+        # Leitum að notanda í TinyDB (Conversation history)
+        user = users_table.get((User.username == username) & (User.password == password))
+        
+        if user:
+            session['user_id'] = user.doc_id # Vistum í session 
             
-        return redirect(url_for('profile'))
-    
-    # Ef innskráning mistekst
-    flash("Rangt notandanafn eða lykilorð.")
-    return redirect(url_for('login'))
+            # Skilyrði fyrir administrator eins og þú baðst um (Conversation history)
+            if username == 'admin':
+                session['role'] = 'admin'
+            else:
+                session['role'] = user.get('role', 'user')
+                
+            return redirect(url_for('profile')) # Sendum á prófíl eftir innskráningu [5]
+        
+        # Ef upplýsingar voru rangar
+        flash("Rangt notandanafn eða lykilorð.") # Gefum feedback [6]
+        return redirect(url_for('login'))
+
+    # 3. Ef aðferðin er GET (notandi bara að opna síðuna), birtum við formið [7]
+    return render_template('login.html')
+
 ```
 
 ### Mikilvæg atriði:
