@@ -367,6 +367,50 @@ def login():
         return redirect(url_for('index'))
 ```
 
+Til þess að bæta við skilyrði fyrir stjórnanda (administrator) í `/login` rásinni þarftu að nota `request.form` til að sækja gögnin og uppfæra svo `session` hlutinn með viðeigandi hlutverki (role).
+
+Hér er hvernig þú getur breytt rásinni til að tryggja að notandinn „admin“ fái réttindi í session:
+
+### Uppfærð `/login` rás
+
+```python
+@app.route('/login', methods=['POST'])
+def login():
+    # 1. Sækjum gögn úr forminu með request.form
+    username = request.form.get('username')
+    password = request.form.get('password')
+    
+    # 2. Leitum að notanda í TinyDB
+    user = users_table.get((User.username == username) & (User.password == password))
+    
+    if user:
+        # 3. Vistum doc_id í session
+        session['user_id'] = user.doc_id
+        
+        # 4. Bætum við skilyrðinu fyrir administrator
+        # Ef notandanafnið er 'admin', fær hann hlutverkið 'admin' í session
+        if username == 'admin':
+            session['role'] = 'admin'
+        else:
+            # Annars fær hann hlutverkið sem er skráð í DB eða 'user' sem sjálfgefið
+            session['role'] = user.get('role', 'user')
+            
+        return redirect(url_for('profile'))
+    
+    # Ef innskráning mistekst
+    flash("Rangt notandanafn eða lykilorð.")
+    return redirect(url_for('login'))
+```
+
+### Mikilvæg atriði:
+
+*   **Session hluturinn:** `session` í Flask virkar eins og Python orðasafn (dict) þar sem þú getur geymt upplýsingar sem eiga að fylgja notandanum á milli síðna.
+*   **Secret Key:** Mundu að þú verður að vera með `app.secret_key` stilltan í forritinu þínu til að `session` virki, annars færðu villu þegar reynt er að skrifa í það.
+*   **Öryggi:** Með því að vista `session['role'] = 'admin'` geturðu á öðrum síðum (eins og í `admin_panel`) einfaldlega athugað þetta gildi áður en þú hleypir notandanum áfram.
+*   **Gagnageymsla:** Þar sem TinyDB vinnur með orðasöfn er auðvelt að fletta upp notandanum og athuga hvort hann sé sá sem hann segist vera áður en réttindin eru veitt.
+
+---
+
 ### 3. Aðgangsstýring í rás (Admin check)
 Þú getur nú búið til rásir sem aðeins 'admin' hefur aðgang að með því að nota einfalda `if` skilyrðingu [Conversation].
 
