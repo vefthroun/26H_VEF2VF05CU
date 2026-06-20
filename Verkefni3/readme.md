@@ -44,8 +44,8 @@
 
 > Notaðu PicoCSS fyrir uppsetningu (_layout_). <br> Notið Jinja erfðir (_Jinja2: inheritance_) og innsetningu skráa (_include: nav, footer_) á vefsíðum.
 
-<!-- Gögnin sem hægt er að sækja frá TVmaze eru orðin 10ára gömul þannig að við notum annan API, Epguide API sem nær í nýtt efni af TVMAZE án þess að það þurfi að innskrá með lykli eða borga fyrir það
 #### Að sækja gögn frá API
+
 Hlekkurinn / API endpoint [https://api.tvmaze.com/shows](https://api.tvmaze.com/shows) skilar upplýsingum um 250 fyrstu þáttarraðir í API gagnasettinu.  Til að fá næstu 250 þætti þarftu að bæta við skilyrðinu / flagginu ?page=1 fyrir aftan shows eða [https://api.tvmaze.com/shows?page=1](https://api.tvmaze.com/shows?page=1) og svo framvegis 
 
 Hlekkurinn / API endpoint [https://api.tvmaze.com/shows/155](https://api.tvmaze.com/shows/155) skilar okkur upplýsingum um þáttaröð eftir id:  Í þessu tilviki þáttaröðina Beauty & the Beast sem hefur id = 155. 
@@ -122,7 +122,7 @@ Leit að þætti eftir nafni, ekki nákvæm leit (fuzzy).  Hér er leitað eftir
 
 </details>
 
--->
+
 ---
 
 ### Námsefni
