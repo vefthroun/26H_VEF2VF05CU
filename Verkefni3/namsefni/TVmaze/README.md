@@ -72,4 +72,89 @@
 }
 ```
 
+---
 
+Hér er uppfærð viðbót fyrir **README.md** skrána þína sem útskýrir hvernig Flask app vinnur með JSON gögn frá TVMaze API og birtir þau með Jinja2 erfðum.
+
+---
+
+### Sækja og birta gögn frá TVMaze API
+
+Þessi hluti útskýrir hvernig miðlarinn (Flask) kallar í TVMaze API, fær JSON svar og sendir það áfram í HTML sniðmát (templates).
+
+#### 1. Bakendinn: Flask rás (Route)
+Í Flask er notað `requests` safnið til að sækja gögnin. API-ið skilar JSON sem Flask breytir í Python lista eða orðasafn (dictionary). Gögnin eru svo send í sniðmátið með `render_template()`.
+
+```python
+import requests
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    # Sækjum lista yfir þætti frá TVMaze API
+    response = requests.get("https://api.tvmaze.com/shows")
+    
+    # Breytum JSON svarinu í Python gögn
+    shows_data = response.json()
+    
+    # Sendum gögnin á index.html sniðmátið
+    return render_template('index.html', shows=shows_data)
+```
+
+#### 2. Grunnútlit: `layout.html`
+Við notum Jinja erfðir til að halda samræmdu útliti. `layout.html` inniheldur grunninn og `{% block content %}` segir til um hvar undirsíður eiga að birtast.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sjónvarpsþættir</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Heim</a>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>Gögn frá TVMaze API</p>
+    </footer>
+</body>
+</html>
+```
+
+#### 3. Undirsíða: `index.html`
+Þessi síða erfir frá `layout.html` og notar `{% for %}` lykkju til að ítra í gegnum listann af þáttum sem kom úr API-inu.
+
+```html
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Vinsælir þættir</h1>
+    
+    {% for show in shows %}
+        <div>
+            <h2>{{ show.name }}</h2>
+            
+            {% if show.image %}
+                <img src="{{ show.image.medium }}" alt="{{ show.name }}">
+            {% endif %}
+            
+            <p><strong>Tegund:</strong> {{ show.genres | join(', ') }}</p>
+            <p>{{ show.summary | safe }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock %}
+```
+
+### Lykilatriði:
+*   **JSON sjálfvirkni**: Flask og TVMaze vinna bæði með JSON snið sem er auðvelt að varpa yfir í Python orðasöfn.
+*   **Jinja2 Erfðir**: Með því að nota `{% extends %}` þurfum við ekki að endurtaka HTML kóða fyrir valmyndir eða fót (footer) á hverri síðu.
+*   **HTML Escaping**: Jinja2 hreinsar sjálfkrafa gögn úr API-inu til að verja síðuna gegn árásum, nema við notum `| safe` sýuna (filter) fyrir gögn sem innihalda HTML merki (eins og `summary` úr TVMaze).
