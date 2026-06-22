@@ -27,7 +27,7 @@
 
 #### JSON API 10%
  
-Útfærðu vefforrit í Flask sem birtir [TV Maze API](https://api.tvmaze.com) gögn. 
+Útfærðu vefforrit í Flask sem birtir gögn frá [TV Maze API](https://api.tvmaze.com). 
 
 1. Á forsíðu (index) skal birta grunnupplýsingar um 20 random þætti ur _Epguides API_ gagnagrunninum. Birta skal nafn og mynd þáttaraða  **2%**
 1. Þegar valin er ein þáttaröð af forsíðu er farið á síðu sem birtir nánari upplýsingar um valda þáttaröð. **3%**
