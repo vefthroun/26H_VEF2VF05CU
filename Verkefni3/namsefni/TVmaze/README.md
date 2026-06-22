@@ -74,10 +74,6 @@
 
 ---
 
-Hér er uppfærð viðbót fyrir **README.md** skrána þína sem útskýrir hvernig Flask app vinnur með JSON gögn frá TVMaze API og birtir þau með Jinja2 erfðum.
-
----
-
 ### Sækja og birta gögn frá TVMaze API
 
 Þessi hluti útskýrir hvernig miðlarinn (Flask) kallar í TVMaze API, fær JSON svar og sendir það áfram í HTML sniðmát (templates).
