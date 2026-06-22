@@ -153,4 +153,4 @@ Við notum Jinja erfðir til að halda samræmdu útliti. `layout.html` inniheld
 ### Lykilatriði:
 *   **JSON sjálfvirkni**: Flask og TVMaze vinna bæði með JSON snið sem er auðvelt að varpa yfir í Python orðasöfn.
 *   **Jinja2 Erfðir**: Með því að nota `{% extends %}` þurfum við ekki að endurtaka HTML kóða fyrir valmyndir eða fót (footer) á hverri síðu.
-*   **HTML Escaping**: Jinja2 hreinsar sjálfkrafa gögn úr API-inu til að verja síðuna gegn árásum, nema við notum `| safe` sýuna (filter) fyrir gögn sem innihalda HTML merki (eins og `summary` úr TVMaze).
+*   **HTML Escaping**: Jinja2 hreinsar sjálfkrafa gögn úr API-inu til að verja síðuna gegn árásum, nema við notum `| safe` síuna (filter) fyrir gögn sem innihalda HTML merki (eins og `summary` úr TVMaze).
