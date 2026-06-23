@@ -25,7 +25,7 @@ app = Flask(__name__)
 
 ```
 
-## 1. Uppsetning Gagnagrunns
+### 1. Uppsetning Gagnagrunns
 TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](https://github.com/vefthroun/26H_VEF2VF05CU/blob/main/Verkefni3/namsefni/Tinydb/README.md#gagnagrunnurinn-dbjson)
 
 ```python
@@ -37,7 +37,10 @@ app.config["SECRET_KEY"] = os.urandom(16)
 
 ```
 
-# Uppsetning TinyDB
+### Uppsetning TinyDB
+
+```python
+
 db = TinyDB('db.json')
 users_table = db.table('users')
 posts_table = db.table('posts')
