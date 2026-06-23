@@ -613,7 +613,7 @@ Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að pa
     "users": {
         "1": {
             "username": "admin",
-            "password": "lykill_123",
+            "password": "psw_123",
             "role": "admin"
         },
         "2": {
@@ -626,20 +626,12 @@ Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að pa
         "1": {
             "content": "Hæ öll! Þetta er fyrsti pósturinn minn á nýja spjallinu.",
             "author_id": 1,
-            "timestamp": "06/18, 2026 10:30"
+            "timestamp": "20. 06. 2026. Kl. 20:06"
         },
         "2": {
-            "content": "Mér finnst Epguides API-ið virka mjög vel með Flask.",
+            "content": "Mér finnst TVmaze API-ið virka mjög vel með Flask.",
             "author_id": 2,
-            "timestamp": "06/18, 2026 11:45"
-        }
-    },
-    "favorites": {
-        "1": {
-            "user_id": 2,
-            "show_id": "the-flash",
-            "title": "The Flash",
-            "image": "https://static.tvmaze.com/uploads/images/medium_portrait/448/1121792.jpg"
+            "timestamp": "20. 07. 2026. Kl. 20:07"
         }
     }
 }
@@ -649,8 +641,5 @@ Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að pa
 
 1.  **`users` taflan:** Hér eru notendurnir geymdir. Lykillinn `"1"` eða `"2"` er það sem við köllum **doc_id**. Við höfum bætt við `role` lyklinum til að stýra aðgangi að stjórnborðinu (admin panel) eins og við ræddum áðan.
 2.  **`posts` taflan:** Hver póstur hefur `content`, `timestamp` (tímastimpil) og `author_id`. **`author_id`** verður að passa við lykilinn í `users` töflunni (t.d. póstur 1 er eftir notanda 1) svo appið geti flett upp réttu nafni á forsíðunni.
-3.  **`favorites` taflan:** Hér geymum við þætti sem notendur hafa valið úr Epguides API. Við vistar titilinn og myndaslóðina frá **TVMaze** beint í skrána svo við þurfum ekki að kalla aftur í API-ið þegar notandinn skoðar prófílinn sinn.
-
-**Athugið:** Ef þú ert að byrja með tóman gagnagrunn mun TinyDB búa þessa skrá til sjálfkrafa þegar þú notar `insert()` í fyrsta skipti í Python.
 
 **Mikilvægt:** Vistaðu JSON skrána með **UTF-8** kóðun til að íslenskir stafir eins og „þ“ og „ð“ birtist rétt.
