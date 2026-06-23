@@ -11,7 +11,7 @@ Til að búa til þessa spjallsíðu þurfum við að tengja saman **Flask** fyr
 
 ### 1. Bakendinn: `app.py`
 
-Þessi skrá stýrir flæðinu, notar **TinyDB** fyrir gögnin og **session** fyrir auðkenningu 
+Pakkarnir sem notaðir eru í appinu eru **session** fyrir auðkenningu, **TinyDB** fyrir gögnin, **os** og **datetime** úr stýrikerfinu,  og **pprint** til að gera json söfnin læsileg í terminal
 
 ```python
 
@@ -24,8 +24,6 @@ from pprint import pprint       # pprint er í standard libary
 app = Flask(__name__)
 
 ```
-
----
 
 ## 1. Uppsetning Gagnagrunns
 TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](https://github.com/vefthroun/26H_VEF2VF05CU/blob/main/Verkefni3/namsefni/Tinydb/README.md#gagnagrunnurinn-dbjson)
