@@ -126,7 +126,6 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('index'))
-    
 ```
 Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. 
 
@@ -136,35 +135,54 @@ Gögnum er safnað úr formi og vistuð í `users` töfluna með `insert()`.
 2. Vista í TinyDB. `insert()` skilar sjálfkrafa einstöku ID (doc_id).
 
 ```python
-
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password') # Í alvöru kerfi þarf að hasha þetta!
+        
+        if not users_table.search(User.username == username):
+            users_table.insert({'username': username, 'password': password, 'role': 'user'})
+            flash("Nýskráning tókst! Skráðu þig inn.")
+            return redirect(url_for('login'))
+        flash("Notandanafn er frátekið.")
+    return render_template('signup.html')
 ```
 
+### Prófílsíða og aðgangsstýring
 
-
-
-## 3. 
-
-```python
-
-```
-
-## 4. Prófílsíða og Aðgangsstýring
 Prófílsíðan sýnir aðeins þá pósta sem tilheyra innskráðum notanda.
 
 1. Athugum hvort `user_id` sé í `session`.
-2. Notum `posts_table.search(Query().author_id == session['user_id'])` til að sía gögnin [6, 7, Conversation].
+2. Notum `posts_table.search(Query().author_id == session['user_id'])` til að sía gögnin
+
+```python
+@app.route('/profile')
+def profile():
+    if 'user_id' not in session: 
+        return redirect(url_for('login'))
+    # Sækja aðeins pósta þessa notanda [7, Conversation]
+    my_posts = posts_table.search(Post.author_id == session['user_id'])
+    for p in my_posts: p['id'] = p.doc_id
+    return render_template('profile.html', posts=my_posts)
+```
 
 ## 5. Stjórnun pósta (Create, Update, Delete)
 
 ### Búa til póst (Create)
-Notandi skrifar texta í form. Við bætum við `author_id` úr session og tímastimpli áður en við vistum [20, Conversation].
+Notandi skrifar texta í form. Við bætum við `author_id` úr session og tímastimpli áður en við vistum.
+
 ```python
-new_post = {
-    'content': request.form.get('content'),
-    'author_id': session['user_id'],
-    'timestamp': datetime.now().strftime("%d-%m-%Y %H:%M") # íslensk tímaröð
-}
-posts_table.insert(new_post)
+@app.route('/create_post', methods=['POST'])
+def create_post():
+    if 'user_id' in session:
+        content = request.form.get('content')
+        posts_table.insert({
+            'content': content,
+            'author_id': session['user_id'],
+            'timestamp': datetime.now().strftime("%d. %m. %Y. Kl. %H:%M") # Íslensk dagsetning skráð í db
+        })
+    return redirect(url_for('profile'))
 ```
 
 ### Uppfæra póst (Update)
