@@ -613,7 +613,7 @@ Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að pa
     "users": {
         "1": {
             "username": "admin",
-            "password": "psw_123",
+            "password": "psw123",
             "role": "admin"
         },
         "2": {
