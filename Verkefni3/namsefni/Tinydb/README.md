@@ -235,52 +235,72 @@ def delete_post(post_id):
 ### 2. Sniðmát (Templates)
 
 #### `templates/layout.html`
-Grunnskjalið sem öll önnur erfa frá. 
+
+Skipulagssíðan sem allar grunnsíður "_templates_" erfa frá `{% extends "layout.html" %}`. 
+
 ```html
 <!DOCTYPE html>
 <html lang="is">
 <head>
-    <meta charset="UTF-8"> <!-- Mikilvægt fyrir íslenska stafi! -->
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TinyDB og Json">
+    <meta name="author" content="Guðmundur Jón Guðjónsson">
+    <title> {% block title %}. 
+                Verkefni 3. TinyDB & JSON 
+            {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{url_for('static', filename='pico.indigo.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/svg" href="/static/images/Glogo.svg">
 </head>
 <body>
-    <nav>
-        <a href="{{ url_for('index') }}">Forsíða</a>
+    <nav class="container">
+        <ul>
+            <li><h5><a href="{{ url_for('index') }}">Klúbburinn</a></h5></li>
+        </ul>
+        <ul>
         {% if session.user_id %}
-            <a href="{{ url_for('profile') }}">Mín síða ({{ session.username }})</a>
-            <a href="{{ url_for('logout') }}">Útskrá</a>
+            <li><a href="{{ url_for('profile') }}">Mín síða ({{ session.username }})</a></li>
+            <li><a href="{{ url_for('logout') }}">Útskrá</a></li>
         {% else %}
-            <a href="{{ url_for('login') }}">Innskrá</a>
-            <a href="{{ url_for('signup') }}">Nýskrá</a>
+            <li><a href="{{ url_for('login') }}">Innskrá</a></li>
+            <li><a href="{{ url_for('signup') }}">Nýskrá</a></li>
         {% endif %}
+        </ul>
     </nav>
+    <main class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}<p class="flashes">{{ msg }}</p>{% endfor %}
+            {% endif %}
+        {% endwith %}
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}<p>{{ msg }}</p>{% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <main>{% block content %}{% endblock %}</main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="container">
+        <p class="center">&copy; Cat,  VEFÞ2VF, spönn 1, haust 2026.</p>
+    </footer>
 </body>
 </html>
 ```
 
 #### `templates/index.html`
-Birtir alla pósta með notendanafni og tíma [Conversation].
+Birtir alla pósta ú **db** með notendanafni og tímasetningu.
 ```html
 {% extends "layout.html" %}
-{% block title %}Spjallborð{% endblock %}
+{% block title %}Skilaboðaskjóðan{% endblock %}
 {% block content %}
-    <h1>Nýjustu færslur</h1>
+    <h3>Nýjustu skilaboðin</h3>
+    <div class="newpost">
     {% for post in posts %}
-        <div class="post">
+        <article>
             <p>{{ post.content }}</p>
-            <small>Sent af: {{ post.username }} | {{ post.timestamp }}</small>
-        </div>
+            <small>Skrifað þann: {{ post.timestamp }}. Höfundur: {{ post.username }}</small>
+        </article>
         <hr>
     {% endfor %}
+    </div>
 {% endblock %}
 ```
 
