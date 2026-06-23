@@ -217,7 +217,7 @@ def edit_post(post_id):
 ```
 
 ### Eyða pósti (Delete)
-Til að eyða notum við `remove()`. Gættu þess að notandi geti aðeins eytt sínum eigin póstum (nema hann sé með **admin** hlutverk) [6, 7, Conversation].
+Til að eyða notum við `remove()`. Gættu þess að notandi geti aðeins eytt sínum eigin póstum (nema hann sé með **admin** hlutverk).
 ```python
 @app.route('/delete_post/<int:post_id>')
 def delete_post(post_id):
@@ -232,65 +232,10 @@ def delete_post(post_id):
 
 ---
 
-Hér er grunnkóðinn fyrir Flask forritið og HTML sniðmátin sem fylgja þeirri rökréttu uppbyggingu sem við ræddum: 
-
-Gættu þess að vista allar skrár með **UTF-8** kóðun svo íslenskir stafir birtist rétt [Conversation].
-
-
-
-
-
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password') # Í alvöru kerfi þarf að hasha þetta!
-        
-        if not users_table.search(User.username == username):
-            users_table.insert({'username': username, 'password': password, 'role': 'user'})
-            flash("Nýskráning tókst! Skráðu þig inn.")
-            return redirect(url_for('login'))
-        flash("Notandanafn er frátekið.")
-    return render_template('signup.html')
-
-
-
-@app.route('/profile')
-def profile():
-    if 'user_id' not in session: 
-        return redirect(url_for('login'))
-    # Sækja aðeins pósta þessa notanda [7, Conversation]
-    my_posts = posts_table.search(Post.author_id == session['user_id'])
-    for p in my_posts: p['id'] = p.doc_id
-    return render_template('profile.html', posts=my_posts)
-
-@app.route('/create_post', methods=['POST'])
-def create_post():
-    if 'user_id' in session:
-        content = request.form.get('content')
-        posts_table.insert({
-            'content': content,
-            'author_id': session['user_id'],
-            'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M")
-        })
-    return redirect(url_for('profile'))
-
-@app.route('/delete_post/<int:post_id>')
-def delete_post(post_id):
-    post = posts_table.get(doc_id=post_id)
-    if post and post['author_id'] == session.get('user_id'):
-        posts_table.remove(doc_ids=[post_id])
-        flash("Pósti eytt.")
-    return redirect(url_for('profile'))
-
-if __name__ == '__main__':
-    app.run(debug=True)
-```
-
 ### 2. Sniðmát (Templates)
 
 #### `templates/layout.html`
-Grunnskjalið sem öll önnur erfa frá. Hér er **UTF-8** stillingin [Conversation].
+Grunnskjalið sem öll önnur erfa frá. 
 ```html
 <!DOCTYPE html>
 <html lang="is">
