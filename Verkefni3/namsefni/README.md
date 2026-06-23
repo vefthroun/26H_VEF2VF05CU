@@ -13,7 +13,7 @@
 JSON er notað með ýmsum forritunarmálum.
 
 <details>
-<summary> Kóðadæmi</summary>
+<summary> Kóðadæmi (_í námsefni_)</summary>
 <br>
 
 1. [JSON sýnidæmi](JSON/2_JSON_EXAMPLES.json)
@@ -49,9 +49,6 @@ JSON er notað með ýmsum forritunarmálum.
 og [Certify](https://certifi.io/)
 -->
 
-</details>
-
-
 ---
 
 ### API
@@ -65,7 +62,7 @@ Ein vinsælasta leiðin til að smíða forritaskil (API) er REST arkitektúrst�
 - [Creating Web APIs with Python and Flask](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask)
 - [REST API using Flask in 7 minutes](https://towardsdatascience.com/launch-your-own-rest-api-using-flask-python-in-7-minutes-c4373eb34239) 
 
-
+</details>
 ---
 
 
