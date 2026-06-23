@@ -27,6 +27,7 @@
 JSON er notað með ýmsum forritunarmálum og þú getur notað JSONLint til að validate JSON. http://jsonlint.com/ 
 
 - [JSON kóðadæmi](JSON/README.md)
+- [JSON & Python CRUD dæmi](namsefni/pyCrudExamples/README.md)
 
 ---
 
