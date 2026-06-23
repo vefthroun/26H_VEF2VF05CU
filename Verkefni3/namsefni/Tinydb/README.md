@@ -236,7 +236,7 @@ def delete_post(post_id):
 
 #### `templates/layout.html`
 
-1. Skipulagssíðan sem allar grunnsíður "_templates_" erfa frá `{% extends "layout.html" %}`. 
+1. Skipulagssíðan sem allar grunnsíður "_templates_" erfa `{% extends "layout.html" %}`. 
 1.  **UTF-8**: Meta-tagið í `layout.html` kemur í veg fyrir skrípi-stafi eins og „Ã¦“ .
 
 ```html
