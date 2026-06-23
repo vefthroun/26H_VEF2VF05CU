@@ -431,8 +431,8 @@ def edit_post(post_id):
 
 ```
 
-### Nýtt sniðmát: `templates/edit_post.html`
-Þetta skjal birtir form þar sem gamli textinn er þegar inni í `textarea` svo notandinn geti lagfært hann.
+### `templates/edit_post.html`
+Þetta skjal birtir form þar sem upphaflegi textinn er þegar inni í `textarea` svo notandinn geti lagfært hann.
 
 ```html
 {% extends "layout.html" %}
@@ -464,7 +464,7 @@ def edit_post(post_id):
 
 ### Aðgangsstýring á stjórnborð
 
-Vefstjóri er skráður í JSON gagnagrunnin með annað hlutverk en aðrir notendur `"role": "admin"`. Með `{% if session.role == 'admin' %}` skilyrðingu í **profil.html** þá tjekkar jinja á því hvort 'admin' sé innskráður ef svo er þá hefur hann aðgang að stjórnborði vefstjóra póstkröfu á `/admin_panel`.
+Vefstjóri er skráður í JSON gagnagrunnin með annað hlutverk en aðrir notendur `"role": "admin"`. Með `{% if session.role == 'admin' %}` skilyrðingu í **profil.html** þá tjekkar jinja á því hvort 'admin' sé innskráður ef svo er þá hefur hann aðgang að stjórnborði vefstjóra með póst aðferð á `/admin_panel`.
 
 ```python
 
