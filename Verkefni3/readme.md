@@ -4,9 +4,8 @@
 - Viðfangsefni:
   - API, beiðnir (_requests_) frá [TVmaze API](https://api.tvmaze.com)
   - CRUD aðgerðir með JSON / [TinyDB](https://tinydb.readthedocs.io/en/latest/getting-started.html)
-  - Jinja2: Template inheritance, Include
+  - Jinja2: Template inheritance, extend layout
   - HTML Form
-  - Uppsetning (_Layout_) 
 
 ---
 
