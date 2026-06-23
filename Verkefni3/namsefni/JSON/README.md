@@ -1,12 +1,12 @@
 # JSON Kóðadæmi
 
-1. [JSON sýnidæmi](JSON/2_JSON_EXAMPLES.json)
-1. [JSON í Dictionary](JSON/3_JsonToDictionary.py)
-1. [Dictionary í JSON](JSON/4_dictionaryToJson.py)
-1. [Að lesa úr JSON skrá](JSON/5_lesa_skra.py)
-1. [Að skrifa í skrá](JSON/6_skrifaSkra.py)
-1. [Að skrifa í JSON skrá](JSON/6_skrifa_Json_skra.py)
-1. [Að lesa úr JSON skrá hýst á Github (https) með urllib](JSON/7_urllib_request.py)
+1. [JSON sýnidæmi](2_JSON_EXAMPLES.json)
+1. [JSON í Dictionary](3_JsonToDictionary.py)
+1. [Dictionary í JSON](4_dictionaryToJson.py)
+1. [Að lesa úr JSON skrá](5_lesa_skra.py)
+1. [Að skrifa í skrá](6_skrifaSkra.py)
+1. [Að skrifa í JSON skrá](6_skrifa_Json_skra.py)
+1. [Að lesa úr JSON skrá hýst á Github (https) með urllib](7_urllib_request.py)
 
 <details>
 <summary>Bjargir</summary>
@@ -33,8 +33,8 @@ og [Certify](https://certifi.io/)
 
 Ein vinsælasta leiðin til að smíða forritaskil (API) er REST arkitektúrstíllinn. Python býður upp á frábær verkfæri, ekki aðeins til að sækja gögn úr REST API heldur einnig til að smíða þín eigin Python REST API.
 
-1. [Að búa til sinn eigin REST API](JSON/API.py) 
-1. [Að vinna úr dictionary sem kemur frá API](JSON/8_dictionary_API.py)
+1. [Að búa til sinn eigin REST API](API.py) 
+1. [Að vinna úr dictionary sem kemur frá API](8_dictionary_API.py)
 
 <details>
 <summary>Bjargir</summary>
@@ -42,7 +42,7 @@ Ein vinsælasta leiðin til að smíða forritaskil (API) er REST arkitektúrst�
 - [Python and REST APIs: Interacting With Web Services](https://realpython.com/api-integration-in-python/)
 - [Creating Web APIs with Python and Flask](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask)
 - [REST API using Flask in 7 minutes](https://towardsdatascience.com/launch-your-own-rest-api-using-flask-python-in-7-minutes-c4373eb34239) 
-- [Postman VSCode viðbót](JSON/VSC_Postman/README.md) til að prófa að gera API fyrirspurnir.
+- [Postman VSCode viðbót](Postman/README.md) til að prófa að gera API fyrirspurnir.
 
 </details>
 
