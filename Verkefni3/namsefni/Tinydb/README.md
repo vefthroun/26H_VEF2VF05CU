@@ -219,10 +219,16 @@ def edit_post(post_id):
 ### Eyða pósti (Delete)
 Til að eyða notum við `remove()`. Gættu þess að notandi geti aðeins eytt sínum eigin póstum (nema hann sé með **admin** hlutverk) [6, 7, Conversation].
 ```python
-posts_table.remove(doc_ids=[int(post_id)])
+@app.route('/delete_post/<int:post_id>')
+def delete_post(post_id):
+    post = posts_table.get(doc_id=post_id)
+    if post and post['author_id'] == session.get('user_id'):
+        posts_table.remove(doc_ids=[post_id])
+        flash("Pósti eytt.")
+    return redirect(url_for('profile'))
 ```
 
-> **Athugið:** Allar skrár (`.py`, `.html`, `.json`) skulu vistaðar með **UTF-8** kóðun til að tryggja að íslenskir sérstafir skili sér rétt frá bakenda yfir í Jinja sniðmát [Conversation].
+> **Athugið:** Allar skrár (`.py`, `.html`, `.json`) skulu vistaðar með **UTF-8** kóðun til að tryggja að íslenskir sérstafir skili sér rétt frá bakenda yfir í Jinja sniðmát.
 
 ---
 
