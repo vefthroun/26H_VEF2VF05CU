@@ -167,6 +167,9 @@ def profile():
 
 ### Stjórnun pósta (Create, Update, Delete)
 
+
+> **Athugið:** Allar skrár (`.py`, `.html`, `.json`) skulu vistaðar með **UTF-8** kóðun til að tryggja að íslenskir sérstafir skili sér rétt frá bakenda yfir í Jinja sniðmát.
+
 ### Búa til póst (Create)
 Notandi skrifar texta í form. Við bætum við `author_id` úr session og tímastimpli áður en við vistum.
 
@@ -227,8 +230,6 @@ def delete_post(post_id):
         flash("Pósti eytt.")
     return redirect(url_for('profile'))
 ```
-
-> **Athugið:** Allar skrár (`.py`, `.html`, `.json`) skulu vistaðar með **UTF-8** kóðun til að tryggja að íslenskir sérstafir skili sér rétt frá bakenda yfir í Jinja sniðmát.
 
 ---
 
