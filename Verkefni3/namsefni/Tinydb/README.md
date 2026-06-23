@@ -38,10 +38,20 @@ pprint(app.config["SECRET_KEY"])
 
 ```python
 
-db = TinyDB('db.json')
+# --- DATABASE --- leiðin að db.json fundinn
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.abspath(os.path.join(BASE_DIR, 'data'))
+# Ensure DB folder exists & instantiate
+os.makedirs(DB_PATH, exist_ok=True) 
+
+POSTDB_FILE = os.path.join(DB_PATH, 'db.json')
+
+# indent tvö bil og hvert par fær sér línu. íslenskir stafir notaðir og ascii afþakkað
+db = TinyDB(POSTDB_FILE, indent=2, encoding='utf-8', ensure_ascii=False)
+
+# --- AÐGANGSTÝRING db ---
 users_table = db.table('users')
 posts_table = db.table('posts')
-fav_table = db.table('favorites')
 User = Query()
 Post = Query()
 
@@ -49,7 +59,7 @@ Post = Query()
 def get_posts_with_users():
     all_posts = posts_table.all()
     for post in all_posts:
-        # Nota author_id til að finna notanda [6, Conversation]
+        # Nota author_id til að finna notanda 
         user = users_table.get(doc_id=post['author_id'])
         post['username'] = user['username'] if user else "Óþekktur"
         post['id'] = post.doc_id # Ná í doc_id fyrir eyðingu/uppfærslu
