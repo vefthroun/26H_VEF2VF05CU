@@ -74,6 +74,16 @@ TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari s
 
 Ferlið við að smíða vefkerfi sem styður nýskráningu, innskráningu og CRUD aðgerðir (Create, Read, Update, Delete) fyrir spjallpósta með **TinyDB** sem gagnagrunn.
 
+### Forsíða: Lesa gögn (Read on Index)
+
+Á forsíðunni viljum við birta alla pósta ásamt upplýsingum um höfund og tímasetningu 
+
+1. Sækjum alla pósta með `posts_table.all()`.
+2. Fyrir hvern póst flettum við upp höfundi í `users_table` með því að nota `author_id` póstsins
+3. Sendum listann á `index.html` með `render_template()`.
+
+**Mikilvægt:** Til að íslenskir stafir birtist rétt þarf `layout.html` að innihalda `<meta charset="UTF-8">` 
+
 ```python
 # --- RÁSIR (ROUTES) ---
 
@@ -102,7 +112,7 @@ def login():
             session['user_id'] = user.doc_id # Vista ID í session
             session['username'] = user['username']
             
-            # Skilyrði fyrir administrator eins og þú baðst um (Conversation history)
+            # Skilyrði fyrir administrator með role: úr db
             if username == 'admin':
                 session['role'] = 'admin'
             else:
@@ -127,19 +137,12 @@ Gögnum er safnað úr formi og vistuð í `users` töfluna með `insert()`.
 
 ```python
 
+```
 
 
 
 
-
-## 3. Forsíða: Lesa gögn (Read on Index)
-Á forsíðunni viljum við birta alla pósta ásamt upplýsingum um höfund og tímasetningu 
-
-1. Sækjum alla pósta með `posts_table.all()`.
-2. Fyrir hvern póst flettum við upp höfundi í `users_table` með því að nota `author_id` póstsins
-3. Sendum listann á `index.html` með `render_template()`.
-
-**Mikilvægt:** Til að íslenskir stafir birtist rétt þarf `layout.html` að innihalda `<meta charset="UTF-8">` 
+## 3. 
 
 ```python
 
