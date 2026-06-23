@@ -48,21 +48,22 @@ JSON er notað með ýmsum forritunarmálum.
 <!-- 
 og [Certify](https://certifi.io/)
 -->
+</details>
 
 ---
 
 ### API
-[API](https://www.youtube.com/watch?v=s7wmiS2mSXY) (application programming interface) stendur fyrir forritunarviðmót. API er notað til að sækja gögn á milli kerfa, [nánar um API](https://zapier.com/learn/apis/chapter-1-introduction-to-apis/). Hér [Postman VSCode viðbót](JSON/VSC_Postman/README.md) til að prófa að gera API fyrirspurnir.
 
-#### Að búa til sinn eigin REST API <em>(ítarefni)</em>
-  
 Ein vinsælasta leiðin til að smíða forritaskil (API) er REST arkitektúrstíllinn. Python býður upp á frábær verkfæri, ekki aðeins til að sækja gögn úr REST API heldur einnig til að smíða þín eigin Python REST API.
 
+[API](https://www.youtube.com/watch?v=s7wmiS2mSXY) (application programming interface) stendur fyrir forritunarviðmót. API er notað til að sækja gögn á milli kerfa, [nánar um API](https://zapier.com/learn/apis/chapter-1-introduction-to-apis/). Hér [Postman VSCode viðbót](JSON/VSC_Postman/README.md) til að prófa að gera API fyrirspurnir.
+
+- [Að búa til sinn eigin REST API (_ítarefni_)](namsefni/API.py)
 - [Python and REST APIs: Interacting With Web Services](https://realpython.com/api-integration-in-python/)
 - [Creating Web APIs with Python and Flask](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask)
 - [REST API using Flask in 7 minutes](https://towardsdatascience.com/launch-your-own-rest-api-using-flask-python-in-7-minutes-c4373eb34239) 
 
-</details>
+
 ---
 
 
