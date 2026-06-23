@@ -74,7 +74,8 @@ def index():
 
 ```
 
-## 2. Innskráning (Create & Authenticate)
+##" 2. Innskráning (Create & Authenticate)
+
 Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. Við notum **Flask session** til að muna eftir innskráðum notendum.
 
 ```python
@@ -90,12 +91,32 @@ Gögnum er safnað úr formi og vistuð í `users` töfluna með `insert()`.
 
 ```
 
-### Innskráning (`/login`)
+
+### Session innskráning og útskráning
+
 1. Leita að notanda með `Query()` þar sem notandanafn passar.
-2. Ef notandi finnst, vistum við `user_id` hans í `session['user_id']` [57, Conversation].
-3. **login.html:** Þetta skjal þarf að innihalda form með `method="POST"` sem sendir gögnin á viðeigandi rás.
+2. Ef notandi finnst, vistum við `user_id` hans í `session['user_id']`
+3. **login.html:** þarf að innihalda form með `method="POST"` sem sendir gögnin á viðeigandi rás.
 
 ```python
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = users_table.get((User.username == username) & (User.password == password))
+        
+        if user:
+            session['user_id'] = user.doc_id # Vista ID í session
+            session['username'] = user['username']
+            return redirect(url_for('profile'))
+        flash("Rangt notandanafn eða lykilorð.")
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 ```
 
@@ -168,24 +189,7 @@ def signup():
         flash("Notandanafn er frátekið.")
     return render_template('signup.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        user = users_table.get((User.username == username) & (User.password == password))
-        
-        if user:
-            session['user_id'] = user.doc_id # Vista ID í session
-            session['username'] = user['username']
-            return redirect(url_for('profile'))
-        flash("Rangt notandanafn eða lykilorð.")
-    return render_template('login.html')
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('index'))
 
 @app.route('/profile')
 def profile():
