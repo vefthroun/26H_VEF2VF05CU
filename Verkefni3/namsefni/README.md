@@ -1,6 +1,6 @@
 ## JSON málskipan
 
-[JSON](https://realpython.com/python-json/) er vinsælt opið gagnaskiptasnið. Uppbygging samanstendur af eigindi (key) og gildi (value) pörum. JSON er notað með ýmsum forritunarmálum. 
+[JSON](https://realpython.com/python-json/) er vinsælt opið gagnaskiptasnið. Uppbygging samanstendur af eigindi (key) og gildi (value) pörum. 
   
  * key/value parasamband
  * {}, slaufusvigi eru utan um JSON object og innri objecta
@@ -9,6 +9,8 @@
  * Ekki hægt að commenta í JSON skrá
  * JSON skráarsnið er með .json endingu
  * Þú getur notað JSONLint til að validate JSON. http://jsonlint.com/ 
+
+JSON er notað með ýmsum forritunarmálum.
 
 <details>
 <summary> Kóðadæmi</summary>
@@ -55,20 +57,13 @@ og [Certify](https://certifi.io/)
 ### API
 [API](https://www.youtube.com/watch?v=s7wmiS2mSXY) (application programming interface) stendur fyrir forritunarviðmót. API er notað til að sækja gögn á milli kerfa, [nánar um API](https://zapier.com/learn/apis/chapter-1-introduction-to-apis/). Hér [Postman VSCode viðbót](JSON/VSC_Postman/README.md) til að prófa að gera API fyrirspurnir.
 
-<!--
-> [xmltodict 0.13.0](https://pypi.org/project/xmltodict/) _Makes working with XML feel like you are working with JSON_
--->
-
-<details>
-<summary>Að búa til sinn eigin REST API <em>(ítarefni)</em></summary>
-<br>
+#### Að búa til sinn eigin REST API <em>(ítarefni)</em>
   
-One of the most popular ways to build APIs is the REST architecture style. Python provides some great tools not only to get data from REST APIs but also to build your own Python REST APIs.
+Ein vinsælasta leiðin til að smíða forritaskil (API) er REST arkitektúrstíllinn. Python býður upp á frábær verkfæri, ekki aðeins til að sækja gögn úr REST API heldur einnig til að smíða þín eigin Python REST API.
+
 - [Python and REST APIs: Interacting With Web Services](https://realpython.com/api-integration-in-python/)
 - [Creating Web APIs with Python and Flask](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask)
 - [REST API using Flask in 7 minutes](https://towardsdatascience.com/launch-your-own-rest-api-using-flask-python-in-7-minutes-c4373eb34239) 
-
-</details>
 
 
 ---
