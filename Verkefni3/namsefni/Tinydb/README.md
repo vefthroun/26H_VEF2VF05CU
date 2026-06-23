@@ -9,7 +9,7 @@ Ef þú þarft einfaldan API gagnagrunn sem virkar án mikillar fyrirhafnar þá
 
 Til að búa til þessa spjallsíðu þurfum við að tengja saman **Flask** fyrir vefumgjörðina, **sessions** fyrir örugga aðgangsstýringu og **TinyDB** sem JSON gagnagrunn.
 
-### 1. Bakendinn: `app.py`
+### Bakendinn: `app.py`
 
 Pakkarnir sem notaðir eru í appinu eru **session** fyrir auðkenningu, **TinyDB** fyrir gögnin, **os** og **datetime** úr stýrikerfinu,  og **pprint** til að gera json söfnin læsileg í terminal
 
@@ -165,7 +165,7 @@ def profile():
     return render_template('profile.html', posts=my_posts)
 ```
 
-## 5. Stjórnun pósta (Create, Update, Delete)
+## Stjórnun pósta (Create, Update, Delete)
 
 ### Búa til póst (Create)
 Notandi skrifar texta í form. Við bætum við `author_id` úr session og tímastimpli áður en við vistum.
@@ -399,38 +399,6 @@ def delete_post(post_id):
 {% endblock %}
 ```
 
-### Uppfærsla pósta
-
-```python
-@app.route('/edit_post/<int:post_id>', methods=['GET', 'POST'])
-def edit_post(post_id):
-    # 1. Athugum hvort notandi sé innskráður
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-
-    # 2. Sækjum póstinn úr TinyDB með doc_id
-    post = posts_table.get(doc_id=post_id)
-
-    # 3. Öryggisathugun: Má notandinn breyta þessum pósti?
-    if not post or post['author_id'] != session['user_id']:
-        flash("Þú getur aðeins breytt þínum eigin póstum!")
-        return redirect(url_for('profile'))
-
-    if request.method == 'POST':
-        # 4. Sækjum nýja textann úr forminu
-        new_content = request.form.get('content')
-        
-        # 5. Uppfærum póstinn í gagnagrunninum
-        posts_table.update({'content': new_content}, doc_ids=[post_id])
-        
-        flash("Pósti hefur verið breytt!")
-        return redirect(url_for('profile'))
-
-    # Ef GET: Sýnum síðu með formi og gamla textanum
-    return render_template('edit_post.html', post=post)
-
-```
-
 ### `templates/edit_post.html`
 Þetta skjal birtir form þar sem upphaflegi textinn er þegar inni í `textarea` svo notandinn geti lagfært hann.
 
@@ -467,7 +435,71 @@ def edit_post(post_id):
 Vefstjóri er skráður í JSON gagnagrunnin með annað hlutverk en aðrir notendur `"role": "admin"`. Með `{% if session.role == 'admin' %}` skilyrðingu í **profil.html** þá tjekkar jinja á því hvort 'admin' sé innskráður ef svo er þá hefur hann aðgang að stjórnborði vefstjóra með póst aðferð á `/admin_panel`.
 
 ```python
+# stjórnborðið
+@app.route('/admin_panel', methods=['GET', 'POST'])
+def admin_panel():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = users_table.get((User.username == username) & (User.password == password))
 
+    # 1. Öryggisathugun 
+    if session.get('role') != 'admin':
+        flash("Aðgangur ekki leyfilegur")
+        return redirect(url_for('index'))
+
+    # 2. Sækja og undirbúa notendur
+    users = users_table.all()
+    for u in users:
+        u['id'] = u.doc_id
+
+    # 3. Sækja og undirbúa alla pósta
+    all_posts = posts_table.all()
+    for p in all_posts:
+        p['id'] = p.doc_id
+        # Fletta upp höfundi til að sýna nafn en ekki bara ID [3]
+        user = users_table.get(doc_id=p['author_id'])
+        p['username'] = user['username'] if user else "Óþekktur"
+
+    return render_template('admin_panel.html', users=users, all_posts=all_posts)
+
+# Notandi fjarlægður
+@app.route('/delete_user/<int:user_id>')
+def delete_user(user_id):
+    # 1. Öryggisathugun: Aðeins admin má eyða notendum [57, Conversation]
+    if session.get('role') != 'admin':
+        flash("Aðgangur bannaður: Þú verður að vera stjórnandi.")
+        return redirect(url_for('index'))
+
+    # 2. Öryggisathugun: Kom í veg fyrir að admin eyði sjálfum sér (Conversation)
+    if user_id == session.get('user_id'):
+        flash("Þú getur ekki eytt sjálfum þér á meðan þú ert innskráð(ur)!")
+        return redirect(url_for('admin_panel'))
+
+    # 3. Eyða notandanum úr TinyDB
+    # Við notum doc_ids þar sem user_id kemur beint úr slóðinni [4, 5]
+    users_table.remove(doc_ids=[user_id])
+    
+    # Valfrjálst: Hér mætti líka eyða öllum póstum sem tilheyrðu þessum notanda (Conversation)
+    # posts_table.remove(Query().author_id == user_id)
+
+    # 4. Endurgjöf og flutningur aftur á stjórnborðið [3, 6]
+    flash("Notanda hefur verið eytt.")
+    return redirect(url_for('admin_panel'))
+
+# eyða póst frá admin stjórnborði
+@app.route('/delete_post_admin/<int:post_id>')
+def delete_post_admin(post_id):
+    # 1. Öryggisathugun fyrir admin [57, Conversation]
+    if session.get('role') != 'admin':
+        flash("Þú hefur ekki leyfi til að eyða póstum annarra.")
+        return redirect(url_for('index'))
+
+    # 2. Eyðum póstinum úr posts töflunni [1]
+    posts_table.remove(doc_ids=[post_id])
+    
+    flash("Pósti hefur verið eytt af stjórnanda.")
+    return redirect(url_for('admin_panel'))
 ```
 
 ###  `templates/admin_panel.html`
