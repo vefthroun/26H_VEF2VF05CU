@@ -165,7 +165,7 @@ def profile():
     return render_template('profile.html', posts=my_posts)
 ```
 
-## Stjórnun pósta (Create, Update, Delete)
+### Stjórnun pósta (Create, Update, Delete)
 
 ### Búa til póst (Create)
 Notandi skrifar texta í form. Við bætum við `author_id` úr session og tímastimpli áður en við vistum.
@@ -325,7 +325,7 @@ def delete_post(post_id):
 - Til að útfæra **`signup.html`** þarftu að búa til HTML-form sem sendir gögnin (notandanafn og lykilorð) á bakendann með `POST` aðferðinni. Sniðmátið á að nota Jinja2 erfðir til að fylgja útliti vefsins þíns og birta endurgjöf ef eitthvað fer úrskeiðis.
 - Formið þarf að nota `method="POST"` til að flytja gögnin á öruggan hátt í `request.form` safnið í Flask. Við notum `url_for('signup')` í `action` eigindinu til að vísa á rétta rás í bakendanum.
 
-###  `templates/signup.html`
+####  `templates/signup.html`
 
 ```html
 {% extends "layout.html" %}
@@ -399,7 +399,7 @@ def delete_post(post_id):
 {% endblock %}
 ```
 
-### `templates/edit_post.html`
+#### `templates/edit_post.html`
 Þetta skjal birtir form þar sem upphaflegi textinn er þegar inni í `textarea` svo notandinn geti lagfært hann.
 
 ```html
@@ -502,12 +502,12 @@ def delete_post_admin(post_id):
     return redirect(url_for('admin_panel'))
 ```
 
-###  `templates/admin_panel.html`
+####  `templates/admin_panel.html`
 
 Hönnunin á **`admin_panel.html`** byggir á því að sýna yfirlit yfir alla notendur kerfisins og bjóða upp á aðgerðir til að stýra þeim. <br>
 Síðan nýtir erfðir frá `layout.html` til að viðhalda samræmdu útliti og fær gögnin send sem lista af orðasöfnum (dictionaries) frá Flask bakendanum.
 
-#### Notendastjórnun vefstjóra
+### Notendastjórnun vefstjóra
 
 Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt. Við ítrum í gegnum `users` listann sem TinyDB skilar.
 
@@ -554,14 +554,15 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
     </section>
 ```
 
-### 2. Lykilatriði í hönnuninni
+#### 2. Lykilatriði í hönnuninni
+
 *   **Aðgangur að gögnum**: Inni í lykkjunni nálgast þú gildi eins og `user.username` og `user.role` með punkt-málfræði Jinja2, sem svarar til lykla í Python orðasafni.
 *   **doc_id**: Við notum `user.doc_id` (sjálfgefið auðkenni í TinyDB) í `url_for` til að vita nákvæmlega hvaða notanda við ætlum að eyða eða uppfæra.
 *   **Skilyrt birting**: Með því að nota `{% if user.role != 'admin' %}` tryggjum við að við séum ekki að bjóða upp á að gera einhvern að admin sem er það þegar.
 
 ### HLUTI 2: PÓSTSTJÓRNUN 
 
-Vefstjóru hefur aðgang að öllum póstum og fjarlægt þá
+Vefstjóru hefur aðgang að öllum póstum og getur fjarlægt þá
 
 ```html
 
@@ -643,11 +644,11 @@ Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að pa
 }
 ```
 
-### Útskýring á uppbyggingunni:
+#### Útskýring á uppbyggingunni:
 
 1.  **`users` taflan:** Hér eru notendurnir geymdir. Lykillinn `"1"` eða `"2"` er það sem við köllum **doc_id**. Við höfum bætt við `role` lyklinum til að stýra aðgangi að stjórnborðinu (admin panel) eins og við ræddum áðan.
-2.  **`posts` taflan:** Hver póstur hefur `content`, `timestamp` (tímastimpil) og `author_id`. **`author_id`** verður að passa við lykilinn í `users` töflunni (t.d. póstur 1 er eftir notanda 1) svo appið geti flett upp réttu nafni á forsíðunni [6, Conversation].
-3.  **`favorites` taflan:** Hér geymum við þætti sem notendur hafa valið úr Epguides API. Við vistar titilinn og myndaslóðina frá **TVMaze** beint í skrána svo við þurfum ekki að kalla aftur í API-ið þegar notandinn skoðar prófílinn sinn [3, 20, Conversation].
+2.  **`posts` taflan:** Hver póstur hefur `content`, `timestamp` (tímastimpil) og `author_id`. **`author_id`** verður að passa við lykilinn í `users` töflunni (t.d. póstur 1 er eftir notanda 1) svo appið geti flett upp réttu nafni á forsíðunni.
+3.  **`favorites` taflan:** Hér geymum við þætti sem notendur hafa valið úr Epguides API. Við vistar titilinn og myndaslóðina frá **TVMaze** beint í skrána svo við þurfum ekki að kalla aftur í API-ið þegar notandinn skoðar prófílinn sinn.
 
 **Athugið:** Ef þú ert að byrja með tóman gagnagrunn mun TinyDB búa þessa skrá til sjálfkrafa þegar þú notar `insert()` í fyrsta skipti í Python.
 
