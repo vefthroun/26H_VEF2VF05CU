@@ -9,14 +9,59 @@ Ef þú þarft einfaldan API gagnagrunn sem virkar án mikillar fyrirhafnar þá
 
 Til að búa til þessa spjallsíðu þurfum við að tengja saman **Flask** fyrir vefumgjörðina, **sessions** fyrir örugga aðgangsstýringu og **TinyDB** sem JSON gagnagrunn.
 
+### 1. Bakendinn: `app.py`
+
+Þessi skrá stýrir flæðinu, notar **TinyDB** fyrir gögnin og **session** fyrir auðkenningu 
+
+```python
+
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from tinydb import TinyDB, Query
+import os                       # to generate secret key with operating system in flask app
+from datetime import datetime   # fyrir tímaskráningu pósta í spjallborði
+from pprint import pprint       # pprint er í standard libary
+
+app = Flask(__name__)
+
+```
+
 ---
+
+## 1. Uppsetning Gagnagrunns
+TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](https://github.com/vefthroun/26H_VEF2VF05CU/blob/main/Verkefni3/namsefni/Tinydb/README.md#gagnagrunnurinn-dbjson)
+
+```python
+
+# Secret key for session management
+app.config["SECRET_KEY"] = os.urandom(16)
+# Display the secret key and current time in console for debugging
+# pprint(app.config["SECRET_KEY"])
+
+```
+
+# Uppsetning TinyDB
+db = TinyDB('db.json')
+users_table = db.table('users')
+posts_table = db.table('posts')
+fav_table = db.table('favorites')
+User = Query()
+Post = Query()
+
+# --- HJÁLPARFÖLL ---
+def get_posts_with_users():
+    all_posts = posts_table.all()
+    for post in all_posts:
+        # Nota author_id til að finna notanda [6, Conversation]
+        user = users_table.get(doc_id=post['author_id'])
+        post['username'] = user['username'] if user else "Óþekktur"
+        post['id'] = post.doc_id # Ná í doc_id fyrir eyðingu/uppfærslu
+    return all_posts
+
+```
 
 # Flask & TinyDB samþætting
 
 Ferlið við að smíða vefkerfi sem styður nýskráningu, innskráningu og CRUD aðgerðir (Create, Read, Update, Delete) fyrir spjallpósta með **TinyDB** sem gagnagrunn.
-
-## 1. Uppsetning Gagnagrunns
-TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](https://github.com/vefthroun/26H_VEF2VF05CU/blob/main/Verkefni3/namsefni/Tinydb/README.md#gagnagrunnurinn-dbjson)
 
 ## 2. Nýskráning og Innskráning (Create & Authenticate)
 Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. Við notum **Flask session** til að muna eftir innskráðum notendum.
@@ -79,36 +124,7 @@ Hér er grunnkóðinn fyrir Flask forritið og HTML sniðmátin sem fylgja þeir
 
 Gættu þess að vista allar skrár með **UTF-8** kóðun svo íslenskir stafir birtist rétt [Conversation].
 
-### 1. Bakendinn: `app.py`
 
-Þessi skrá stýrir flæðinu, notar **TinyDB** fyrir gögnin og **session** fyrir auðkenningu [5, 57, Conversation].
-
-```python
-from flask import Flask, render_template, request, redirect, url_for, session, flash
-from tinydb import TinyDB, Query
-from datetime import datetime
-import requests
-
-app = Flask(__name__)
-app.secret_key = 'leynilykill_fyrir_session' # Nauðsynlegt fyrir session
-
-# Uppsetning TinyDB
-db = TinyDB('db.json')
-users_table = db.table('users')
-posts_table = db.table('posts')
-fav_table = db.table('favorites')
-User = Query()
-Post = Query()
-
-# --- HJÁLPARFÖLL ---
-def get_posts_with_users():
-    all_posts = posts_table.all()
-    for post in all_posts:
-        # Nota author_id til að finna notanda [6, Conversation]
-        user = users_table.get(doc_id=post['author_id'])
-        post['username'] = user['username'] if user else "Óþekktur"
-        post['id'] = post.doc_id # Ná í doc_id fyrir eyðingu/uppfærslu
-    return all_posts
 
 # --- RÁSIR (ROUTES) ---
 
