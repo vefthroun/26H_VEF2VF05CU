@@ -236,7 +236,8 @@ def delete_post(post_id):
 
 #### `templates/layout.html`
 
-Skipulagssíðan sem allar grunnsíður "_templates_" erfa frá `{% extends "layout.html" %}`. 
+1. Skipulagssíðan sem allar grunnsíður "_templates_" erfa frá `{% extends "layout.html" %}`. 
+1.  **UTF-8**: Meta-tagið í `layout.html` kemur í veg fyrir skrípi-stafi eins og „Ã¦“ .
 
 ```html
 <!DOCTYPE html>
@@ -286,7 +287,10 @@ Skipulagssíðan sem allar grunnsíður "_templates_" erfa frá `{% extends "lay
 ```
 
 #### `templates/index.html`
-Birtir alla pósta ú **db** með notendanafni og tímasetningu.
+
+1. Birtir alla pósta ú **db** með notendanafni og tímasetningu.
+2.  **Tenging gagna**: Í `index()` rásinni flettum við upp notanda í hvert sinn sem póstur er birtur til að sýna nafn en ekki bara ID-tölu.
+   
 ```html
 {% extends "layout.html" %}
 {% block title %}Skilaboðaskjóðan{% endblock %}
@@ -305,6 +309,7 @@ Birtir alla pósta ú **db** með notendanafni og tímasetningu.
 ```
 
 #### `templates/login.html`
+
 ```html
 {% extends "layout.html" %}
 {% block content %}
@@ -318,7 +323,10 @@ Birtir alla pósta ú **db** með notendanafni og tímasetningu.
 ```
 
 #### `templates/profile.html`
-Hér getur notandi búið til nýjan póst og eytt sínum eigin [6, 20, Conversation].
+
+- Hér getur notandi búið til nýjan póst og eytt sínum eigin.
+- **profile.html** sýnir hvernig á að eyða (`remove`) og búa til (`insert`) gögn í TinyDB.
+  
 ```html
 {% extends "layout.html" %}
 {% block content %}
@@ -342,22 +350,8 @@ Hér getur notandi búið til nýjan póst og eytt sínum eigin [6, 20, Conversa
 {% endblock %}
 ```
 
-### Lykilatriði:
-1.  **UTF-8**: Meta-tagið í `layout.html` kemur í veg fyrir skrípi-stafi eins og „Ã¦“ [Conversation].
-2.  **Tenging gagna**: Í `index()` rásinni flettum við upp notanda í hvert sinn sem póstur er birtur til að sýna nafn en ekki bara ID-tölu [6, Conversation].
-3.  **CRUD**: `profile.html` sýnir hvernig á að eyða (`remove`) og búa til (`insert`) gögn í TinyDB.
-
----
-
-Til að útfæra **`signup.html`** þarftu að búa til HTML-form sem sendir gögnin (notandanafn og lykilorð) á bakendann með `POST` aðferðinni. Sniðmátið á að nota Jinja2 erfðir til að fylgja útliti vefsins þíns og birta endurgjöf ef eitthvað fer úrskeiðis.
-
-Hér er hvernig þú setur síðuna upp:
-
-### 1. Nota erfðir (`{% extends %}`)
-Eins og rætt hefur verið í fyrri samtölum okkar á síðan að byrja á því að erfa frá **`layout.html`** [Conversation]. Þetta tryggir að hún hafi sömu valmynd og útlit og aðrar síður.
-
-### 2. Uppsetning formsins
-Formið þarf að nota `method="POST"` til að flytja gögnin á öruggan hátt í `request.form` safnið í Flask. Við notum `url_for('signup')` í `action` eigindinu til að vísa á rétta rás í bakendanum.
+- Til að útfæra **`signup.html`** þarftu að búa til HTML-form sem sendir gögnin (notandanafn og lykilorð) á bakendann með `POST` aðferðinni. Sniðmátið á að nota Jinja2 erfðir til að fylgja útliti vefsins þíns og birta endurgjöf ef eitthvað fer úrskeiðis.
+- Formið þarf að nota `method="POST"` til að flytja gögnin á öruggan hátt í `request.form` safnið í Flask. Við notum `url_for('signup')` í `action` eigindinu til að vísa á rétta rás í bakendanum.
 
 ### Dæmi um `signup.html`:
 ```html
@@ -367,23 +361,23 @@ Formið þarf að nota `method="POST"` til að flytja gögnin á öruggan hátt 
 
 {% block content %}
     <h2>Búa til nýjan aðgang</h2>
+    <article>
+		{# Formið sendir gögnin á /signup rásina með POST #}
+		<form action="{{ url_for('signup') }}" method="POST">
+			<div>
+				<label for="username">Notandanafn:</label>
+				{# 'name' eigindið verður að passa við request.form.get('username') í Python #}
+				<input type="text" id="username" name="username" required>
+			</div>
+			
+			<div>
+				<label for="password">Lykilorð:</label>
+				<input type="password" id="password" name="password" required>
+			</div>
 
-    {# Formið sendir gögnin á /signup rásina með POST #}
-    <form action="{{ url_for('signup') }}" method="POST">
-        <div>
-            <label for="username">Notandanafn:</label>
-            {# 'name' eigindið verður að passa við request.form.get('username') í Python #}
-            <input type="text" id="username" name="username" required>
-        </div>
-        
-        <div>
-            <label for="password">Lykilorð:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <button type="submit">Nýskrá</button>
-    </form>
-
+			<button type="submit">Nýskrá</button>
+		</form>
+	</article>
     <p>Áttu þegar aðgang? <a href="{{ url_for('login') }}">Innskráning hér</a></p>
 {% endblock %}
 ```
@@ -424,8 +418,6 @@ def signup():
 ```
 
 ### 2. Vista hlutverk í Session
-Þegar notandi skráir sig inn er gott að geyma hlutverkið í `session` svo þú þurfir ekki að fletta því upp í gagnagrunninum í hvert sinn sem notandinn hleður síðu.
-
 ```python
 @app.route('/login', methods=['POST'])
 def login():
@@ -580,14 +572,6 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
 
 ---
 
-### Uppfærsla eigin pósta
-
-Til þess að notandi geti breytt eigin póstum þarftu að nýta **`update()`** aðferðina í TinyDB og búa til nýja rás (route) í Flask sem birtir breytingarform og vistar nýja textann. Ferlið krefst þess að við staðfestum að sá sem reynir að breyta sé örugglega höfundur póstsins með því að bera saman `user_id` úr session við `author_id` póstsins.
-
-Hér er hvernig þú bætir þessari virkni við:
-
-### 1. Flask rásin: `edit_post` í `app.py`
-Þessi rás þarf að styðja bæði `GET` (til að sýna formið með gamla textanum) og `POST` (til að vista breytingarnar).
 
 ```python
 @app.route('/edit_post/<int:post_id>', methods=['GET', 'POST'])
