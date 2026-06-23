@@ -478,7 +478,7 @@ def delete_user(user_id):
         return redirect(url_for('admin_panel'))
 
     # 3. Eyða notandanum úr TinyDB
-    # Við notum doc_ids þar sem user_id kemur beint úr slóðinni [4, 5]
+    # Við notum doc_ids þar sem user_id kemur beint úr slóðinni
     users_table.remove(doc_ids=[user_id])
     
     # Valfrjálst: Hér mætti líka eyða öllum póstum sem tilheyrðu þessum notanda 
@@ -508,7 +508,7 @@ def delete_post_admin(post_id):
 Hönnunin á **`admin_panel.html`** byggir á því að sýna yfirlit yfir alla notendur kerfisins og bjóða upp á aðgerðir til að stýra þeim. <br>
 Síðan nýtir erfðir frá `layout.html` til að viðhalda samræmdu útliti og fær gögnin send sem lista af orðasöfnum (dictionaries) frá Flask bakendanum.
 
-### Notendastjórnun vefstjóra
+### Notendastjórn vefstjóra
 
 Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt. Við ítrum í gegnum `users` listann sem TinyDB skilar.
 
@@ -537,7 +537,7 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
                         <td>{{ user.username }}</td>
                         <td><span class="badge">{{ user.role }}</span></td>
                         <td>
-                            {# Eyða notanda - notar doc_id úr bakenda [3, 4] #}
+                            {# Eyða notanda - notar doc_id úr bakenda #}
                             {% if user.username != session.username %}
                                 <a href="{{ url_for('delete_user', user_id=user.id) }}" 
                                    class="btn-danger" 
@@ -561,9 +561,9 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
 *   **doc_id**: Við notum `user.doc_id` (sjálfgefið auðkenni í TinyDB) í `url_for` til að vita nákvæmlega hvaða notanda við ætlum að eyða eða uppfæra.
 *   **Skilyrt birting**: Með því að nota `{% if user.role != 'admin' %}` tryggjum við að við séum ekki að bjóða upp á að gera einhvern að admin sem er það þegar.
 
-### HLUTI 2: PÓSTSTJÓRNUN 
+### Ritstjórn vefstjóra
 
-Vefstjóru hefur aðgang að öllum póstum og getur fjarlægt þá
+Vefstjóri hefur aðgang að öllum póstum og getur fjarlægt þá
 
 ```html
 
