@@ -84,29 +84,42 @@ def index():
 
 ```
 
-##" 2. Innskráning (Create & Authenticate)
+### 2. Innskráning (Create & Authenticate)
 
 Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. Við notum **Flask session** til að muna eftir innskráðum notendum.
 
-```python
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = users_table.get((User.username == username) & (User.password == password))
+        
+        if user:
+            session['user_id'] = user.doc_id # Vista ID í session
+            session['username'] = user['username']
+            
+            # Skilyrði fyrir administrator eins og þú baðst um (Conversation history)
+            if username == 'admin':
+                session['role'] = 'admin'
+            else:
+                session['role'] = user.get('role', 'user')
+            return redirect(url_for('profile'))
+        
+        flash("Rangt notandanafn eða lykilorð.")
+    return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+    
 ```
 
 ### Nýskráning (`/signup`)
 Gögnum er safnað úr formi og vistuð í `users` töfluna með `insert()`.
 1. Sækja `username` og `password` úr `request.form`.
 2. Vista í TinyDB. `insert()` skilar sjálfkrafa einstöku ID (doc_id).
-
-```python
-
-```
-
-
-### Session innskráning og útskráning
-
-1. Leita að notanda með `Query()` þar sem notandanafn passar.
-2. Ef notandi finnst, vistum við `user_id` hans í `session['user_id']`
-3. **login.html:** þarf að innihalda form með `method="POST"` sem sendir gögnin á viðeigandi rás.
 
 ```python
 @app.route('/login', methods=['GET', 'POST'])
@@ -129,6 +142,15 @@ def logout():
     return redirect(url_for('index'))
 
 ```
+
+
+### Session innskráning og útskráning
+
+1. Leita að notanda með `Query()` þar sem notandanafn passar.
+2. Ef notandi finnst, vistum við `user_id` hans í `session['user_id']`
+3. **login.html:** þarf að innihalda form með `method="POST"` sem sendir gögnin á viðeigandi rás.
+
+
 
 ## 3. Forsíða: Lesa gögn (Read on Index)
 Á forsíðunni viljum við birta alla pósta ásamt upplýsingum um höfund og tímasetningu 
