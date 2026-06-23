@@ -232,7 +232,7 @@ def delete_post(post_id):
 
 ---
 
-### 2. Sniðmát (Templates)
+### Sniðmát (Templates)
 
 #### `templates/layout.html`
 
@@ -325,7 +325,7 @@ def delete_post(post_id):
 - Til að útfæra **`signup.html`** þarftu að búa til HTML-form sem sendir gögnin (notandanafn og lykilorð) á bakendann með `POST` aðferðinni. Sniðmátið á að nota Jinja2 erfðir til að fylgja útliti vefsins þíns og birta endurgjöf ef eitthvað fer úrskeiðis.
 - Formið þarf að nota `method="POST"` til að flytja gögnin á öruggan hátt í `request.form` safnið í Flask. Við notum `url_for('signup')` í `action` eigindinu til að vísa á rétta rás í bakendanum.
 
-### Dæmi um `signup.html`
+###  `templates/signup.html`
 
 ```html
 {% extends "layout.html" %}
@@ -394,94 +394,12 @@ def delete_post(post_id):
         
             <a href="{{ url_for('delete_post', post_id=post.id) }}" 
                 onclick="return confirm('Ertu alveg viss?')">Eyða pósti</a>
-
         </article>
     {% endfor %}
 {% endblock %}
 ```
 
----
-
-### 3. Aðgangsstýring á stjórnborð
-
-Vefstjóri er skráður í JSON gagnagrunnin með annað hlutverk en aðrir notendur `"role": "admin"`. Með {% if session.role == 'admin' %} skilyrðingu á "profil" þá tjekkar jinja á því hvort 'admin' sé innskráður ef svo er þá hefur hann aðgang að stjórnborði vefstjóra póstkröfu á `/admin_panel`.
-
-```
-
-
-
-### Lykilatriði:
-*   **Sveigjanleiki**: Þar sem orðasöfn í Python eru breytanleg (mutable) er auðvelt að bæta við fleiri hlutverkum síðar, t.d. 'moderator'.
-*   **Öryggi**: Mundu að athuga alltaf `session.get('role')` á bakendanum (í Python) en ekki bara fela hnappa í HTML-inu, þar sem tæknilega þenkjandi notendur gætu reynt að skrifa slóðina handvirkt í vafrann [31, Conversation].
-*   **Jinja2**: Í HTML sniðmátum geturðu notað hlutverkið til að sýna eða fela hluti:
-    ```html
-    {% if session.role == 'admin' %}
-        <a href="/admin_panel">Stjórnborð</a>
-    {% endif %}
-    ```
-
-Hönnunin á **`admin_panel.html`** byggir á því að sýna yfirlit yfir alla notendur kerfisins og bjóða upp á aðgerðir til að stýra þeim. Síðan nýtir erfðir frá `layout.html` til að viðhalda samræmdu útliti og fær gögnin send sem lista af orðasöfnum (dictionaries) frá Flask bakendanum [44, 45, Conversation].
-
-Hér er uppsetning stjórnborðsíðunnar:
-
-### 1. Grunnur og tafla
-Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt. Við ítrum í gegnum `users` listann sem TinyDB skilar [6, 25, Conversation].
-
-```html
-{% extends "layout.html" %}
-
-{% block title %}Stjórnborð{% endblock %}
-
-{% block content %}
-    <h1>Stjórnun notenda</h1>
-
-    <table class="admin-table">
-        <thead>
-            <tr>
-                <th>Notendanafn</th>
-                <th>Hlutverk</th>
-                <th>Aðgerðir</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-                <tr>
-                    <td>{{ user.username }}</td>
-                    <td>
-                        <span class="role-tag {{ user.role }}">
-                            {{ user.role }}
-                        </span>
-                    </td>
-                    <td>
-                        {# Aðgerð 1: Breyta hlutverki #}
-                        {% if user.role != 'admin' %}
-                            <a href="{{ url_for('make_admin', user_id=user.doc_id) }}" class="btn-small">Gera að admin</a>
-                        {% endif %}
-
-                        {# Aðgerð 2: Eyða notanda (Conversation) #}
-                        <a href="{{ url_for('delete_user', user_id=user.doc_id) }}" 
-                           class="btn-danger" 
-                           onclick="return confirm('Ertu viss um að þú viljir eyða þessum notanda?')">
-                           Eyða
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endblock %}
-```
-
-### 2. Lykilatriði í hönnuninni
-*   **Aðgangur að gögnum**: Inni í lykkjunni nálgast þú gildi eins og `user.username` og `user.role` með punkt-málfræði Jinja2, sem svarar til lykla í Python orðasafni.
-*   **doc_id**: Við notum `user.doc_id` (sjálfgefið auðkenni í TinyDB) í `url_for` til að vita nákvæmlega hvaða notanda við ætlum að eyða eða uppfæra [6, 39, Conversation].
-*   **Skilyrt birting**: Með því að nota `{% if user.role != 'admin' %}` tryggjum við að við séum ekki að bjóða upp á að gera einhvern að admin sem er það þegar.
-
-
-**Samantekt:** `admin_panel.html` er öflugt tæki þar sem þú notar **Jinja2 lykkjur** til að lesa úr **TinyDB** og **URL building** til að framkvæma CRUD aðgerðir á notendagrunninum.
-
----
-
+### Uppfærsla pósta
 
 ```python
 @app.route('/edit_post/<int:post_id>', methods=['GET', 'POST'])
@@ -510,28 +428,10 @@ def edit_post(post_id):
 
     # Ef GET: Sýnum síðu með formi og gamla textanum
     return render_template('edit_post.html', post=post)
+
 ```
 
-### 2. Uppfæra `profile.html`
-Bættu við hlekk við hvern póst í listanum þínum svo notandinn geti smellt á „Breyta“. Notaðu **`url_for`** til að búa til slóðina með réttu `post_id`.
-
-```html
-{# Inni í for-lykkjunni í profile.html #}
-{% for post in posts %}
-    <div class="post">
-        <p>{{ post.content }}</p>
-        <small>{{ post.timestamp }}</small> | 
-        
-        {# Hlekkur á breytingasíðuna #}
-        <a href="{{ url_for('edit_post', post_id=post.id) }}">Breyta pósti</a> |
-        
-        <a href="{{ url_for('delete_post', post_id=post.id) }}" 
-           onclick="return confirm('Ertu viss?')">Eyða</a>
-    </div>
-{% endfor %}
-```
-
-### 3. Nýtt sniðmát: `templates/edit_post.html`
+### Nýtt sniðmát: `templates/edit_post.html`
 Þetta skjal birtir form þar sem gamli textinn er þegar inni í `textarea` svo notandinn geti lagfært hann.
 
 ```html
@@ -541,15 +441,16 @@ Bættu við hlekk við hvern póst í listanum þínum svo notandinn geti smellt
 
 {% block content %}
     <h1>Breyta pósti</h1>
-    
-    <form method="POST">
-        <label for="content">Innihald:</label><br>
-        {# Birtum gamla textann inni í textarea #}
-        <textarea name="content" rows="5" cols="40" required>{{ post.content }}</textarea><br>
-        
-        <button type="submit">Vista breytingar</button>
-        <a href="{{ url_for('profile') }}">Hætta við</a>
-    </form>
+    <article>
+        <form method="POST">
+            <label for="content">Innihald:</label><br>
+            {# Birtum gamla textann inni í textarea #}
+            <textarea name="content" rows="5" cols="40" required>{{ post.content }}</textarea><br>
+            
+            <button type="submit">Vista breytingar</button>
+            <a href="{{ url_for('profile') }}">Hætta við</a>
+        </form>
+    </article>
 {% endblock %}
 ```
 
@@ -558,6 +459,83 @@ Bættu við hlekk við hvern póst í listanum þínum svo notandinn geti smellt
 *   **doc_id**: Þegar við birtum póstana á prófílsíðunni verðum við að muna að geyma `doc_id` (t.d. sem `post.id`) svo rásin viti hvaða póst á að uppfæra.
 *   **Aðgangsstýring**: Það er mikilvægt að athuga `author_id` á bakendanum (Python) en ekki bara fela hlekkinn í HTML, því annars gæti einhver breytt póstum annarra með því að giska á `post_id` í vefslóðinni.
 *   **Sjálfvirk hreinsun**: Jinja2 sér um að **hreinsa (escape)** textann sjálfkrafa þegar hann er birtur í forminu, sem verndar gegn öryggisvandanum.
+
+---
+
+### Aðgangsstýring á stjórnborð
+
+Vefstjóri er skráður í JSON gagnagrunnin með annað hlutverk en aðrir notendur `"role": "admin"`. Með `{% if session.role == 'admin' %}` skilyrðingu í **profil.html** þá tjekkar jinja á því hvort 'admin' sé innskráður ef svo er þá hefur hann aðgang að stjórnborði vefstjóra póstkröfu á `/admin_panel`.
+
+```python
+
+```
+
+###  `templates/admin_panel.html`
+
+Hönnunin á **`admin_panel.html`** byggir á því að sýna yfirlit yfir alla notendur kerfisins og bjóða upp á aðgerðir til að stýra þeim. <br>
+Síðan nýtir erfðir frá `layout.html` til að viðhalda samræmdu útliti og fær gögnin send sem lista af orðasöfnum (dictionaries) frá Flask bakendanum.
+
+#### Notendastjórnun vefstjóra
+
+Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt. Við ítrum í gegnum `users` listann sem TinyDB skilar.
+
+```html
+{% extends "layout.html" %}
+
+{% block title %}Stjórnborð - Umsjón{% endblock %}
+
+{% block content %}
+    <h3>Stjórnborð kerfisstjóra</h3>
+
+    {# HLUTI 1: NOTENDASTJÓRNUN #}
+    <section class="admin-section">
+        <h2>Notendur</h2>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Notendanafn</th>
+                    <th>Hlutverk</th>
+                    <th>Aðgerðir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td><span class="badge">{{ user.role }}</span></td>
+                        <td>
+                            {# Eyða notanda - notar doc_id úr bakenda [3, 4] #}
+                            {% if user.username != session.username %}
+                                <a href="{{ url_for('delete_user', user_id=user.id) }}" 
+                                   class="btn-danger" 
+                                   onclick="return confirm('Viltu örugglega eyða notandanum {{ user.username }}?')">
+                                   Eyða notanda
+                                </a>
+                            {% else %}
+                                <small>(Sjálfur þú)</small>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+```
+
+### 2. Lykilatriði í hönnuninni
+*   **Aðgangur að gögnum**: Inni í lykkjunni nálgast þú gildi eins og `user.username` og `user.role` með punkt-málfræði Jinja2, sem svarar til lykla í Python orðasafni.
+*   **doc_id**: Við notum `user.doc_id` (sjálfgefið auðkenni í TinyDB) í `url_for` til að vita nákvæmlega hvaða notanda við ætlum að eyða eða uppfæra [6, 39, Conversation].
+*   **Skilyrt birting**: Með því að nota `{% if user.role != 'admin' %}` tryggjum við að við séum ekki að bjóða upp á að gera einhvern að admin sem er það þegar.
+
+
+**Samantekt:** `admin_panel.html` er öflugt tæki þar sem þú notar **Jinja2 lykkjur** til að lesa úr **TinyDB** og **URL building** til að framkvæma CRUD aðgerðir á notendagrunninum.
+
+---
+
+
+
+
+
 
 ---
 
