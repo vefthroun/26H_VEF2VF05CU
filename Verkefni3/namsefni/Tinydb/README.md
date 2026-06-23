@@ -402,31 +402,13 @@ def delete_post(post_id):
 
 ---
 
-### Stjórnboð vefstjóra
+### 3. Aðgangsstýring á stjórnborð
 
-### 3. Aðgangsstýring í rás (Admin check)
-Þú getur nú búið til rásir sem aðeins 'admin' hefur aðgang að með því að nota einfalda `if` skilyrðingu [Conversation].
+Vefstjóri er skráður í JSON gagnagrunnin með annað hlutverk en aðrir notendur `"role": "admin"`. Með {% if session.role == 'admin' %} skilyrðingu á "profil" þá tjekkar jinja á því hvort 'admin' sé innskráður ef svo er þá hefur hann aðgang að stjórnborði vefstjóra póstkröfu á `/admin_panel`.
 
-```python
-@app.route('/admin_panel')
-def admin_panel():
-    # Athugum hvort notandi sé innskráður OG sé admin
-    if session.get('role') == 'admin':
-        allir_notendur = users_table.all()
-        return render_template('admin.html', users=allir_notendur)
-    
-    # Ef ekki admin, sendum hann burt með villuboðum
-    flash("Þú hefur ekki aðgang að þessari síðu.")
-    return redirect(url_for('index'))
 ```
 
-### 4. Uppfæra notanda í Admin
-Til að gera venjulegan notanda að admin geturðu notað `update()` aðferðina í TinyDB. Þetta er hægt að gera handvirkt í Python eða í gegnum sérstaka stjórnunarsíðu.
 
-```python
-# Uppfærum notanda með ákveðið notendanafn í admin
-users_table.update({'role': 'admin'}, Query().username == 'gummi')
-```
 
 ### Lykilatriði:
 *   **Sveigjanleiki**: Þar sem orðasöfn í Python eru breytanleg (mutable) er auðvelt að bæta við fleiri hlutverkum síðar, t.d. 'moderator'.
