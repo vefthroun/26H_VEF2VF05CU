@@ -159,7 +159,7 @@ Prófílsíðan sýnir aðeins þá pósta sem tilheyra innskráðum notanda.
 def profile():
     if 'user_id' not in session: 
         return redirect(url_for('login'))
-    # Sækja aðeins pósta þessa notanda [7, Conversation]
+    # Sækja aðeins pósta þessa notanda 
     my_posts = posts_table.search(Post.author_id == session['user_id'])
     for p in my_posts: p['id'] = p.doc_id
     return render_template('profile.html', posts=my_posts)
@@ -490,7 +490,7 @@ def delete_user(user_id):
 # eyða póst frá admin stjórnborði
 @app.route('/delete_post_admin/<int:post_id>')
 def delete_post_admin(post_id):
-    # 1. Öryggisathugun fyrir admin [57, Conversation]
+    # 1. Öryggisathugun fyrir admin 
     if session.get('role') != 'admin':
         flash("Þú hefur ekki leyfi til að eyða póstum annarra.")
         return redirect(url_for('index'))
@@ -556,7 +556,7 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
 
 ### 2. Lykilatriði í hönnuninni
 *   **Aðgangur að gögnum**: Inni í lykkjunni nálgast þú gildi eins og `user.username` og `user.role` með punkt-málfræði Jinja2, sem svarar til lykla í Python orðasafni.
-*   **doc_id**: Við notum `user.doc_id` (sjálfgefið auðkenni í TinyDB) í `url_for` til að vita nákvæmlega hvaða notanda við ætlum að eyða eða uppfæra [6, 39, Conversation].
+*   **doc_id**: Við notum `user.doc_id` (sjálfgefið auðkenni í TinyDB) í `url_for` til að vita nákvæmlega hvaða notanda við ætlum að eyða eða uppfæra.
 *   **Skilyrt birting**: Með því að nota `{% if user.role != 'admin' %}` tryggjum við að við séum ekki að bjóða upp á að gera einhvern að admin sem er það þegar.
 
 ### HLUTI 2: PÓSTSTJÓRNUN 
@@ -604,7 +604,7 @@ Vefstjóru hefur aðgang að öllum póstum og fjarlægt þá
 
 ### Gagnagrunnurinn db.json
 
-Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að passa við appið sem við höfum verið að smíða. TinyDB geymir gögnin í flokkuðum töflum þar sem hver færsla fær sjálfvirkt númer (ID) sem lykil [5, 6, Conversation].
+Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að passa við appið sem við höfum verið að smíða. TinyDB geymir gögnin í flokkuðum töflum þar sem hver færsla fær sjálfvirkt númer (ID) sem lykil.
 
 ```json
 {
@@ -645,10 +645,10 @@ Hér er dæmi um hvernig **`db.json`** skráin þín á að líta út til að pa
 
 ### Útskýring á uppbyggingunni:
 
-1.  **`users` taflan:** Hér eru notendurnir geymdir. Lykillinn `"1"` eða `"2"` er það sem við köllum **doc_id**. Við höfum bætt við `role` lyklinum til að stýra aðgangi að stjórnborðinu (admin panel) eins og við ræddum áðan [Conversation].
+1.  **`users` taflan:** Hér eru notendurnir geymdir. Lykillinn `"1"` eða `"2"` er það sem við köllum **doc_id**. Við höfum bætt við `role` lyklinum til að stýra aðgangi að stjórnborðinu (admin panel) eins og við ræddum áðan.
 2.  **`posts` taflan:** Hver póstur hefur `content`, `timestamp` (tímastimpil) og `author_id`. **`author_id`** verður að passa við lykilinn í `users` töflunni (t.d. póstur 1 er eftir notanda 1) svo appið geti flett upp réttu nafni á forsíðunni [6, Conversation].
 3.  **`favorites` taflan:** Hér geymum við þætti sem notendur hafa valið úr Epguides API. Við vistar titilinn og myndaslóðina frá **TVMaze** beint í skrána svo við þurfum ekki að kalla aftur í API-ið þegar notandinn skoðar prófílinn sinn [3, 20, Conversation].
 
 **Athugið:** Ef þú ert að byrja með tóman gagnagrunn mun TinyDB búa þessa skrá til sjálfkrafa þegar þú notar `insert()` í fyrsta skipti í Python.
 
-**Mikilvægt:** Vistaðu JSON skrána með **UTF-8** kóðun til að íslenskir stafir eins og „þ“ og „ð“ birtist rétt [Conversation].
+**Mikilvægt:** Vistaðu JSON skrána með **UTF-8** kóðun til að íslenskir stafir eins og „þ“ og „ð“ birtist rétt.
