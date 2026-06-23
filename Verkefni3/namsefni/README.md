@@ -1,10 +1,6 @@
 ## JSON málskipan
 
 [JSON](https://realpython.com/python-json/) er vinsælt opið gagnaskiptasnið. Uppbygging samanstendur af eigindi (key) og gildi (value) pörum. JSON er notað með ýmsum forritunarmálum. 
-
-<details>
-<summary>JSON málskipan</summary>
-<br>
   
  * key/value parasamband
  * {}, slaufusvigi eru utan um JSON object og innri objecta
@@ -13,8 +9,6 @@
  * Ekki hægt að commenta í JSON skrá
  * JSON skráarsnið er með .json endingu
  * Þú getur notað JSONLint til að validate JSON. http://jsonlint.com/ 
-
-</details>
 
 <details>
 <summary> Kóðadæmi</summary>
