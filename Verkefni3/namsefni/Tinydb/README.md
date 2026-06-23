@@ -82,8 +82,6 @@ Ferlið við að smíða vefkerfi sem styður nýskráningu, innskráningu og CR
 2. Fyrir hvern póst flettum við upp höfundi í `users_table` með því að nota `author_id` póstsins
 3. Sendum listann á `index.html` með `render_template()`.
 
-**Mikilvægt:** Til að íslenskir stafir birtist rétt þarf `layout.html` að innihalda `<meta charset="UTF-8">` 
-
 ```python
 # --- RÁSIR (ROUTES) ---
 
@@ -127,7 +125,7 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 ```
-Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. 
+Til að kerfið virki þarf nýr notandi að geta búið til aðgang og skráð sig síðan inn. 
 
 ### Nýskráning (`/signup`) 
 Gögnum er safnað úr formi og vistuð í `users` töfluna með `insert()`.
@@ -187,8 +185,35 @@ def create_post():
 
 ### Uppfæra póst (Update)
 Til að breyta pósti notum við `update()` aðferðina þar sem við skilgreinum nýju gögnin og hvaða póst á að uppfæra.
+
 ```python
-posts_table.update({'content': nyr_texti}, Query().doc_id == post_id)
+# Uppfærsla pósta
+@app.route('/edit_post/<int:post_id>', methods=['GET', 'POST'])
+def edit_post(post_id):
+    # 1. Athugum hvort notandi sé innskráður
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    # 2. Sækjum póstinn úr TinyDB með doc_id
+    post = posts_table.get(doc_id=post_id)
+
+    # 3. Öryggisathugun: Má notandinn breyta þessum pósti?
+    if not post or post['author_id'] != session['user_id']:
+        flash("Þú getur aðeins breytt þínum eigin póstum!")
+        return redirect(url_for('profile'))
+
+    if request.method == 'POST':
+        # 4. Sækjum nýja textann úr forminu
+        new_content = request.form.get('content')
+        
+        # 5. Uppfærum póstinn í gagnagrunninum
+        posts_table.update({'content': new_content}, doc_ids=[post_id])
+        
+        flash("Pósti hefur verið breytt!")
+        return redirect(url_for('profile'))
+
+    # Ef GET: Sýnum síðu með formi og gamla textanum
+    return render_template('edit_post.html', post=post)
 ```
 
 ### Eyða pósti (Delete)
