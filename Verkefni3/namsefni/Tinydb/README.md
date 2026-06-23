@@ -466,12 +466,12 @@ def admin_panel():
 # Notandi fjarlægður
 @app.route('/delete_user/<int:user_id>')
 def delete_user(user_id):
-    # 1. Öryggisathugun: Aðeins admin má eyða notendum [57, Conversation]
+    # 1. Öryggisathugun: Aðeins admin má eyða notendum
     if session.get('role') != 'admin':
         flash("Aðgangur bannaður: Þú verður að vera stjórnandi.")
         return redirect(url_for('index'))
 
-    # 2. Öryggisathugun: Kom í veg fyrir að admin eyði sjálfum sér (Conversation)
+    # 2. Öryggisathugun: Kom í veg fyrir að admin eyði sjálfum sér
     if user_id == session.get('user_id'):
         flash("Þú getur ekki eytt sjálfum þér á meðan þú ert innskráð(ur)!")
         return redirect(url_for('admin_panel'))
@@ -480,10 +480,10 @@ def delete_user(user_id):
     # Við notum doc_ids þar sem user_id kemur beint úr slóðinni [4, 5]
     users_table.remove(doc_ids=[user_id])
     
-    # Valfrjálst: Hér mætti líka eyða öllum póstum sem tilheyrðu þessum notanda (Conversation)
+    # Valfrjálst: Hér mætti líka eyða öllum póstum sem tilheyrðu þessum notanda 
     # posts_table.remove(Query().author_id == user_id)
 
-    # 4. Endurgjöf og flutningur aftur á stjórnborðið [3, 6]
+    # 4. Endurgjöf og flutningur aftur á stjórnborðið
     flash("Notanda hefur verið eytt.")
     return redirect(url_for('admin_panel'))
 
@@ -559,15 +559,46 @@ Best er að nota töflu (table) til að sýna notendagögnin á skipulegan hátt
 *   **doc_id**: Við notum `user.doc_id` (sjálfgefið auðkenni í TinyDB) í `url_for` til að vita nákvæmlega hvaða notanda við ætlum að eyða eða uppfæra [6, 39, Conversation].
 *   **Skilyrt birting**: Með því að nota `{% if user.role != 'admin' %}` tryggjum við að við séum ekki að bjóða upp á að gera einhvern að admin sem er það þegar.
 
+### HLUTI 2: PÓSTSTJÓRNUN 
+
+Vefstjóru hefur aðgang að öllum póstum og fjarlægt þá
+
+```html
+
+    <section class="admin-section">
+        <h3>Allir póstar á spjallborði</h3>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Höfundur</th>
+                    <th>Innihald</th>
+                    <th>Tímasetning</th>
+                    <th>Aðgerðir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in all_posts %}
+                    <tr>
+                        <td><strong>{{ post.username }}</strong></td>
+                        <td>{{ post.content | truncate(50) }}</td>
+                        <td>{{ post.timestamp }}</td>
+                        <td>
+                            {# Eyða pósti - notar doc_id póstsins [3, 4] #}
+                            <a href="{{ url_for('delete_post_admin', post_id=post.id) }}" 
+                               class="btn-danger" 
+                               onclick="return confirm('Eyða þessum pósti?')">
+                               Eyða pósti
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}
+```
 
 **Samantekt:** `admin_panel.html` er öflugt tæki þar sem þú notar **Jinja2 lykkjur** til að lesa úr **TinyDB** og **URL building** til að framkvæma CRUD aðgerðir á notendagrunninum.
-
----
-
-
-
-
-
 
 ---
 
