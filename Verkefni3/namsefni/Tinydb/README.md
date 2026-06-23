@@ -384,13 +384,11 @@ def delete_post(post_id):
 
 ### Mikilvæg atriði við útfærsluna:
 
-*   **`name` eigindið**: Þetta er mikilvægasti hlutinn. Gildin í `name="username"` og `name="password"` verða að vera nákvæmlega þau sömu og þú notar í Python kóðanum þegar þú kallar í `request.form.get()` [49, Conversation].
+*   **`name` eigindið**: Þetta er mikilvægasti hlutinn. Gildin í `name="username"` og `name="password"` verða að vera nákvæmlega þau sömu og þú notar í Python kóðanum þegar þú kallar í `request.form.get()`.
 *   **Öryggi og endurgjöf**:
     *   Flask og Jinja2 sjá sjálfkrafa um að **hreinsa (escape)** gögnin sem notandinn slær inn til að verjast sprautuhótunum (injection attacks).
-    *   Ef notandanafnið er þegar til í **TinyDB**, mun bakendinn nota `flash()` til að gefa skilaboð [60, Conversation]. Gakktu úr skugga um að `layout.html` skjalið þitt sé með lykkju til að birta þessi skilaboð með `get_flashed_messages()`.
-*   **Vefslóðir**: Notaðu alltaf **`url_for()`** til að búa til hlekki á milli síðna (t.d. yfir á innskráningu). Það er öruggara en að harðkóða slóðir eins og `/login`.
-
-Með þessari uppsetningu smellpassar síðan við bakendann sem við bjuggum til áðan og vistar nýja notendur sem orðasöfn (dictionaries) í **`db.json`** skránni [5, Conversation].
+    *   Ef notandanafnið er þegar til í **TinyDB**, notum við `flash()` til að senda skilaboð. Gakktu úr skugga um að `layout.html` skjalið þitt sé með lykkju `get_flashed_messages()` til að birta skilaboðin.
+*   **Vefslóðir**: Notaðu alltaf **`url_for()`** til að búa til tengingar á milli síðna (t.d. yfir á innskráningu). Það er öruggara en að harðkóða slóðir eins og `/login`.
 
 ---
 
