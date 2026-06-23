@@ -432,7 +432,7 @@ def delete_post(post_id):
 
 ### Aðgangsstýring á stjórnborð
 
-Vefstjóri er skráður í JSON gagnagrunnin með annað hlutverk en aðrir notendur `"role": "admin"`. Með `{% if session.role == 'admin' %}` skilyrðingu í **profil.html** þá tjekkar jinja á því hvort 'admin' sé innskráður ef svo er þá hefur hann aðgang að stjórnborði vefstjóra með póst aðferð á `/admin_panel`.
+Vefstjóri er skráður í JSON gagnagrunnin með annað hlutverk en aðrir notendur `"role": "admin"`. Með `{% if session.role == 'admin' %}` skilyrðingu í **profil.html** þá tjékkar Jinja á því hvort 'admin' sé innskráður ef svo er þá hefur hann aðgang að stjórnborði vefstjóra með póst aðferð á `/admin_panel`. Til að vera 100% örugg þá athum við `session.get('role') != 'admin'`
 
 ```python
 # stjórnborðið
