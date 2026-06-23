@@ -322,38 +322,11 @@ def delete_post(post_id):
 {% endblock %}
 ```
 
-#### `templates/profile.html`
-
-- Hér getur notandi búið til nýjan póst og eytt sínum eigin.
-- **profile.html** sýnir hvernig á að eyða (`remove`) og búa til (`insert`) gögn í TinyDB.
-  
-```html
-{% extends "layout.html" %}
-{% block content %}
-    <h1>Velkomin(n), {{ session.username }}</h1>
-    
-    <h3>Búa til nýjan póst</h3>
-    <form action="{{ url_for('create_post') }}" method="POST">
-        <textarea name="content" required></textarea><br>
-        <button type="submit">Senda póst</button>
-    </form>
-
-    <hr>
-    <h3>Mínir póstar</h3>
-    {% for post in posts %}
-        <div class="my-post">
-            <p>{{ post.content }}</p>
-            <small>{{ post.timestamp }}</small> | 
-            <a href="{{ url_for('delete_post', post_id=post.id) }}" onclick="return confirm('Eyða?')">Eyða</a>
-        </div>
-    {% endfor %}
-{% endblock %}
-```
-
 - Til að útfæra **`signup.html`** þarftu að búa til HTML-form sem sendir gögnin (notandanafn og lykilorð) á bakendann með `POST` aðferðinni. Sniðmátið á að nota Jinja2 erfðir til að fylgja útliti vefsins þíns og birta endurgjöf ef eitthvað fer úrskeiðis.
 - Formið þarf að nota `method="POST"` til að flytja gögnin á öruggan hátt í `request.form` safnið í Flask. Við notum `url_for('signup')` í `action` eigindinu til að vísa á rétta rás í bakendanum.
 
-### Dæmi um `signup.html`:
+### Dæmi um `signup.html`
+
 ```html
 {% extends "layout.html" %}
 
@@ -390,89 +363,46 @@ def delete_post(post_id):
     *   Ef notandanafnið er þegar til í **TinyDB**, notum við `flash()` til að senda skilaboð. Gakktu úr skugga um að `layout.html` skjalið þitt sé með lykkju `get_flashed_messages()` til að birta skilaboðin.
 *   **Vefslóðir**: Notaðu alltaf **`url_for()`** til að búa til tengingar á milli síðna (t.d. yfir á innskráningu). Það er öruggara en að harðkóða slóðir eins og `/login`.
 
+#### `templates/profile.html`
+
+- Hér getur notandi búið til nýjan póst og eytt sínum eigin.
+- **profile.html** sýnir hvernig á að eyða (`remove`) og búa til (`insert`) gögn í TinyDB.
+  
+```html
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Velkomin(n), {{ session.username }}</h1>
+    {% if session.role == 'admin' %}
+        <form action="/admin_panel">
+            <button>Stjórnborð</button>
+        </form>
+    {% endif %}
+    <h3>Búa til nýjan póst</h3>
+    <form action="{{ url_for('create_post') }}" method="POST">
+        <textarea name="content" required></textarea>
+        <button type="submit">Senda póst</button>
+    </form>
+    <hr>
+    <h3>Mínir póstar</h3>
+    {% for post in posts %}
+        <article>
+            <p>{{ post.content }}</p>
+            <small>{{ post.timestamp }}</small> |
+
+            {# Hlekkur á breytingasíðuna #}
+            <a href="{{ url_for('edit_post', post_id=post.id) }}">Breyta pósti</a> |
+        
+            <a href="{{ url_for('delete_post', post_id=post.id) }}" 
+                onclick="return confirm('Ertu alveg viss?')">Eyða pósti</a>
+
+        </article>
+    {% endfor %}
+{% endblock %}
+```
+
 ---
 
-Það er einfalt að bæta við **'admin'** hlutverki (role) í bakendanum þar sem TinyDB geymir gögn sem sveigjanleg Python orðasöfn. Þú getur bætt við hvaða lykli sem er í notandagögnin án þess að breyta uppsetningu gagnagrunnsins sérstaklega [20, Conversation].
-
-Hér er hvernig þú útfærir hlutverkakerfi:
-
-### 1. Sjálfgefið hlutverk við nýskráningu
-Í `signup` rásinni (route) bætirðu við `'role': 'user'` sem sjálfgefnu gildi þegar nýr notandi er búinn til [20, Conversation].
-
-```python
-@app.route('/signup', methods=['POST'])
-def signup():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    
-    # Við bætum 'role' lyklinum við orðasafnið
-    nyr_notandi = {
-        'username': username, 
-        'password': password, 
-        'role': 'user'  # Allir byrja sem venjulegir notendur
-    }
-    users_table.insert(nyr_notandi)
-    return redirect(url_for('login'))
-```
-
-### 2. Vista hlutverk í Session
-```python
-@app.route('/login', methods=['POST'])
-def login():
-    username = request.form.get('username')
-    user = users_table.get(Query().username == username)
-    
-    if user:
-        session['user_id'] = user.doc_id
-        session['role'] = user.get('role', 'user') # Sækjum hlutverkið
-        return redirect(url_for('index'))
-```
-
-Til þess að bæta við skilyrði fyrir stjórnanda (administrator) í `/login` rásinni þarftu að nota `request.form` til að sækja gögnin og uppfæra svo `session` hlutinn með viðeigandi hlutverki (role).
-
-Hér er hvernig þú getur breytt rásinni til að tryggja að notandinn „admin“ fái réttindi í session:
-
-### Uppfærð `/login` rás
-
-```python
-@app.route('/login', methods=['GET', 'POST']) # 1. Skilgreinum báðar aðferðir 
-def login():
-    # 2. Ef aðferðin er POST, þá vinnum við úr gögnunum úr forminu 
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        
-        # Leitum að notanda í TinyDB (Conversation history)
-        user = users_table.get((User.username == username) & (User.password == password))
-        
-        if user:
-            session['user_id'] = user.doc_id # Vistum í session 
-            
-            # Skilyrði fyrir administrator eins og þú baðst um (Conversation history)
-            if username == 'admin':
-                session['role'] = 'admin'
-            else:
-                session['role'] = user.get('role', 'user')
-                
-            return redirect(url_for('profile')) # Sendum á prófíl eftir innskráningu [5]
-        
-        # Ef upplýsingar voru rangar
-        flash("Rangt notandanafn eða lykilorð.") # Gefum feedback [6]
-        return redirect(url_for('login'))
-
-    # 3. Ef aðferðin er GET (notandi bara að opna síðuna), birtum við formið [7]
-    return render_template('login.html')
-
-```
-
-### Mikilvæg atriði:
-
-*   **Session hluturinn:** `session` í Flask virkar eins og Python orðasafn (dict) þar sem þú getur geymt upplýsingar sem eiga að fylgja notandanum á milli síðna.
-*   **Secret Key:** Mundu að þú verður að vera með `app.secret_key` stilltan í forritinu þínu til að `session` virki, annars færðu villu þegar reynt er að skrifa í það.
-*   **Öryggi:** Með því að vista `session['role'] = 'admin'` geturðu á öðrum síðum (eins og í `admin_panel`) einfaldlega athugað þetta gildi áður en þú hleypir notandanum áfram.
-*   **Gagnageymsla:** Þar sem TinyDB vinnur með orðasöfn er auðvelt að fletta upp notandanum og athuga hvort hann sé sá sem hann segist vera áður en réttindin eru veitt.
-
----
+### Stjórnboð vefstjóra
 
 ### 3. Aðgangsstýring í rás (Admin check)
 Þú getur nú búið til rásir sem aðeins 'admin' hefur aðgang að með því að nota einfalda `if` skilyrðingu [Conversation].
