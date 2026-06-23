@@ -28,14 +28,11 @@
 
 > Notaðu PicoCSS fyrir uppsetningu (_layout_) og Jinja erfðir (_Jinja2: inheritance_)
 
----
-
 ### Námsefni
 
 - [JSON málskipan](namsefni/README.md)
 - [JSON & Python CRUD dæmi](namsefni/pyCrudExamples/README.md)
 - [TVmaze API](namsefni/TVmaze/README.md)
-- [Tinydb gagnagrunnur](namsefni/Tinydb/README.md)
 
 ---
 
@@ -51,6 +48,9 @@
 1. Prófílsíðan er varin með **session** aðgangsvörn
 1. Vefstjóri (admin) getur eytt póstum og notendum 
 
+### Námsefni
+
+- [Tinydb gagnagrunnur](namsefni/Tinydb/README.md)
 
 ---
 
