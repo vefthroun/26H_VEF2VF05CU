@@ -17,23 +17,20 @@ Pakkarnir sem notaðir eru í appinu eru **session** fyrir auðkenningu, **TinyD
 
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from tinydb import TinyDB, Query
-import os                       # to generate secret key with operating system in flask app
+import os                       # að búa til leynilykil með stýrikerfi í Flask appinu
 from datetime import datetime   # fyrir tímaskráningu pósta í spjallborði
-from pprint import pprint       # pprint er í standard libary
+from pprint import pprint       # pprint er python safninu
 
 app = Flask(__name__)
 
 ```
-
-### 1. Uppsetning Gagnagrunns
-TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](https://github.com/vefthroun/26H_VEF2VF05CU/blob/main/Verkefni3/namsefni/Tinydb/README.md#gagnagrunnurinn-dbjson)
+### Secret key for session management
 
 ```python
 
-# Secret key for session management
 app.config["SECRET_KEY"] = os.urandom(16)
-# Display the secret key and current time in console for debugging
-# pprint(app.config["SECRET_KEY"])
+# Display the secret key in console ONLY for debugging
+pprint(app.config["SECRET_KEY"])
 
 ```
 
@@ -60,31 +57,60 @@ def get_posts_with_users():
 
 ```
 
-# Flask & TinyDB samþætting
+### Uppsetning Gagnagrunns
+TinyDB geymir gögn sem Python orðasöfn (dicts) í JSON skrá. [Sjá nánari skýringu neðst á síðunni](https://github.com/vefthroun/26H_VEF2VF05CU/blob/main/Verkefni3/namsefni/Tinydb/README.md#gagnagrunnurinn-dbjson)
+
+### Forsíða með póstum, innskráning, nýskráning og prófílsíða með CRUD virkni
 
 Ferlið við að smíða vefkerfi sem styður nýskráningu, innskráningu og CRUD aðgerðir (Create, Read, Update, Delete) fyrir spjallpósta með **TinyDB** sem gagnagrunn.
 
-## 2. Nýskráning og Innskráning (Create & Authenticate)
+```python
+# --- RÁSIR (ROUTES) ---
+
+@app.route('/')
+def index():
+    posts = get_posts_with_users()
+    return render_template('index.html', posts=posts)
+
+```
+
+## 2. Innskráning (Create & Authenticate)
 Til að kerfið virki þarf notandi að geta búið til aðgang og skráð sig inn. Við notum **Flask session** til að muna eftir innskráðum notendum.
+
+```python
+
+```
 
 ### Nýskráning (`/signup`)
 Gögnum er safnað úr formi og vistuð í `users` töfluna með `insert()`.
 1. Sækja `username` og `password` úr `request.form`.
 2. Vista í TinyDB. `insert()` skilar sjálfkrafa einstöku ID (doc_id).
 
+```python
+
+```
+
 ### Innskráning (`/login`)
 1. Leita að notanda með `Query()` þar sem notandanafn passar.
 2. Ef notandi finnst, vistum við `user_id` hans í `session['user_id']` [57, Conversation].
 3. **login.html:** Þetta skjal þarf að innihalda form með `method="POST"` sem sendir gögnin á viðeigandi rás.
 
+```python
+
+```
+
 ## 3. Forsíða: Lesa gögn (Read on Index)
-Á forsíðunni viljum við birta alla pósta ásamt upplýsingum um höfund og tímasetningu [Conversation].
+Á forsíðunni viljum við birta alla pósta ásamt upplýsingum um höfund og tímasetningu 
 
 1. Sækjum alla pósta með `posts_table.all()`.
-2. Fyrir hvern póst flettum við upp höfundi í `users_table` með því að nota `author_id` póstsins [6, Conversation].
+2. Fyrir hvern póst flettum við upp höfundi í `users_table` með því að nota `author_id` póstsins
 3. Sendum listann á `index.html` með `render_template()`.
 
-**Mikilvægt:** Til að íslenskir stafir birtist rétt þarf `layout.html` að innihalda `<meta charset="UTF-8">` [Conversation].
+**Mikilvægt:** Til að íslenskir stafir birtist rétt þarf `layout.html` að innihalda `<meta charset="UTF-8">` 
+
+```python
+
+```
 
 ## 4. Prófílsíða og Aðgangsstýring
 Prófílsíðan sýnir aðeins þá pósta sem tilheyra innskráðum notanda.
@@ -121,18 +147,13 @@ posts_table.remove(doc_ids=[int(post_id)])
 
 ---
 
-Hér er grunnkóðinn fyrir Flask forritið og HTML sniðmátin sem fylgja þeirri rökréttu uppbyggingu sem við ræddum: **Innskráning, nýskráning, forsíða með póstum og prófílsíða með CRUD virkni**.
+Hér er grunnkóðinn fyrir Flask forritið og HTML sniðmátin sem fylgja þeirri rökréttu uppbyggingu sem við ræddum: 
 
 Gættu þess að vista allar skrár með **UTF-8** kóðun svo íslenskir stafir birtist rétt [Conversation].
 
 
 
-# --- RÁSIR (ROUTES) ---
 
-@app.route('/')
-def index():
-    posts = get_posts_with_users()
-    return render_template('index.html', posts=posts)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
