@@ -30,12 +30,12 @@ if __name__ == '__main__':
 
 #### Nánari skýringar
 
+- [Quick Start](https://flask.palletsprojects.com/en/2.3.x/quickstart/)
 - Decorators[`@app.route('/')`](decorators.md) 
 - Flask API documentation [`Flask(__name__)`](https://flask.palletsprojects.com/en/2.2.x/api/#flask.Flask)
 - Python documentation [`__main__`](https://docs.python.org/3/library/__main__.html)
 - Stack Overflow [`if __name__ == '__main__':`](https://stackoverflow.com/questions/419163/what-does-if-name-main-do)
-- [Quick Start](https://flask.palletsprojects.com/en/2.3.x/quickstart/)
-- [Hello Tiny Flask App](http://www.compjour.org/lessons/flask-single-page/hello-tiny-flask-app/)
+
 
 ---
 
