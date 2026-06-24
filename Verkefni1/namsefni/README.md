@@ -1,8 +1,10 @@
-### Routing
-
 #### Uppsetning vefþróunarsvæðis
 
 - [How to build a Virtual Environment](how-to-build-venv/README.md)
+
+---
+
+### Routing
 
 #### Sýnidæmi
 1. [Flask uppsetning og Halló heimur](synidaemi/halloheimur.md)
@@ -20,7 +22,7 @@
 
 ---
 
-### Jinja
+### Jinja templates
 
 #### Sýnidæmi
 1. [hlekkir og static](synidaemi/1-static.py)
