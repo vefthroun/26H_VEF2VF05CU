@@ -5,12 +5,12 @@
 - [How to build a Virtual Environment](how-to-build-venv/README.md)
 
 #### Sýnidæmi
-1. [Flask uppsetning og Halló heimur](halloheimur.md)
-1. [Static Routing](staticRoutes.py) 
-1. [Static files](staticFiles.py)
-1. [Error Handling](errorHandlingStatusCodes.py)
-1. [url_for fallið](urlfor.py)
-1. [Basic Data structure](datastructures.py)
+1. [Flask uppsetning og Halló heimur](synidaemi/halloheimur.md)
+1. [Static Routing](synidaemi/staticRoutes.py) 
+1. [Static files](synidaemi/staticFiles.py)
+1. [Error Handling](synidaemi/errorHandlingStatusCodes.py)
+1. [url_for fallið](synidaemi/urlfor.py)
+1. [Basic Data structure](synidaemi/datastructures.py)
 
 #### Vefgreinar
 
@@ -23,10 +23,10 @@
 ### Jinja
 
 #### Sýnidæmi
-1. [hlekkir og static](1-static.py)
-1. [breytur og dictionary](2-breyta_og_dictionary.py)
-1. [for in lykkja með lista](3-listi.py)
-1. [for in lykkja með dictionary](4-dictionary_lykkja.py)
+1. [hlekkir og static](synidaemi/1-static.py)
+1. [breytur og dictionary](synidaemi/2-breyta_og_dictionary.py)
+1. [for in lykkja með lista](synidaemi/3-listi.py)
+1. [for in lykkja með dictionary](synidaemi/4-dictionary_lykkja.py)
 
 #### Vefgreinar
 1. [Jinja](https://jinja.palletsprojects.com/en/3.0.x/templates/) 
