@@ -1,18 +1,6 @@
 ### Uppsetning á Flask með VENV 
 [Flask tutorial in VS Code](https://code.visualstudio.com/docs/python/tutorial-flask).
 
-Ef þú færð eftirfarandi skilaboð í Windows:
-
-```
-C:\vef31> venv\scripts\activate
-venv\scripts\activate : File C:\vef31\venv\scripts\Activate.ps1 cannot be loaded because running scripts is disabled
-on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170. 
-```
-**Lausn:** Í powershell (run as admin)
-`set-executionpolicy remotesigned`
-
----
-
 ### Halló heimur 
  
 ```python
@@ -48,6 +36,21 @@ if __name__ == '__main__':
 - Stack Overflow [`if __name__ == '__main__':`](https://stackoverflow.com/questions/419163/what-does-if-name-main-do)
 - [Quick Start](https://flask.palletsprojects.com/en/2.3.x/quickstart/)
 - [Hello Tiny Flask App](http://www.compjour.org/lessons/flask-single-page/hello-tiny-flask-app/)
+
+---
+
+Ef þú færð eftirfarandi skilaboð í Windows:
+
+```
+C:\vef31> venv\scripts\activate
+venv\scripts\activate : File C:\vef31\venv\scripts\Activate.ps1 cannot be loaded because running scripts is disabled
+on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170. 
+```
+**Lausn:** Í powershell (run as admin)
+`set-executionpolicy remotesigned`
+
+---
+
 <!--
 #### Ef við viljum sleppa `app.run` í kóðanum
 
