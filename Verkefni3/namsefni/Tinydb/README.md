@@ -19,7 +19,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from tinydb import TinyDB, Query
 import os                       # að búa til leynilykil með stýrikerfi í Flask appinu
 from datetime import datetime   # fyrir tímaskráningu pósta í spjallborði
-from pprint import pprint       # pprint er python safninu
+from pprint import pprint       # birtir json dict með línuskiptingum, pprint er python safninu
 
 app = Flask(__name__)
 
