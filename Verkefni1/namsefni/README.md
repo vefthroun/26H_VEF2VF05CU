@@ -11,7 +11,7 @@
 1. [Static Routing](synidaemi/staticRoutes.py) 
 1. [Static files](synidaemi/staticFiles.py)
 1. [Error Handling](synidaemi/errorHandlingStatusCodes.py)
-1. [url_for fallið](synidaemi/urlfor.py)
+1. [url_for fallið](https://github.com/vefthroun/26H_VEF2VF05CU/blob/main/Verkefni1/namsefni/urlfor.py)
 1. [Basic Data structure](synidaemi/datastructures.py)
 
 #### Vefgreinar
