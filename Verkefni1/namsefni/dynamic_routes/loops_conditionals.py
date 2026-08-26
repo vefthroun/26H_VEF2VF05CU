@@ -18,7 +18,7 @@ def index():
         ("George", "Windows"),
     ]
 
-    return render_template("listi_tuples.html", user_os=user_os)
+    return render_template("loops_conditionals.html", user_os=user_os)
     
 if __name__ == '__main__':
   app.run(debug=True, use_reloader=True)  
