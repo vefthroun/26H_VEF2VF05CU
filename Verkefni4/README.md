@@ -59,8 +59,10 @@ Nemandi býr til eigin kóðalausnir sem henta hans lokaverkefni. Hér eru nokkr
 1. Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). 
 
 #### **(5%)** vægi
-1. Síða þar sem hægt er að breyta eða bæta við flokkum 
-1. [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ).  
+1. Stjórnborð síða þar sem hægt er að breyta eða bæta við flokkum 
+1. [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ). 
+1. [WTFORM WTForms is a flexible forms validation and rendering library for Python web development.](https://flask-wtf.readthedocs.io/en/1.2.x/)  
+1. [CKeditor. Rich Text Editor in Flask](https://ckeditor.com/)
 1. **HTMX** er framendalausn þar sem vafrinn er í lykilhlutverki í samskiptum við miðlarann  
     - Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). 
 1. **Annað** sem nemendur skýra frá í kynningu lokverkefnis 
