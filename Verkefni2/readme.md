@@ -20,7 +20,7 @@
     - Útfærðu útskráningarvirkni (eyða session)
 1. Adminsíða (admin) sem inniheldur: **20%**
     - nafn innskráðs notanda.
-    - form til að búa til blogfærslu; titill, textainnihald með [CKEditor](https://flask-ckeditor.readthedocs.io/en/latest/basic.html) (rich-text editor), dagsetning og nafn höfundar (admin). 
+    - form til að búa til blogfærslu; titill, textainnihald, dagsetning og nafn höfundar (admin). 
     - blogfærsla er [skrifuð](https://www.freecodecamp.org/news/everything-you-need-to-know-about-python-dictionaries/) (vistuð) í gagnagrind (listi með dictionaries) sem dictionary þegar smellt er á hnapp.
     - blogfærslu er [eytt](https://www.freecodecamp.org/news/everything-you-need-to-know-about-python-dictionaries/) úr gagnagrind (listi með dictionaries) þegar smellt er á hnapp / hlekk. 
     - notaðu formprófun (validation) til að láta vita hvort aðgerð hafi tekist og _redirect_ á forsíðuna.
