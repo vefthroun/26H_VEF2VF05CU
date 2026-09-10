@@ -12,7 +12,9 @@ app = Flask(__name__)
 
 # route() maps what you type in the browser (the url) to a Python function.
 # @app.route() (@ er decorator í python) bindur fallið index() við URL. 
-# Whenever a browser requests a URL, the associated function is called and the return value is sent back to the browser
+# Whenever a browser requests a URL, the associated function is called and 
+# return value is sent back to the browser
+
 @app.route('/')
 def index():
     # fallið skilar hér streng sem er sendur til biðlara (e. client) í vafra.
@@ -22,10 +24,7 @@ def index():
 if __name__ == '__main__':
     # run, starts a built-in development server
     app.run(debug=True, use_reloader=True)   
-            # debug=True. debug
-            # > er nytsamlegt í vefþróun, gefur skýrari villuskilaboð.
-            # use_reloader. use_reloader=True
-            # > þýðir að þú þarft ekki að endurkeyra python skrá stöðugt þegar þú gerir kóðabreytingar.
+
 ```
 
 ## Skýring
