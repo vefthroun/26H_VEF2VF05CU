@@ -7,7 +7,7 @@
 # import Flask class in Python
 from flask import Flask
 
-# Create app, that hosts the application. Don't worry about that __name__ object, it's just a convention.
+# Create app, that hosts the application.
 app = Flask(__name__)
 
 # route() maps what you type in the browser (the url) to a Python function.
