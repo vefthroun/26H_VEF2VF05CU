@@ -22,10 +22,10 @@ def index():
 if __name__ == '__main__':
     # run, starts a built-in development server
     app.run(debug=True, use_reloader=True)   
-            # debug=True. debug er nytsamlegt í vefþróun, gefur skýrari villuskilaboð.
-            # use_reloader. use_reloader=True þýðir að þú þarft ekki að endurkeyra python skrá stöðugt þegar þú gerir kóðabreytingar. 
-     
-# Keyrðu python skránna í terminal og skoðaðu url í vafra (localhost), en með Flask kemur web server sem vð getum notað
+            # debug=True. debug
+            # > er nytsamlegt í vefþróun, gefur skýrari villuskilaboð.
+            # use_reloader. use_reloader=True
+            # > þýðir að þú þarft ekki að endurkeyra python skrá stöðugt þegar þú gerir kóðabreytingar.
 ```
 
 ## Skýring
@@ -34,7 +34,7 @@ if __name__ == '__main__':
 from flask import Flask, render_template
 
 app = Flask(__name__)
-```
+
 
 Þessi kóði er grunnurinn að því að setja upp vefforrit í Flask. Hér er stutt útskýring á því hvað hver lína gerir:
 
