@@ -64,9 +64,6 @@ if __name__ == '__main__':
 
 **Mikilvæg athugasemd:** Samkvæmt heimildum ætti aldrei að nota villuleitarhaminn (`debug=True`) í raunverulegu vinnsluumhverfi (e. production) þar sem hann getur skapað öryggishættu með því að leyfa keyrslu á kóða beint úr vafra.
 
-## verkefni 2
-
-
 #### Nánari skýringar
 
 - [Quick Start](https://flask.palletsprojects.com/en/2.3.x/quickstart/)
@@ -76,8 +73,7 @@ if __name__ == '__main__':
 - Stack Overflow [`if __name__ == '__main__':`](https://stackoverflow.com/questions/419163/what-does-if-name-main-do)
 
 
----
-
+<!--
 Ef þú færð eftirfarandi skilaboð í Windows:
 
 ```
@@ -90,7 +86,7 @@ on this system. For more information, see about_Execution_Policies at https:/go.
 
 ---
 
-<!--
+
 #### Ef við viljum sleppa `app.run` í kóðanum
 
 - Stillum umhverfisbreytu í terminal: `$env:FLASK_APP = "app.py"`
