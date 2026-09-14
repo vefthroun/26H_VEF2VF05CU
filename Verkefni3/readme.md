@@ -40,15 +40,14 @@
 - <details>
   <summary>hvað er REST API?</summary>
   <strong>REST API</strong> er útskýrt sem vefþjónusta sem gerir forritum kleift að skiptast á gögnum yfir netið með því að nota staðlaðar HTTP fyrirspurnir og vefslóðir (endpoints).
-  
-  <p>Samskipti með HTTP og vefslóðum (Endpoints):</p>
   <ul>
     </li><li>REST API notar aðgengilegar vefslóðir til að tilgreina hvaða gögn eða úrræði á að sækja, t.d. `/shows/155` til að sækja ákveðinn þátt eða `/search/shows?q=shark` til að leita. 
-    </li><li>Samskiptin nota staðlaðar HTTP aðferðir (eins og GET eða POST)[1].
-    </li><li> **Gagnasnið (JSON)**: Svör frá REST API eru oftast send á **JSON** sniði, sem er létt, skýrt og auðvelt að breyta í Python orðasöfn (dicts) eða lista í bakenda[2][5].
-    </li><li> **HTTP Stöðukóðar (Status Codes)**: Miðlarinn skilar svörum ásamt stöðukóða sem gefur til kynna hvernig beiðnin gekk, svo sem **200 OK** (aðgerð tókst), **301** (tilvísun), **404 Not Found** (úrræði fannst ekki) eða **429 Too Many Requests** (farið yfir leyfileg hraðatakmörk)[6].
-    </li><li> **Færibreytur og samþætting (Embedding)**: Hægt er að senda síur eða breytur með vefslóðinni (t.d. `?q=query` eða `?page=1`)[3][9]. Einnig styðja REST API þjónustur (eins og TVMaze með HAL/HATEOAS staðlinum) að innfella tengd gögn í einu kalli með færibreytum eins og `?embed=episodes`[2][10].
-    </li><li> **Öryggi og aðgengi**: REST API þjónustur nýta **HTTPS** fyrir örugg samskipti og eru oft með **CORS** (Cross-Origin Resource Sharing) virkjað svo hægt sé að kalla í þær beint úr vefforritum.
+    </li><li>Samskiptin nota staðlaðar HTTP aðferðir (eins og GET eða POST).
+    </li><li> <b>Gagnasnið (JSON)</b>: Svör frá REST API eru oftast send á <b>JSON</b> sniði, sem er létt, skýrt og auðvelt að breyta í Python orðasöfn (dicts) eða lista í bakenda[2][5].
+    </li><li><b>HTTP Stöðukóðar <b>(Status Codes)</b>: Miðlarinn skilar svörum ásamt stöðukóða sem gefur til kynna hvernig beiðnin gekk, svo sem **200 OK</b> (aðgerð tókst), <b>301</b> (tilvísun), <b>404 Not Found</b> (úrræði fannst ekki) eða <b>429 Too Many Requests</b> (farið yfir leyfileg hraðatakmörk)[6].
+    </li><li> <b>Færibreytur og samþætting (Embedding)**: Hægt er að senda síur eða breytur með vefslóðinni (t.d. `?q=query` eða `?page=1`). 
+      Einnig styðja REST API þjónustur (eins og TVMaze með HAL/HATEOAS staðlinum) að innfella tengd gögn í einu kalli með færibreytum eins og `?embed=episodes`.
+    </li><li> <b>Öryggi og aðgengi</b>: REST API þjónustur nýta **HTTPS** fyrir örugg samskipti og eru oft með **CORS** (Cross-Origin Resource Sharing) virkjað svo hægt sé að kalla í þær beint úr vefforritum.
     </li>
   </ul>
   </details>
