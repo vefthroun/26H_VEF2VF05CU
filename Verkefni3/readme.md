@@ -52,31 +52,6 @@
   </ul>
   </details>
 
----
-
-#### JSON Tinydb 10%
-
-Hér lærir þú að vinna með form, gögn notenda og varanlega gagnageymslu. Þú munt búa til vefforrit sem tekur við inntaki gegnum HTML form, vinnur úr gögnunum í bakenda og framkvæmir CRUD-aðgerðir í TinyDB skráargagnagrunni.
-
-* **HTML Form &amp; Formvinnsla**: Viðtaka og úrvinnsla inntaks frá notanda gegnum `request.form`.
-* **CRUD-aðgerðir**: Nýskráning, uppfletting, uppfærsla og eyðing gagna (*Create, Read, Update, Delete*).
-* **TinyDB**: Varanleg skráargagnageymsla á JSON-sniði (`db.json`).
-
-1. Notaðu uppsetninguna sem þú hannaðir í 2. verkefni, taktu út orðasöfnin (_dictonaries_) úr appinu og settu innihaldið í JSON skrá.
-1. Notaðu TinyDB pakkann til að framkvæma CRUD aðgerðir 
-   * Allar færslur og breytingar eru vistaðar í JSON skránni
-1. Á forsíðu birtast allir póstar úr json skránni
-1. Nýskráning býr til nýjan notanda
-1. Notandi getur síðan skráð sig inn á eigin **prófíl**
-1. Notendur geta skrifað nýja pósta, breytt eigin póstum eða eytt þeim
-1. Prófílsíðan er varin með **session** aðgangsvörn
-1. Vefstjóri (admin) getur eytt póstum og notendum 
-
-### Námsefni
-
-- [Tinydb gagnagrunnur](namsefni/Tinydb/README.md)
-
----
 #### Að sækja gögn frá API
 Hlekkurinn / API endpoint [https://api.tvmaze.com/shows](https://api.tvmaze.com/shows) skilar upplýsingum um 250 fyrstu þáttarraðir í API gagnasettinu.  Til að fá næstu 250 þætti þarftu að bæta við skilyrðinu / flagginu ?page=1 fyrir aftan shows eða [https://api.tvmaze.com/shows?page=1](https://api.tvmaze.com/shows?page=1) og svo framvegis 
 
@@ -153,6 +128,30 @@ Leit að þætti eftir nafni, ekki nákvæm leit (fuzzy).  Hér er leitað eftir
 ```
 
 </details>
+
+---
+
+#### JSON Tinydb 10%
+
+Hér lærir þú að vinna með form, gögn notenda og varanlega gagnageymslu. Þú munt búa til vefforrit sem tekur við inntaki gegnum HTML form, vinnur úr gögnunum í bakenda og framkvæmir CRUD-aðgerðir í TinyDB skráargagnagrunni.
+
+* **HTML Form &amp; Formvinnsla**: Viðtaka og úrvinnsla inntaks frá notanda gegnum `request.form`.
+* **CRUD-aðgerðir**: Nýskráning, uppfletting, uppfærsla og eyðing gagna (*Create, Read, Update, Delete*).
+* **TinyDB**: Varanleg skráargagnageymsla á JSON-sniði (`db.json`).
+
+1. Notaðu uppsetninguna sem þú hannaðir í 2. verkefni, taktu út orðasöfnin (_dictonaries_) úr appinu og settu innihaldið í JSON skrá.
+1. Notaðu TinyDB pakkann til að framkvæma CRUD aðgerðir 
+   * Allar færslur og breytingar eru vistaðar í JSON skránni
+1. Á forsíðu birtast allir póstar úr json skránni
+1. Nýskráning býr til nýjan notanda
+1. Notandi getur síðan skráð sig inn á eigin **prófíl**
+1. Notendur geta skrifað nýja pósta, breytt eigin póstum eða eytt þeim
+1. Prófílsíðan er varin með **session** aðgangsvörn
+1. Vefstjóri (admin) getur eytt póstum og notendum 
+
+### Námsefni
+
+- [Tinydb gagnagrunnur](namsefni/Tinydb/README.md)
 
 ---
 
