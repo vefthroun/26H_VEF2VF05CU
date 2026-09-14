@@ -6,12 +6,16 @@
   - CRUD aðgerðir með JSON / [TinyDB](https://tinydb.readthedocs.io/en/latest/getting-started.html)
   - Jinja2: Template inheritance, extend layout
   - HTML Form
-
----
-
-#### JSON API 10%
  
-Útfærðu vefforrit í Flask sem birtir gögn frá [TVmaze API](https://api.tvmaze.com). 
+#### JSON API 10%
+
+Í verkefni 3 lærir þú að nýta vefþjónustur (REST APIs) í Flask. Þú munt framkvæma fyrirspurnir gegnum netið, sækja gögn á JSON-sniði, vinna úr þeim í bakenda með Python og birta niðurstöðurnar (t.d. þáttalista, myndir og leitarútkomur) í HTML sniðmátum
+
+* **API / REST**: Samskipti við ytri miðlara gegnum HTTP fyrirspurnir.
+* **JSON gögn**: Meðhöndlun á lista- og orðasafnsuppbyggingu (dicts) í Python.
+* **Gagnvirk birting**: Birting á gögnum og myndum með Jinja2 sniðmátum og `| safe` síum
+
+#### Útfærðu vefforrit í Flask sem birtir gögn frá [TVmaze API](https://api.tvmaze.com). 
 
 1. Á forsíðu (index) skal birta grunnupplýsingar um 20 random þætti ur _Epguides API_ gagnagrunninum. Birta skal nafn og mynd þáttaraða  **2%**
 1. Þegar valin er ein þáttaröð af forsíðu er farið á síðu sem birtir nánari upplýsingar um valda þáttaröð. **3%**
@@ -37,6 +41,12 @@
 ---
 
 #### JSON Tinydb 10%
+
+Hér lærir þú að vinna með form, gögn notenda og varanlega gagnageymslu. Þú munt búa til vefforrit sem tekur við inntaki gegnum HTML form, vinnur úr gögnunum í bakenda og framkvæmir CRUD-aðgerðir í TinyDB skráargagnagrunni.
+
+* **HTML Form &amp; Formvinnsla**: Viðtaka og úrvinnsla inntaks frá notanda gegnum `request.form`.
+* **CRUD-aðgerðir**: Nýskráning, uppfletting, uppfærsla og eyðing gagna (*Create, Read, Update, Delete*).
+* **TinyDB**: Varanleg skráargagnageymsla á JSON-sniði (`db.json`).
 
 1. Notaðu uppsetninguna sem þú hannaðir í 2. verkefni, taktu út orðasöfnin (_dictonaries_) úr appinu og settu innihaldið í JSON skrá.
 1. Notaðu TinyDB pakkann til að framkvæma CRUD aðgerðir 
