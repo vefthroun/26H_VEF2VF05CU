@@ -154,3 +154,45 @@ Við notum Jinja erfðir til að halda samræmdu útliti. `layout.html` inniheld
 *   **JSON sjálfvirkni**: Flask og TVMaze vinna bæði með JSON snið sem er auðvelt að varpa yfir í Python orðasöfn.
 *   **Jinja2 Erfðir**: Með því að nota `{% extends %}` þurfum við ekki að endurtaka HTML kóða fyrir valmyndir eða fót (footer) á hverri síðu.
 *   **HTML Escaping**: Jinja2 hreinsar sjálfkrafa gögn úr API-inu til að verja síðuna gegn árásum, nema við notum `| safe` síuna (filter) fyrir gögn sem innihalda HTML merki (eins og `summary` úr TVMaze).
+
+---
+
+### Hvernig á að sækja þátt úr þáttaröð
+
+Í vefsíðu sem sýnir þætti í þáttaröð þá getur notandi smellt á hlekk sem vísar á einstakann þátt á rásinni:
+`/episode/<show_id>/<season_number>/<episode_number>` 
+
+---
+
+### Skref-fyrir-skref útskýring á breytunum:
+
+#### 1. Sótt **ID fyrir þáttaröðina (Show ID)**:
+`{{ ep['_links']['show']['href'].split('/')[-1] }}`
+* **`ep['_links']['show']['href']`**: TVMaze API styðst við HAL/HATEOAS staðalinn og skilar tenglum í eigninni `_links`. Þetta gefur fulla vefslóð á þáttaröðina, t.d. `"https://api.tvmaze.com/shows/155"`.
+* **`.split('/')`**: Þetta er Python strengjaaðferð sem skiptir slóðinni upp í lista af strengjum miðað við skástrikin (`/`). Niðurstaðan verður t.d. `['https:', '', 'api.tvmaze.com', 'shows', '155']`.
+* **`[-1]`**: Vísar í **síðasta stakið** í listanum, sem er auðkenni þáttaraðarinnar (ID-talan, t.d. `155`). Þetta er gagnleg tækni þegar `ep` hluturinn geymir ekki `show_id` sem stakan reit.
+
+#### 2. Sótt **seríunúmer (Season)**:
+`{{ ep['season'] }}`
+* Nálgast númer árstíðarinnar/seríunnar úr orðasafni þáttarins (t.d. `1`).
+
+#### 3. Sótt **þáttanúmer (Number)**:
+`{{ ep['number'] }}`
+* Nálgast númer þáttarins innan þeirrar seríu (t.d. `3`).
+
+#### 4. Sýnilegur texti hlekksins:
+`{{ ep['number'] }} - {{ ep['name'] }}`
+* Birtir þáttanúmerið og heiti þáttarins á síðunni fyrir notandann, t.d. **`3 - Baelor`**.
+
+---
+
+### Dæmi um útkomu í HTML:
+Ef þátturinn er 3. þáttur í 1. seríu af þáttaröð með ID `155` sem heitir *"Baelor"*, mun Jinja2 þýða kóðann yfir í eftirfarandi HTML:
+
+```html
+<li>
+    Episode: <a href="/episode/155/1/3">3 - Baelor</a>
+</li>
+```
+
+Þessi slóð passar svo við Flask rás í bakendanum sem tæki t.d. við breytunum svona: `@app.route('/episode/<int:show_id>/<int:season>/<int:number>')`.
