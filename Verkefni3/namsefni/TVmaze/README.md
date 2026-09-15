@@ -162,8 +162,6 @@ Við notum Jinja erfðir til að halda samræmdu útliti. `layout.html` inniheld
 Í vefsíðu sem sýnir þætti í þáttaröð þá getur notandi smellt á hlekk sem vísar á einstakann þátt á rásinni:
 `/episode/<show_id>/<season_number>/<episode_number>` 
 
----
-
 ### Skref-fyrir-skref útskýring á breytunum:
 
 #### 1. Sótt **ID fyrir þáttaröðina (Show ID)**:
