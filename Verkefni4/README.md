@@ -64,14 +64,12 @@ Búðu til eigin kóðalausnir sem henta þínu lokaverkefni. Hér eru nokkrir *
 - [Fileupload](https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/), ljósmyndir fyrir blogfærslur. (**10%** vægi)
 - Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). (**10%** vægi)
 - Stjórnborð síða þar sem hægt er að breyta eða bæta við flokkum í Tinydb gagnagrunn. (**5%** vægi)
-- 
 - [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ). (**5%** vægi)
 - [WTFORM WTForms is a flexible forms validation and rendering library for Python web development.](https://flask-wtf.readthedocs.io/en/1.2.x/)  (**5%** vægi)
 - [CKeditor. Rich Text Editor in Flask](https://ckeditor.com/) (**5%** vægi)
-- 
-- **HTMX** er framendalausn þar sem vafrinn er í lykilhlutverki í samskiptum við miðlarann  
-    - Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). (**5%** vægi)
 - **Annað** sem nemendur skýra frá í kynningu lokverkefnis (**5%** vægi)
+<!-- - **HTMX** er framendalausn þar sem vafrinn er í lykilhlutverki í samskiptum við miðlarann  
+    - Notaðu [htmx](https://htmx.org/docs/) til að gera vefinn dýnamískan (án þess að reload alla síðu) fyrir [delete](https://youtu.be/O2Xd6DmcB9g?t=1996) aðgerð á blogfærslum og [leit](https://www.youtube.com/watch?v=PWEl1ysbPAY). (**5%** vægi)-->
 
 ---
 
