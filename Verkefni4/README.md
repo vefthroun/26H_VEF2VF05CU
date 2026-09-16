@@ -42,8 +42,8 @@ Matþættir eru í verkefni 4 **í Canvas**. (_í vinnslu_)
 1. Notkun á dynamic route og errorhandler (404 villa) **(5%)**
 1. Vefsíða sem birtir blogfærslur með röðun (nýjast efst). **(5%)**
 1. Login, sessions, validation og logout. **(5%)**
-1. Nýskráning notanda í Tinydb gagnagrunn **(10%)**
-1. Á pófíl síðu getur notandi framkvæmt CRUD aðgerðir á JSON skrá, höndlað með TinyDB (blogfærslur) **(5%)**
+1. Nýskráning notanda í Tinydb gagnagrunn **(5%)**
+1. Á pófíl síðu getur notandi framkvæmt CRUD aðgerðir á JSON skrá, höndlað með TinyDB (blogfærslur) **(10%)**
    * Hnappur til að búa til blogfærslu -> síða með HTML Form til að skrifa nýja blogfærslu, Flash tilkynning.
    * Hnappur til að uppfæra blogfærslu -> síða með HTML Form til að uppfæra blogfærslu, Flash tilkynning.
    * Hnappur til að eyða blogfærslu -> FLash tilkynning 
