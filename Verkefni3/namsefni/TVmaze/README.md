@@ -159,8 +159,7 @@ Við notum Jinja erfðir til að halda samræmdu útliti. `layout.html` inniheld
 
 ### Listi yfir kvikmyndagreinar _(Genres)_
 
-Comprehensive List of Supported GenresThe specific genres actively used and supported by the TVmaze database 
-include:
+The specific genres actively used and supported by the **TVmaze** database include:
 
 * Action
 * Anime
