@@ -36,19 +36,26 @@ Matþættir eru í verkefni 4 **í Canvas**. (_í vinnslu_)
 #### Eftirfarandi verkþættir eru metnir til einkunna: verkefni 1-4 (70%)
 
 1. Jinja: inheritance, include, skilyrðissetnignar, lykkjunotkun, filter, url_for, breytur. **(10%)**
-1. PicoCSS eða eigið CSS safn fyrir uppsetningu og útlit. **(10%)**
+1. PicoCSS eða eigið CSS safn fyrir uppsetningu og útlit. **(5%)**
 1. Efnisyfirlit (menu) sýnir hvaða hlekkur er virkur hverju sinni og í efnisyfirlitinu er leitargluggi **(5%)**
-1. API notkun (_ekki Epguides API_) til að sækja gögn sem birtast á vef, lágmark 2 mismunandi fyrirspurnir. **(10%)**
+1. API notkun (_ekki TWmaze API_) til að sækja gögn sem birtast á vef, lágmark 2 mismunandi fyrirspurnir. **(10%)**
 1. Notkun á dynamic route og errorhandler (404 villa) **(5%)**
 1. Vefsíða sem birtir blogfærslur með röðun (nýjast efst). **(5%)**
-1. Login, sessions, validation og einföld auðkenning fyrir einn notanda (admin@admin.is og lykilorðið 123456), logout. **(5%)**
-1. Admin (dashboard) með töfluuppsetningu [sýnidæmi](https://blog-admin-ui.netlify.app/), CRUD aðgerðir á JSON skrá höndlað með TinyDB (blogfærslur). **(20%)**
-   * Blog yfirlit í töflu
+1. Login, sessions, validation og logout. **(5%)**
+1. Nýskráning notanda í Tinydb gagnagrunn **(10%)**
+1. Á pófíl síðu getur notandi framkvæmt CRUD aðgerðir á JSON skrá, höndlað með TinyDB (blogfærslur) **(5%)**
    * Hnappur til að búa til blogfærslu -> síða með HTML Form til að skrifa nýja blogfærslu, Flash tilkynning.
    * Hnappur til að uppfæra blogfærslu -> síða með HTML Form til að uppfæra blogfærslu, Flash tilkynning.
-   * Hnappur til að eyða blogfærslu -> FLash tilkynning birtist á stjórnborði
-   * "Select" innsláttarreitur til að velja flokk (_Category_)
-   * Notendur geta skráð sig í gagnagrunn og síðan loggað sig inn og skrifað pósta sem birtast í blogginu
+   * Hnappur til að eyða blogfærslu -> FLash tilkynning 
+1. Admin (dashboard) með töfluuppsetningu [sýnidæmi](https://blog-admin-ui.netlify.app/), . **(10%)**
+   * Einungis notandi með session `role='admin'` getur komist á admin síðuna  
+   *  Yfirlit notenda (_users_) í töflu
+   *  Hnappur til að eyða notenda úr gagnagrunni -> FLash tilkynning
+   *  Yfirlit pósta (_posts_) í töflu
+   *  Hnappur til að eyða póstum úr gagnagrunni -> FLash tilkynning
+
+
+   
 
 #### Nýjungar: (30%)
 
