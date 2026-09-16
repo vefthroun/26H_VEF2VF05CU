@@ -59,7 +59,7 @@ Matþættir eru í verkefni 4 **í Canvas**. (_í vinnslu_)
 
 #### Nýjungar: (30%)
 
-Hér eru nokkrir **valmöguleikar** í boði þar semandi býr til eigin kóðalausnir sem henta hans lokaverkefni.
+Búðu til eigin kóðalausnir sem henta þínu lokaverkefni. Hér eru nokkrir **valmöguleikar** í boði:
 
 - [Fileupload](https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/), ljósmyndir fyrir blogfærslur. (**10%** vægi)
 - Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). (**10%** vægi)
