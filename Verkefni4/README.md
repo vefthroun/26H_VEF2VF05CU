@@ -25,8 +25,6 @@
 
 **Ath.** sumir API biðja um að fá kreditkorta upplýsingar, sleppum þeim.
 
-- **[hýsing vefs á Py anywhere](py-anywhere/README.md)**
-
 ---
 
 ### Námsmat 
@@ -63,6 +61,7 @@ Búðu til eigin kóðalausnir sem henta þínu lokaverkefni. Hér eru nokkrir *
 
 - [Fileupload](https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/), ljósmyndir fyrir blogfærslur. (**10%** vægi)
 - Vefurinn er hýstur (live production) með [PythonAnywhere](https://www.pythonanywhere.com/). (**10%** vægi)
+  - - **[hýsing vefs á Py anywhere](py-anywhere/README.md)**
 - Í stjórnborð síðu er hægt að bæta við flokkum í Tinydb gagnagrunn. (**5%** vægi)
 - [Pagination in Flask: Split Your Data Into Pages](https://www.youtube.com/watch?v=U18hO1ngZEQ). (**5%** vægi)
 - [WTFORM WTForms is a flexible forms validation and rendering library for Python web development.](https://flask-wtf.readthedocs.io/en/1.2.x/)  (**5%** vægi)
