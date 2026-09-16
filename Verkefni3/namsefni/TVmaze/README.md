@@ -157,6 +157,39 @@ Við notum Jinja erfðir til að halda samræmdu útliti. `layout.html` inniheld
 
 ---
 
+### Listi yfir kvikmyndagreinar _(Genres)_
+
+Comprehensive List of Supported GenresThe specific genres actively used and supported by the TVmaze database 
+include:
+
+* Action
+* Anime
+* Adventure
+* Children
+* Comedy
+* Crime
+* DIY
+* Drama
+* Espionage
+* Family
+* Fantasy
+* Food
+* History
+* Horror
+* Legal
+* Medical
+* Music
+* Mystery
+* Nature
+* Romance
+* Science-Fiction
+* Sports
+* Supernatural
+* Thriller
+* TravelWarWestern
+
+---
+
 ### Hvernig á að sækja þátt úr þáttaröð
 
 Í vefsíðu sem sýnir þætti í þáttaröð þá getur notandi smellt á hlekk sem vísar á einstakann þátt á rásinni:
