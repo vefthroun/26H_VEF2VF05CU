@@ -185,7 +185,9 @@ The specific genres actively used and supported by the **TVmaze** database inclu
 * Sports
 * Supernatural
 * Thriller
-* TravelWarWestern
+* Travel
+* War
+* Western
 
 ---
 
