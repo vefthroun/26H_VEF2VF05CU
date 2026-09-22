@@ -157,6 +157,99 @@ Við notum Jinja erfðir til að halda samræmdu útliti. `layout.html` inniheld
 
 ---
 
+Hér er yfirlit yfir helstu endapunkta (endpoints) **TVmaze API**. Grunnvefslóðin (root URL) fyrir öll köll er `https://api.tvmaze.com`.
+
+---
+
+### 1. Sjónvarpsþættir (Shows)
+* **Aðalupplýsingar um þátt (Show Main Information)**:
+  `GET /shows/:id`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1`
+* **Listi yfir alla þætti (Show Episode List)**:
+  `GET /shows/:id/episodes`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/episodes`
+* **Listi yfir árstíðir (Show Seasons)**:
+  `GET /shows/:id/seasons`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/seasons`
+* **Aðalleikarar (Show Cast)**:
+  `GET /shows/:id/cast`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/cast`
+* **Tæknifólk / Starfslið (Show Crew)**:
+  `GET /shows/:id/crew`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/crew`
+* **Aukaheiti (Show AKAs)**:
+  `GET /shows/:id/akas`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/akas`
+* **Myndir (Show Images)**:
+  `GET /shows/:id/images`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/images`
+* **Einn ákveðinn þáttur eftir seríu- og þáttanúmeri (Episode by Number)**:
+  `GET /shows/:id/episodebynumber?season=:season&number=:number`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/episodebynumber?season=1&number=1`
+* **Þættir eftir loftunardegi (Episodes by Date)**:
+  `GET /shows/:id/episodesbydate?date=:date`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/episodesbydate?date=2013-07-01`
+* **Heildarlisti yfir þætti með síðutali (Show Index)**:
+  `GET /shows?page=:num`
+  * *Dæmi:* `https://api.tvmaze.com/shows?page=1`
+
+---
+
+### 2. Stakir þættir (Episodes)
+* **Aðalupplýsingar um stakan þátt (Episode Main Information)**:
+  `GET /episodes/:id`
+  * *Dæmi:* `https://api.tvmaze.com/episodes/1`
+* **Gestaleikarar í þátti (Episode Guest Cast)**:
+  `GET /episodes/:id/guestcast`
+  * *Dæmi:* `https://api.tvmaze.com/episodes/1/guestcast`
+* **Gestatæknifólk í þátti (Episode Guest Crew)**:
+  `GET /episodes/:id/guestcrew`
+  * *Dæmi:* `https://api.tvmaze.com/episodes/1/guestcrew`
+
+---
+
+### 3. Árstíðir (Seasons)
+* **Þættir innan ákveðinnar árstíðar (Season Episodes)**:
+  `GET /seasons/:id/episodes`
+  * *Dæmi:* `https://api.tvmaze.com/seasons/1/episodes`
+
+---
+
+### 4. Leit (Search)
+* **Almenn leit að þætti (Show Search - fuzzy search)**:
+  `GET /search/shows?q=:query`
+  * *Dæmi:* `https://api.tvmaze.com/search/shows?q=girls`
+* **Einstök leit að þætti (Show Single Search)**:
+  `GET /singlesearch/shows?q=:query`
+  * *Dæmi:* `https://api.tvmaze.com/singlesearch/shows?q=girls`
+* **Fletta upp þætti eftir IMDB / TVDB ID (Show Lookup)**:
+  `GET /lookup/shows?imdb=:id` eða `GET /lookup/shows?thetvdb=:id`
+* **Leit að leikurum eða fólki (People Search)**:
+  `GET /search/people?q=:query`
+  * *Dæmi:* `https://api.tvmaze.com/search/people?q=lauren`
+
+---
+
+### 5. Fólk og leikarar (People)
+* **Aðalupplýsingar um persónu / leikara (Person Main Information)**:
+  `GET /people/:id`
+  * *Dæmi:* `https://api.tvmaze.com/people/1`
+* **Leikferill persónu (Person Cast Credits)**:
+  `GET /people/:id/castcredits`
+  * *Dæmi:* `https://api.tvmaze.com/people/1/castcredits`
+
+---
+
+### 6. Samþætting gagna í einu kalli (Embedding)
+Margar af þessum slóðum styðja `embed` breytuna til að draga inn tengd gögn (t.d. leikara eða þáttalista) í sama svari án þess að gera mörg köll:
+* `https://api.tvmaze.com/shows/1?embed=cast`
+* `https://api.tvmaze.com/shows/1?embed=episodes`
+* `https://api.tvmaze.com/shows/1?embed[]=episodes&embed[]=cast`
+
+💡 Viltu að ég sýni þér dæmi um hvernig á að útfæra tiltekna rás í Flask (t.d. fyrir leikara/cast eða árstíðir) og birta gögnin í Jinja2 sniðmáti?
+
+---
+
 ### Listi yfir kvikmyndagreinar _(Genres)_
 
 The specific genres actively used and supported by the **TVmaze** database include:
