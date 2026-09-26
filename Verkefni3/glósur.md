@@ -22,8 +22,6 @@
     *   `session` hluturinn geymir dulkóðuð gögn notanda á milli beiðna og krefst þess að `app.secret_key` sé skilgreint.
     *   Áframvísun er framkvæmd með `redirect()` og hægt er að stöðva beiðni með `abort()`. Svörum sem eru Python orðasöfn eða listar er sjálfkrafa breytt í JSON svar með `jsonify()`.
 
----
-
 ### 2. Python Orðasöfn og CRUD aðgerðir (*Python Dictionary*)
 
 *   **Skilgreining og eiginleikar:**
