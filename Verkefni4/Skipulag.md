@@ -41,7 +41,7 @@
 1. **Undirsíða með API gögnum**
    * hér eru gögn sem notandi hefur valið af forsíðu
      * gögn sem hægt er að nálgast miðað við ID
-1. **Notandi** (user profile)
+1. **Notandi** (_user profile_)
    * aðgangi lokað með session (_role=user_)
      * **stjórnborð** (_dashboard_)
      * yfirlit yfir alla pósta notanda.
