@@ -46,7 +46,7 @@
      * **stjórnborð** (_dashboard_)
      * yfirlit yfir alla pósta notanda.
      * notandi getur skrifað nýja pósta, breytt eða eytt póstum
-1. **Stjórandi** (_admin_)
+1. **Stjórnandi** (_admin_)
    * aðgangi lokað með session (_role=admin_)
      * **stjórnborð** (_dashboard_)
      * yfirlit yfir notendur. Hægt er að eyða notendum
