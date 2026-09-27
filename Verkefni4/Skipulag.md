@@ -26,46 +26,29 @@
 
 
 
-<!-- Athugið að ef verkefninu hefur ekki verið skilað fyrir **kl. 8 á mánudagsmorgun 19. maí** (_Deadline_) þá er ekki hægt að fara yfir verkefnið og viðkomandi er _fallinn_ í áfanganum.-->
-
-<!--
-### Undirbúningsvinna
-
-Gerið grein fyrir skipulagi og virkni vefsins
+### skipulag
 
 #### Efnisyfirlit - _Site map_
 
-_Dæmi miðað við grunnkröfur:_
+1. **Layout** (_extends html_)
+   * header (_block header_)
+     * innskráning / nýskráning / flokkar / leit / 
+   * main (_block content_)
+   * footer (_block footer_) 
+1. **Forsíða** 
+   * json - tinydb blog
+   * [val] json API
+1. **Undirsíða með API gögnum**
+   * hér eru gögn sem notandi hefur valið af forsíðu
+     * gögn sem hægt er að nálgast miðað við ID
+1. **Notandi** (user profile)
+   * aðgangi lokað með session (_role=user_)
+     * **stjórnborð** (_dashboard_)
+     * yfirlit yfir alla pósta notanda.
+     * notandi getur skrifað nýja pósta, breytt eða eytt póstum
+1. **Stjórandi** (_admin_)
+   * aðgangi lokað með session (_role=admin_)
+     * **stjórnborð** (_dashboard_)
+     * yfirlit yfir notendur. Hægt er að eyða notendum
+     * yfirlit yfir alla pósta í notenda. Hægt er að eyða póstum
 
-1. app innihald (__init__)
-   * blog.py
-   * admin.py
-2. blog.py 
-   * header, efnisyfirlit með flokkavali
-   * main, birtir gögn úr Json skrá
-   * aside, sækir gögn úr Json API
-3. admin.py
-   * header, efnisyfirlit
-   * aðgangi lokað með session
-   * stjórnborð (_dashboard_)
-     * yfirlit yfir alla pósta í töflu. Hægt er að breyta eða eyða póstum
-     * síða þar sem hægt er skrifa nýjan póst
-     * síða þar sem hægt er að breyta póstum
-
-#### Json gagnagrind
-
-1. tinydb (_default) 
-   1. id
-   2. flokkur
-   3. postur
-   4. dagsetning
-   5. .....
-
-#### Nýungar
-
-Gerið grein fyrir eigin hönnun og forritun sem ekki er tiltekin í grunnkröfum verkefnisins.
-
-Dæmi:
-
-* Vefurinn verður hýstur á [Pythonanywhere.com](https://www.pythonanywhere.com/)
--->
