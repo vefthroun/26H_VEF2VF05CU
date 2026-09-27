@@ -50,5 +50,5 @@
    * aðgangi lokað með session (_role=admin_)
      * **stjórnborð** (_dashboard_)
      * yfirlit yfir notendur. Hægt er að eyða notendum
-     * yfirlit yfir alla pósta í notenda. Hægt er að eyða póstum
+     * yfirlit yfir alla pósta. Hægt er að eyða póstum
 
