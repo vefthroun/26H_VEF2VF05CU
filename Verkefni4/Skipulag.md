@@ -24,9 +24,9 @@
 * Kynning lokaverkefnis, gerið grein fyrir eigin hönnun og forritun sem ekki er tiltekin í grunnkröfum verkefnisins
 * Lokaverkefnaskil,  **skilafrestur er tiltekinn í Canvas**
 
+---
 
-
-### skipulag
+### Skipulag
 
 #### Efnisyfirlit - _Site map_
 
