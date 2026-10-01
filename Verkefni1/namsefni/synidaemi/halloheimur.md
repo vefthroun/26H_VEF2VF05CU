@@ -4,26 +4,27 @@
 ### Halló heimur 
  
 ```python
-# import Flask class in Python
+
+# Flytur inn Flask klasann úr flask safninu
 from flask import Flask
 
-# Create app, that hosts the application.
+# Býr til Flask forritið
 app = Flask(__name__)
 
-# route() maps what you type in the browser (the url) to a Python function.
-# @app.route() (@ er decorator í python) bindur fallið index() við URL. 
-# Whenever a browser requests a URL, the associated function is called and 
-# return value is sent back to the browser
+# route() tengir það sem þú slærð inn í vafrann (vefslóðina/URL) við Python fall.
+# @ táknar skreytingu (decorator) í Python sem bindur fallið index() við vefslóðina.
+# Þegar vafrinn biður um vefslóð er viðeigandi fall kallað til og
+# skilagildið er sent aftur til vafrans.
 
 @app.route('/')
 def index():
-    # fallið skilar hér streng sem er sendur til biðlara (e. client) í vafra.
-    return "<h1>Hello, World!</h1>"  # Við getum blandað html og texta.
+    # Fallið skilar hér streng sem er sent til vafrans.
+    return "<h1>Halló heimur!</h1>"  # Við getum blandað HTML og texta saman.
 
-# This starts the web app 
+# Þetta ræsir vefforritið
 if __name__ == '__main__':
-    # run, starts a built-in development server
-    app.run(debug=True, use_reloader=True)   
+    # run ræsir innbyggðan þróunarvefþjón (development server)
+    app.run(debug=True, use_reloader=True)
 
 ```
 
