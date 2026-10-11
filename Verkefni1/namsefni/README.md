@@ -75,8 +75,8 @@ if __name__ == '__main__':
 ---
 
 ### 2\. Framendakóðinn: `templates/index.html`
-
-Í HTML skránni eru Python breyturnar birtar með slaufusvigum `{{ ... }}` og Jinja lykkjum `{% for ... %}`:
+<details>
+ <summary>Í HTML skránni eru Python breyturnar birtar með slaufusvigum `{{ ... }}` og Jinja lykkjum `{% for ... %}`: </summary>
 
 ```HTML
 
@@ -95,6 +95,8 @@ if __name__ == '__main__':
     </ul>
 
 ```
+
+</details>
 
 ---
 
