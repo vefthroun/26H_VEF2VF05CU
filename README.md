@@ -24,13 +24,13 @@
 
 > Prófin eru tekin í lokuðu umhverfi í Canvas
 
-1. Verkefni 1. <strong>15%</strong>
+1. Verkefni. <strong>15%</strong>
     * Flask grunnatriði, Jinja: templates (7%)
     * Stöðupróf 1 (8%)
-1. Verkefni 2. <strong>15%</strong> 
+1. Verkefni. <strong>15%</strong> 
     * HTML Form, Form vinnsla, CRUD (7%)
     * Stöðupróf 2 (8%)
-1. Verkefni 3 <strong>20%</strong> 
+1. Verkefni. <strong>20%</strong> 
     * API beiðnir (5%)
     * JSON skráarvinnsla (5%)
     * Stöðupróf 3  (10%)
