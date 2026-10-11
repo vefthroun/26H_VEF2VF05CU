@@ -35,7 +35,7 @@ verkefni/
 
 Flask er vísindalega kallað „ör-vinnurammi“ (*microframework*) vegna þess að það þvingar forritara ekki til að nota tiltekna gagnagrunna eða möppuskipulag. Ef þörf er á viðbótarvirkni (eins og gagnagrunnstengingu, auðkenningu eða formstaðfestingum) er auðvelt að bæta við viðeigandi Python pökkum eða Flask-viðbótum (*extensions*).
 
-Hér er lítið dæmi sem sýnir hvernig **[suspicious link removed]** notar `render_template()` til að senda gögn (strengi, lista og orðasöfn) yfir í Jinja2 sniðmát í **templates/** möppunni.
+Hér er lítið dæmi sem sýnir hvernig **app.py** notar `render_template()` til að senda gögn (strengi, lista og orðasöfn) yfir í Jinja2 sniðmát í **templates/** möppunni.
 
 ---
 
