@@ -24,18 +24,18 @@
 
 > Prófin eru tekin í lokuðu umhverfi í Canvas
 
-1. 15% Verkefni 1 
+1. Verkefni 1. 15% 
     * Flask grunnatriði, Jinja: templates (7%)
     * Stöðupróf 1 (8%)
-1. 15% Verkefni 2
+1. Verkefni 2. 15% 
     * HTML Form, Form vinnsla, CRUD (7%)
     * Stöðupróf 2 (8%)
-1. 20% Verkefni 3
+1. Verkefni 3 20% 
     * API beiðnir (5%)
     * JSON skráarvinnsla (5%)
     * Stöðupróf 3  (10%)
-1. 25% Próf úr verkefnum 1, 2 og 3 - **Lykilmatsþáttur**
-1. 25% Lokaverkefni.  Nemendur kynna / verja verkefni - **Lykilmatsþáttur**
+1. Próf úr verkefnum 1, 2 og 3 - **Lykilmatsþáttur** 25% 
+1. Lokaverkefni.  Nemendur kynna / verja verkefni - **Lykilmatsþáttur** 25% 
    <details>
      <summary><strong>Matsþættir kynningar</strong></summary>
      <ul>
