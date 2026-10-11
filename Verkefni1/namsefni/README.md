@@ -35,6 +35,74 @@ verkefni/
 
 Flask er vísindalega kallað „ör-vinnurammi“ (*microframework*) vegna þess að það þvingar forritara ekki til að nota tiltekna gagnagrunna eða möppuskipulag. Ef þörf er á viðbótarvirkni (eins og gagnagrunnstengingu, auðkenningu eða formstaðfestingum) er auðvelt að bæta við viðeigandi Python pökkum eða Flask-viðbótum (*extensions*).
 
+Hér er lítið dæmi sem sýnir hvernig **[suspicious link removed]** notar `render_template()` til að senda gögn (strengi, lista og orðasöfn) yfir í Jinja2 sniðmát í **templates/** möppunni[1].
+
+---
+
+### 1\. Bakendakóðinn: `app.py`
+
+Flask leitar sjálfgefið að HTML sniðmátum í `templates/` möppunni sem er staðsett við hliðina á Python skránni. Gögnin eru send sem lykilorðafæribreytur (*keyword arguments*) inn í `render_template()`:
+
+```Python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    # 1. Búum til nokkrar mismunandi gerðir af Python gögnum
+    notandanafn = "Jón"
+    áfangar = ["FORR2FA", "VEFÞ2VF", "VESM2VT"]
+    notendaupplysingar = {"skoli": "Tækniskólinn", "onn": "Haust 2026"}
+    
+    # 2. Sendum gögnin yfir í templates/index.html
+    # Vinstra megin við '=' er heitið sem Jinja notar, hægra megin er Python breytan
+    return render_template(
+        'index.html', 
+        user=notandanafn, 
+        courses=áfangar, 
+        info=notendaupplysingar
+    )
+
+if __name__ == '__main__':
+    app(debug=True)
+
+```
+
+---
+
+### 2\. Framendakóðinn: `templates/index.html`
+
+Í HTML skránni eru Python breyturnar birtar með slaufusvigum `{{ ... }}` og Jinja lykkjum `{% for ... %}`[2]:
+
+```HTML
+
+    {# 1. Birting á streng (user) #}
+    <h1>Velkomin(n), {{ user }}!</h1>
+
+    {# 2. Birting á gildum úr orðasafni (info) með punktatáknun eða lyklum #}
+    <p><strong>Skóli:</strong> {{ info.skoli }} ({{ info['onn'] }})</p>
+
+    {# 3. Ítrun í gegnum lista (courses) með Jinja for-lykkju #}
+    <h3>Áfangar á þessari önn:</h3>
+    <ul>
+    {% for afangi in courses %}
+        <li>{{ afangi }}</li>
+    {% endfor %}
+    </ul>
+
+```
+
+---
+
+### Hvernig þetta virkar:
+
+* **Möppuskipulag:** Flask leitar sjálfkrafa í möppunni `templates/` að skránni `index.html`.
+* **Gagnasending:** Heitin sem þú gefur í `render_template(user=..., courses=..., info=...)` verða að breytum inni í Jinja2 sniðmátinu.
+* **Sjálfvirk öryggishreinsun:** Jinja2 hreinsar textann sjálfkrafa (*auto-escaping*) til að koma í veg fyrir öryggisgalla (eins og XSS-árásir) ef textinn inniheldur óæskilegan HTML-kóða.
+
+---
+
 #### Uppsetning vefþróunarsvæðis
 
 - [How to build a Virtual Environment](how-to-build-venv/README.md)
