@@ -40,9 +40,10 @@ Hér er lítið dæmi sem sýnir hvernig **app.py** notar `render_template()` ti
 ---
 
 ### 1\. Bakendakóðinn: `app.py`
-<details><summary>
-Flask leitar sjálfgefið að HTML sniðmátum í `templates/` möppunni sem er staðsett við hliðina á Python skránni. Gögnin eru send sem lykilorðafæribreytur (*keyword arguments*) inn í `render_template()`:
+<details>
+ <summary>Flask leitar sjálfgefið að HTML sniðmátum í `templates/` möppunni sem er staðsett við hliðina á Python skránni. Gögnin eru send sem lykilorðafæribreytur (*keyword arguments*) inn í `render_template()`:
 </summary>
+ 
 ```Python
 from flask import Flask, render_template
 
@@ -68,7 +69,9 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 ```
+
 </details>
+
 ---
 
 ### 2\. Framendakóðinn: `templates/index.html`
