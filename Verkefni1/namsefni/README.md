@@ -3,7 +3,7 @@
 ### 1\. Hvernig Flask virkar í Python
 
 * **WSGI Forrit:** Þegar forrit er stofnað með `app = Flask(__name__)` býr Flask til WSGI vefforrit sem tekur á móti HTTP beiðnum frá vafranum og skilar svörum til baka.
-* **Rásun (** **Routing** **):** Flask notar skreytinguna `@app.route('/...')` til að tengja tilteknar vefslóðir (*URL*) við Python birtingarföll (*view functions*). Þegar notandi opnar slóðina keyrir Flask viðkomandi fall og skilar niðurstöðunni (venjulega HTML eða JSON) til vafrans[2][4].
+* **Rásun (** **Routing** **):** Flask notar skreytinguna `@app.route('/...')` til að tengja tilteknar vefslóðir (*URL*) við Python birtingarföll (*view functions*). Þegar notandi opnar slóðina keyrir Flask viðkomandi fall og skilar niðurstöðunni (venjulega HTML eða JSON) til vafrans.
 * **Beiðnir og svör:** Flask heldur utan um innkomandi gögn í gegnum `request` hlutinn (t.d. formgögn úr `request.form` eða færibreytur úr `request.args`).
 
 ---
