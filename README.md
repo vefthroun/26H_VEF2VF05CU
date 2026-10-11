@@ -37,11 +37,12 @@
 1. 25% Próf úr verkefnum 1, 2 og 3 - **Lykilmatsþáttur**
 1. 25% Lokaverkefni.  Nemendur kynna / verja verkefni - **Lykilmatsþáttur**
    <details>
-     <summary>**Matsþættir kynningar**</summary>
-     1. Virkni vefsins - almenn lýsing
-     1. Api virkni - endapunktar og þáttun
-     1. Umsjónarkerfi notenda - almenn lýsing
-     1. Lýsing á virkni kóðans í Flask forritinu
-     1. Lýsing á virkni Jinja sniðmátsins 
-     1. Nýungar, almenn lýsing á hvað er notað umfram grunnkröfur
+     <summary><strong>Matsþættir kynningar</strong></summary>
+     <ul>
+      <li>Virkni vefsins - almenn lýsing</li>
+      <li>Api virkni - endapunktar og þáttun</li>
+      <li> Umsjónarkerfi notenda - almenn lýsing</li>
+     <li>Lýsing á virkni kóðans í Flask forritinu</li>
+     <li>Lýsing á virkni Jinja sniðmátsins </li>
+     <li>Nýungar, almenn lýsing á hvað er notað umfram grunnkröfur</li>
    </details>
