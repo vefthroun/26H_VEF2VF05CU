@@ -154,3 +154,170 @@ Við notum Jinja erfðir til að halda samræmdu útliti. `layout.html` inniheld
 *   **JSON sjálfvirkni**: Flask og TVMaze vinna bæði með JSON snið sem er auðvelt að varpa yfir í Python orðasöfn.
 *   **Jinja2 Erfðir**: Með því að nota `{% extends %}` þurfum við ekki að endurtaka HTML kóða fyrir valmyndir eða fót (footer) á hverri síðu.
 *   **HTML Escaping**: Jinja2 hreinsar sjálfkrafa gögn úr API-inu til að verja síðuna gegn árásum, nema við notum `| safe` síuna (filter) fyrir gögn sem innihalda HTML merki (eins og `summary` úr TVMaze).
+
+---
+
+Hér er yfirlit yfir helstu endapunkta (endpoints) **TVmaze API**. Grunnvefslóðin (root URL) fyrir öll köll er `https://api.tvmaze.com`.
+
+---
+
+### 1. Sjónvarpsþættir (Shows)
+* **Aðalupplýsingar um þátt (Show Main Information)**:
+  `GET /shows/:id`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1`
+* **Listi yfir alla þætti (Show Episode List)**:
+  `GET /shows/:id/episodes`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/episodes`
+* **Listi yfir árstíðir (Show Seasons)**:
+  `GET /shows/:id/seasons`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/seasons`
+* **Aðalleikarar (Show Cast)**:
+  `GET /shows/:id/cast`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/cast`
+* **Tæknifólk / Starfslið (Show Crew)**:
+  `GET /shows/:id/crew`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/crew`
+* **Aukaheiti (Show AKAs)**:
+  `GET /shows/:id/akas`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/akas`
+* **Myndir (Show Images)**:
+  `GET /shows/:id/images`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/images`
+* **Einn ákveðinn þáttur eftir seríu- og þáttanúmeri (Episode by Number)**:
+  `GET /shows/:id/episodebynumber?season=:season&number=:number`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/episodebynumber?season=1&number=1`
+* **Þættir eftir loftunardegi (Episodes by Date)**:
+  `GET /shows/:id/episodesbydate?date=:date`
+  * *Dæmi:* `https://api.tvmaze.com/shows/1/episodesbydate?date=2013-07-01`
+* **Heildarlisti yfir þætti með síðutali (Show Index)**:
+  `GET /shows?page=:num`
+  * *Dæmi:* `https://api.tvmaze.com/shows?page=1`
+
+---
+
+### 2. Stakir þættir (Episodes)
+* **Aðalupplýsingar um stakan þátt (Episode Main Information)**:
+  `GET /episodes/:id`
+  * *Dæmi:* `https://api.tvmaze.com/episodes/1`
+* **Gestaleikarar í þátti (Episode Guest Cast)**:
+  `GET /episodes/:id/guestcast`
+  * *Dæmi:* `https://api.tvmaze.com/episodes/1/guestcast`
+* **Gestatæknifólk í þátti (Episode Guest Crew)**:
+  `GET /episodes/:id/guestcrew`
+  * *Dæmi:* `https://api.tvmaze.com/episodes/1/guestcrew`
+
+---
+
+### 3. Árstíðir (Seasons)
+* **Þættir innan ákveðinnar árstíðar (Season Episodes)**:
+  `GET /seasons/:id/episodes`
+  * *Dæmi:* `https://api.tvmaze.com/seasons/1/episodes`
+
+---
+
+### 4. Leit (Search)
+* **Almenn leit að þætti (Show Search - fuzzy search)**:
+  `GET /search/shows?q=:query`
+  * *Dæmi:* `https://api.tvmaze.com/search/shows?q=girls`
+* **Einstök leit að þætti (Show Single Search)**:
+  `GET /singlesearch/shows?q=:query`
+  * *Dæmi:* `https://api.tvmaze.com/singlesearch/shows?q=girls`
+* **Fletta upp þætti eftir IMDB / TVDB ID (Show Lookup)**:
+  `GET /lookup/shows?imdb=:id` eða `GET /lookup/shows?thetvdb=:id`
+* **Leit að leikurum eða fólki (People Search)**:
+  `GET /search/people?q=:query`
+  * *Dæmi:* `https://api.tvmaze.com/search/people?q=lauren`
+
+---
+
+### 5. Fólk og leikarar (People)
+* **Aðalupplýsingar um persónu / leikara (Person Main Information)**:
+  `GET /people/:id`
+  * *Dæmi:* `https://api.tvmaze.com/people/1`
+* **Leikferill persónu (Person Cast Credits)**:
+  `GET /people/:id/castcredits`
+  * *Dæmi:* `https://api.tvmaze.com/people/1/castcredits`
+
+---
+
+### 6. Samþætting gagna í einu kalli (Embedding)
+Margar af þessum slóðum styðja `embed` breytuna til að draga inn tengd gögn (t.d. leikara eða þáttalista) í sama svari án þess að gera mörg köll:
+* `https://api.tvmaze.com/shows/1?embed=cast`
+* `https://api.tvmaze.com/shows/1?embed=episodes`
+* `https://api.tvmaze.com/shows/1?embed[]=episodes&embed[]=cast`
+
+💡 Viltu að ég sýni þér dæmi um hvernig á að útfæra tiltekna rás í Flask (t.d. fyrir leikara/cast eða árstíðir) og birta gögnin í Jinja2 sniðmáti?
+
+---
+
+### Listi yfir kvikmyndagreinar _(Genres)_
+
+The specific genres actively used and supported by the **TVmaze** database include:
+
+* Action
+* Anime
+* Adventure
+* Children
+* Comedy
+* Crime
+* DIY
+* Drama
+* Espionage
+* Family
+* Fantasy
+* Food
+* History
+* Horror
+* Legal
+* Medical
+* Music
+* Mystery
+* Nature
+* Romance
+* Science-Fiction
+* Sports
+* Supernatural
+* Thriller
+* Travel
+* War
+* Western
+
+---
+
+### Hvernig á að sækja þátt úr þáttaröð
+
+Í vefsíðu sem sýnir þætti í þáttaröð þá getur notandi smellt á hlekk sem vísar á einstakann þátt á rásinni:
+`/episode/<show_id>/<season_number>/<episode_number>` 
+
+### Skref-fyrir-skref útskýring á breytunum:
+
+#### 1. Sótt **ID fyrir þáttaröðina (Show ID)**:
+`{{ ep['_links']['show']['href'].split('/')[-1] }}`
+* **`ep['_links']['show']['href']`**: TVMaze API styðst við HAL/HATEOAS staðalinn og skilar tenglum í eigninni `_links`. Þetta gefur fulla vefslóð á þáttaröðina, t.d. `"https://api.tvmaze.com/shows/155"`.
+* **`.split('/')`**: Þetta er Python strengjaaðferð sem skiptir slóðinni upp í lista af strengjum miðað við skástrikin (`/`). Niðurstaðan verður t.d. `['https:', '', 'api.tvmaze.com', 'shows', '155']`.
+* **`[-1]`**: Vísar í **síðasta stakið** í listanum, sem er auðkenni þáttaraðarinnar (ID-talan, t.d. `155`). Þetta er gagnleg tækni þegar `ep` hluturinn geymir ekki `show_id` sem stakan reit.
+
+#### 2. Sótt **seríunúmer (Season)**:
+`{{ ep['season'] }}`
+* Nálgast númer árstíðarinnar/seríunnar úr orðasafni þáttarins (t.d. `1`).
+
+#### 3. Sótt **þáttanúmer (Number)**:
+`{{ ep['number'] }}`
+* Nálgast númer þáttarins innan þeirrar seríu (t.d. `3`).
+
+#### 4. Sýnilegur texti hlekksins:
+`{{ ep['number'] }} - {{ ep['name'] }}`
+* Birtir þáttanúmerið og heiti þáttarins á síðunni fyrir notandann, t.d. **`3 - Baelor`**.
+
+---
+
+### Dæmi um útkomu í HTML:
+Ef þátturinn er 3. þáttur í 1. seríu af þáttaröð með ID `155` sem heitir *"Baelor"*, mun Jinja2 þýða kóðann yfir í eftirfarandi HTML:
+
+```html
+<li>
+    Episode: <a href="/episode/155/1/3">3 - Baelor</a>
+</li>
+```
+
+Þessi slóð passar svo við Flask rás í bakendanum sem tæki t.d. við breytunum svona: `@app.route('/episode/<int:show_id>/<int:season>/<int:number>')`.
