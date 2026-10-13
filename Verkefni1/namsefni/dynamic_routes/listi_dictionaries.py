@@ -5,10 +5,10 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     
-    # dictionary
+    # safn - dictionary
     user = {'username': 'guest'}
     
-    # list
+    # listi með söfnum [{},{}]
     posts = [
         {
             'author': {'username': 'John'},
