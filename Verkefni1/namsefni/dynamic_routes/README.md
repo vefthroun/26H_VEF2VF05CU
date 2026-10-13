@@ -51,3 +51,7 @@ if __name__ == '__main__':
 - `debug=True` kveikir á villuleitarham, sem gefur hjálpleg villuboð.
 - use_reloader=True`` endurræsir miðlarann sjálfkrafa þegar þú gerir breytingar á kóðanum.
 - Notaðu ALDREI `debug=True` í raunverulegu vinnsluumhverfi (production).
+
+---
+
+> **Afritaðu allt í námsefni yfir á tölvuna þína og opnaðu VSC keyrðu upp Flask og skoðaðu dæmin**
