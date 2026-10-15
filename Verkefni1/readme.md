@@ -27,7 +27,9 @@
 1. **Forsíðan** birtir myndirnar af jólahyskinu  þar sem kemur fram **nafn**,  **mynd** og **komudagur**. **20%**
     * Notandi þarf að geta valið einn af þeim til að fá nánari upplýsingar um hann (næsti liður).  Notaðu [url_for](namsefni/urlfor.py) til að birta myndir  
 1. **Undisíðan** birtir það sem var valið á forsíðunni  **20%**
-    * síðan inniheldur; **nafn, persónulýsingu, hegðun, flokk og mynd**. 
+    1. síðan inniheldur; **nafn, persónulýsingu, hegðun, flokk og mynd**.
+    1. include **nav** 
+    1. include **footer**
 1. Flokkur (undirsíða). Ef notandi velur t.d. hlekkinn **Þjófar** úr valmynd þá birtist vefsíða einungis með jólasveinum úr þeim flokki. **25%**
 1. Settu upp 404 error route og viðeigandi html vefsíðu sem er birt ef upp kemur 404 villa **10%** 
 1. Notaðu [Pico css](https://picocss.com/) safnið fyrir uppsetningu og framsetningu á vef, eigið safn eða hvað sem þú vilt nota. **5%**
