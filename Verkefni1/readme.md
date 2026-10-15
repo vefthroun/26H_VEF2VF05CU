@@ -23,7 +23,10 @@
    1. include **nav** (valmynd)
    1. include **footer** (höfundur verkefnis og myndefnis). 
    1. Innihald vefsins kemur með færibreytu í **&lt;main>**
-1. **Valmynd (nav)** inniheldur hlekk á forsíðu og **4** hlekki sem eru 'flokkur' úr gagnagrind **Þjófar / Betlarar / Perrar / Mannætur**.  Notaðu [url_for](namsefni/urlfor.py) fyrir hlekkina  **10%**
+1. **Valmynd (nav)**
+   1. inniheldur hlekk á forsíðu 
+   1. **4** hlekki sem eru úr gagnagrindinni, hegðun:  **Þjófar / Betlarar / Perrar / Mannætur**.
+   1. Notaðu [url_for](namsefni/urlfor.py) fyrir hlekkina  **10%**
 1. **Forsíðan** birtir myndirnar af jólahyskinu  þar sem kemur fram **nafn**,  **mynd** og **komudagur**. **20%**
     * Notandi þarf að geta valið einn af þeim til að fá nánari upplýsingar um hann (næsti liður).  Notaðu [url_for](namsefni/urlfor.py) til að birta myndir  
 1. **Undisíðan** birtir það sem var valið á forsíðunni  **20%**
