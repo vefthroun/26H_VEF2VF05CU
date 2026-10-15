@@ -20,10 +20,10 @@
 * Hér eru [myndir af jólaveinunum](vinnugogn/) í **.zip** skrá sem þú getur notað.
 
 1. Í **index.html** er síðan hlutuð niður í Jinja; **10%**
-   1. include **nav** (valmynd)
+   1. include **header** (valmynd)
    1. include **footer** (höfundur verkefnis og myndefnis). 
    1. Innihald vefsins kemur með færibreytu í **&lt;main>**
-1. **Valmynd (nav)**
+1. **Header (include)**
    1. inniheldur hlekk á forsíðu 
    1. **4** hlekki sem eru úr gagnagrindinni, hegðun:  **Þjófar / Betlarar / Perrar / Mannætur**.
    1. Notaðu [url_for](namsefni/urlfor.py) fyrir hlekkina  **10%**
@@ -31,8 +31,8 @@
    1. þar sem kemur fram **nafn**,  **mynd** og **komudagur**. 
    1. Notandi þarf að geta valið einn af þeim til að fá nánari upplýsingar um hann (næsti liður).
    1. Notaðu [url_for](namsefni/urlfor.py) til að birta myndir  
-1. **Undisíðan** birtir það sem var valið á forsíðunni  **20%**
-    1. síðan inniheldur; **nafn, persónulýsingu, hegðun, flokk og mynd**.
+1. **Val (id) af forsíðu** (undirsíða) birtir öll gildin útfrá ID valinu **20%**
+    1. **nafn, persónulýsing, hegðun, flokkur og mynd**.
     1. include **nav** 
     1. include **footer**
 1. **Flokkur** (undirsíða). Ef notandi velur t.d. hlekkinn **Þjófar** úr `menu` (nav) þá birtist vefsíða einungis með jólasveinum úr þeim flokki. **25%**
