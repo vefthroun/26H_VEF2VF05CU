@@ -19,9 +19,12 @@
 * Hér fyrir neðan er gagnagrind (jolahyski) sem þú getur notað.  
 * Hér eru [myndir af jólaveinunum](vinnugogn/) í **.zip** skrá sem þú getur notað.
 
-1. Vefurinn er hlutaður niður með **include** í Jinja2; **nav** (valmynd), **footer** (höfundur verkefnis og myndefnis). **10%**
-1. Valmynd (nav) inniheldur hlekk á forsíðu og **4** flokka úr gagnagrind **Þjófar / Betlarar / Perrar / Mannætur**.  Notaðu [url_for](namsefni/urlfor.py) fyrir hlekkina  **10%**
-1. Forsíða birtir myndirnar af jólasveinunum  þar sem kemur fram nafn Jólasveins,  komudagur og mynd. Notandi þarf að geta valið einn af jólasveinunum til að fá nánari upplýsingar um hann (næsti liður).  Notaðu [url_for](namsefni/urlfor.py) til að birta myndir  **20%**
+1. Í **layout.html** er vefurinn er hlutaður niður í Jinja; **10%**
+  1. include **nav** (valmynd)
+  1. include**footer** (höfundur verkefnis og myndefnis). 
+  1. Innihald vefsins kemur með færibreytu í **&lt;main>**
+1. **Valmynd (nav)** inniheldur hlekk á forsíðu og **4** hlekki sem eru 'flokkur' úr gagnagrind **Þjófar / Betlarar / Perrar / Mannætur**.  Notaðu [url_for](namsefni/urlfor.py) fyrir hlekkina  **10%**
+1. **Forsíðan** birtir myndirnar af jólahyskinu  þar sem kemur fram nafn Jólasveins,  komudagur og mynd. Notandi þarf að geta valið einn af þeim til að fá nánari upplýsingar um hann (næsti liður).  Notaðu [url_for](namsefni/urlfor.py) til að birta myndir  **20%**
 1. Síða um jólasvein ( undirsíða ) inniheldur; nafn, persónulýsingu, hegðun, flokk og mynd. **25%**
 1. Flokkur (undirsíða). Ef notandi velur t.d. hlekkinn **Þjófar** úr valmynd þá birtist vefsíða einungis með jólasveinum úr þeim flokki. **25%**
 1. Settu upp 404 error route og viðeigandi html vefsíðu sem er birt ef upp kemur 404 villa **5%** 
