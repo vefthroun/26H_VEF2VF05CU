@@ -21,13 +21,15 @@
 
 1. Í **layout.html** er vefurinn er hlutaður niður í Jinja; **10%**
    1. include **nav** (valmynd)
-   1. include**footer** (höfundur verkefnis og myndefnis). 
+   1. include **footer** (höfundur verkefnis og myndefnis). 
    1. Innihald vefsins kemur með færibreytu í **&lt;main>**
 1. **Valmynd (nav)** inniheldur hlekk á forsíðu og **4** hlekki sem eru 'flokkur' úr gagnagrind **Þjófar / Betlarar / Perrar / Mannætur**.  Notaðu [url_for](namsefni/urlfor.py) fyrir hlekkina  **10%**
-1. **Forsíðan** birtir myndirnar af jólahyskinu  þar sem kemur fram nafn Jólasveins,  komudagur og mynd. Notandi þarf að geta valið einn af þeim til að fá nánari upplýsingar um hann (næsti liður).  Notaðu [url_for](namsefni/urlfor.py) til að birta myndir  **20%**
-1. Síða um jólasvein ( undirsíða ) inniheldur; nafn, persónulýsingu, hegðun, flokk og mynd. **25%**
+1. **Forsíðan** birtir myndirnar af jólahyskinu  þar sem kemur fram **nafn**,  **mynd** og **komudagur**. **20%**
+    * Notandi þarf að geta valið einn af þeim til að fá nánari upplýsingar um hann (næsti liður).  Notaðu [url_for](namsefni/urlfor.py) til að birta myndir  
+1. Síða birtir það sem var valið á annari rás ( undirsíða ) **20%**
+    * síðan inniheldur; **nafn, persónulýsingu, hegðun, flokk og mynd. 
 1. Flokkur (undirsíða). Ef notandi velur t.d. hlekkinn **Þjófar** úr valmynd þá birtist vefsíða einungis með jólasveinum úr þeim flokki. **25%**
-1. Settu upp 404 error route og viðeigandi html vefsíðu sem er birt ef upp kemur 404 villa **5%** 
+1. Settu upp 404 error route og viðeigandi html vefsíðu sem er birt ef upp kemur 404 villa **10%** 
 1. Notaðu [Pico css](https://picocss.com/) safnið fyrir uppsetningu og framsetningu á vef, eigið safn eða hvað sem þú vilt nota. **5%**
 
 > Engin harðkóðun!
