@@ -188,7 +188,7 @@ jolahyski =  [
 
 -  Notaðu `id` úr gagnagrind fyrir url í dynamic route
 -  dæmi um hlekk með _**url_for**_ `<a href="{{ url_for('flokkur', hegdun='Þjófar') }}" ` á dýnamískt route  `@app.route('/flokkur/<hegdun>')`
--  Þú gætir þurft að breyta streng í heiltölu t.d. id = int("3")  # breytum "3" í 3 með int()
+-  Í gagnagrindinni hér að ofan er id=heiltala (int) en færibreytan sem kemur frá jinja er strengur (string). Það er hægt að breyta streng í heiltölu svona `@app.route("/vara/<int:id>")`  
 
 ---
 
