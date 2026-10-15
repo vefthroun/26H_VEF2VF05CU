@@ -17,7 +17,7 @@
 Útfærðu vef sem sýnir hvenær jólasveinarnir koma til byggða, vefurinn er byggður upp með Flask. Notaðu lista með dictionaries sem gagnagrind (datastructure).  
 
 * Hér fyrir neðan er gagnagrind (jolahyski) sem þú getur notað.  
-* Hér eru [myndir af jólaveinunum](vinnugogn/geymsla/) í **.zip** skrá sem þú getur notað.
+* Hér eru [myndir af jólaveinunum](vinnugogn/) í **.zip** skrá sem þú getur notað.
 
 1. Vefurinn er hlutaður niður með **include** í Jinja2; **nav** (valmynd), **footer** (höfundur verkefnis og myndefnis). **10%**
 1. Valmynd (nav) inniheldur hlekk á forsíðu og **4** flokka úr gagnagrind **Þjófar / Betlarar / Perrar / Mannætur**.  Notaðu [url_for](namsefni/urlfor.py) fyrir hlekkina  **10%**
