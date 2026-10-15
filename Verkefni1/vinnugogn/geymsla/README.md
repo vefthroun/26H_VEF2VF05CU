@@ -1,4 +1,4 @@
-## Verkefni 1 
+## Verkefni 1 - ath! var á spönn 1.
 
 - 15% af heildareinkunn
 - Viðfangsefni: 
