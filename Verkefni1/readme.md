@@ -36,7 +36,7 @@
     1. include **nav** 
     1. include **footer**
 1. **Flokkur** (undirsíða). Ef notandi velur t.d. hlekkinn **Þjófar** úr `menu` (nav) þá birtist vefsíða einungis með jólasveinum úr þeim flokki. **25%**
-1. Settu upp 404 error route og viðeigandi html vefsíðu sem er birt ef upp kemur 404 villa **10%** 
+1. Settu upp villusíðu **error route** og viðeigandi html vefsíðu sem er birt ef upp kemur (404) villa **10%** 
 1. Notaðu [Pico css](https://picocss.com/) safnið fyrir uppsetningu og framsetningu á vef, eigið safn eða hvað sem þú vilt nota. **5%**
 
 > Engin harðkóðun!
