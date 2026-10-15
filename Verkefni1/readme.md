@@ -39,7 +39,7 @@
 1. Settu upp villusíðu **error route** og viðeigandi html vefsíðu sem er birt ef upp kemur (404) villa **10%** 
 1. Notaðu [Pico css](https://picocss.com/) safnið fyrir uppsetningu og framsetningu á vef, eigið safn eða hvað sem þú vilt nota. **5%**
 
-> Engin harðkóðun!
+> Allir tenglar (links) nota url_for! Engin harðkóðun.
 
 #### Skráarskipulag
 - Templateskrár sem í grunninn byggir á HTML geymast í möppu sem nefnist `templates`.
@@ -186,9 +186,10 @@ jolahyski =  [
 
 #### Punktar
 
--  Notaðu `id` úr gagnagrind fyrir url í dynamic route
--  dæmi um hlekk með _**url_for**_ `<a href="{{ url_for('flokkur', hegdun='Þjófar') }}" ` á dýnamískt route  `@app.route('/flokkur/<hegdun>')`
--  Í gagnagrindinni hér að ofan er id=heiltala (int) en færibreytan sem kemur frá jinja er strengur (string). Það er hægt að breyta streng í heiltölu svona `@app.route("/vara/<int:id>")`  
+-  Notaðu `id` úr gagnagrind fyrir url í dynamic route `<a href="{{ url_for('jolasveinn', id=item['id']) }}">`
+-  Í gagnagrindinni hér að ofan er id=heiltala (int) en færibreytan sem kemur frá jinja er strengur (string). Það er hægt að breyta streng í heiltölu svona í  `@app.route("/jolahyski/<int:id>")`  
+-  annað dæmi um _**url_for**_  í efnisyfirlitinu `<a href="{{ url_for('flokkur', hegdun='Þjófar') }}" `vísar færibbreytu (streng) á rásina  `@app.route('/flokkur/<hegdun>')`. 
+    - fallið 'flokkur' tekur við breytunni og ber hana saman við gagnagrindina til að finna rétta valið.
 
 ---
 
