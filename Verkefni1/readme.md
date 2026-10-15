@@ -19,7 +19,7 @@
 * Hér fyrir neðan er gagnagrind (jolahyski) sem þú getur notað.  
 * Hér eru [myndir af jólaveinunum](vinnugogn/) í **.zip** skrá sem þú getur notað.
 
-1. Í **layout.html** er vefurinn er hlutaður niður í Jinja; **10%**
+1. Í **index.html** er vefurinn er hlutaður niður í Jinja; **10%**
    1. include **nav** (valmynd)
    1. include **footer** (höfundur verkefnis og myndefnis). 
    1. Innihald vefsins kemur með færibreytu í **&lt;main>**
