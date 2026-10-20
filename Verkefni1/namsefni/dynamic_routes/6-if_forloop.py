@@ -18,7 +18,7 @@ def index():
             'body': 'I´m GROOT!'
         }
     ]
-    print(posts)
+    #print(posts)
     return render_template('for-if.html', posts=posts)
 
 # This starts the web app 
