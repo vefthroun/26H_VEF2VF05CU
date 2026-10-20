@@ -5,16 +5,16 @@ app = Flask(__name__)
 def index():
     posts = [
         {
-            'author': {'username': 'John'},
+            'author': {'username': 'John', 'title':'Student'},
             'body': 'Beautiful day in Portland!'
         },
         {
-            'author': {'username': 'Susan'},
+            'author': {'username': 'Susan', 'title':'Teacher'},
             'body': 'The Avengers movie was so cool!'
         }
         ,
         {
-            'author': {'username': 'Trump'},
+            'author': {'username': 'Trump', 'title':'Idiot'},
             'body': 'I´m GROOT!'
         }
     ]
