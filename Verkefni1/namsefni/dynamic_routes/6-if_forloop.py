@@ -18,7 +18,8 @@ def index():
             'body': 'I´m GROOT!'
         }
     ]
-    return render_template('include_forloop.html', posts=posts)
+    print(posts)
+    return render_template('for-if.html', posts=posts)
 
 # This starts the web app 
 if __name__ == '__main__':

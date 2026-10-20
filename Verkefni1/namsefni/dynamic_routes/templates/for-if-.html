@@ -1,0 +1,11 @@
+<html>
+  <body>
+    {% for post in posts %}
+    {% if post.author.username == "Susan" %}
+      <h1>{{ post.author.username }} says: <em>{{post.body}}</em></h2>
+      {%else%}
+      <p>{{ post.author.username }} says: <em>{{post.body}}</em></p>
+    {% endif %}
+  {% endfor %}
+  </body>
+</html> 
