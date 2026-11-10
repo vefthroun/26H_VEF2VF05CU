@@ -246,8 +246,6 @@ Margar af þessum slóðum styðja `embed` breytuna til að draga inn tengd gög
 * `https://api.tvmaze.com/shows/1?embed=episodes`
 * `https://api.tvmaze.com/shows/1?embed[]=episodes&embed[]=cast`
 
-💡 Viltu að ég sýni þér dæmi um hvernig á að útfæra tiltekna rás í Flask (t.d. fyrir leikara/cast eða árstíðir) og birta gögnin í Jinja2 sniðmáti?
-
 ---
 
 ### Listi yfir kvikmyndagreinar _(Genres)_
