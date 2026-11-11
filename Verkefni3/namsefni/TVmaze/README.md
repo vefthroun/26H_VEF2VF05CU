@@ -208,8 +208,8 @@ Hér er yfirlit yfir helstu endapunkta (endpoints) **TVmaze API**. Grunnvefsló�
 
 ---
 
-### 3. Árstíðir (Seasons)
-* **Þættir innan ákveðinnar árstíðar (Season Episodes)**:
+### 3. Þáttaraðir (Seasons)
+* **Þættir innan ákveðinnar þáttaraðar (Season Episodes)**:
   `GET /seasons/:id/episodes`
   * *Dæmi:* `https://api.tvmaze.com/seasons/1/episodes`
 
