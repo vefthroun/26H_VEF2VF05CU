@@ -8,8 +8,8 @@ verkefni-4/                  # rót appsins á þjóninum
 └── content/
     ├── blog.py
     ├── api.py
-    ├── templates/           # HTML-sniðmát, ef þeirra er þörf
-    └── static/              # CSS, JavaScript og myndir, ef þeirra er þörf
+    ├── templates/           # HTML-sniðmát
+    └── static/              # CSS, JavaScript og myndir
 ```
 
 `blog.py` og `api.py` skilgreina hvort sitt _Flask Blueprint_. `app.py`
