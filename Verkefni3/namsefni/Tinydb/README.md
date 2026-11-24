@@ -254,7 +254,7 @@ def delete_post(post_id):
     </title>
     <link rel="stylesheet" href="{{url_for('static', filename='pico.indigo.min.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="icon" type="image/svg" href="/static/images/Glogo.svg">
+    <link rel="icon" type="image/svg" href="/static/images/logo.svg">
 </head>
 <body>
     <nav class="container">

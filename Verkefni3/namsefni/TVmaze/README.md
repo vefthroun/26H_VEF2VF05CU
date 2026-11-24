@@ -208,8 +208,8 @@ Hér er yfirlit yfir helstu endapunkta (endpoints) **TVmaze API**. Grunnvefsló�
 
 ---
 
-### 3. Árstíðir (Seasons)
-* **Þættir innan ákveðinnar árstíðar (Season Episodes)**:
+### 3. Þáttaraðir (Seasons)
+* **Þættir innan ákveðinnar þáttaraðar (Season Episodes)**:
   `GET /seasons/:id/episodes`
   * *Dæmi:* `https://api.tvmaze.com/seasons/1/episodes`
 
@@ -245,8 +245,6 @@ Margar af þessum slóðum styðja `embed` breytuna til að draga inn tengd gög
 * `https://api.tvmaze.com/shows/1?embed=cast`
 * `https://api.tvmaze.com/shows/1?embed=episodes`
 * `https://api.tvmaze.com/shows/1?embed[]=episodes&embed[]=cast`
-
-💡 Viltu að ég sýni þér dæmi um hvernig á að útfæra tiltekna rás í Flask (t.d. fyrir leikara/cast eða árstíðir) og birta gögnin í Jinja2 sniðmáti?
 
 ---
 
