@@ -1,59 +1,135 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Page-1" id="GMKI_xNHeipOZf3wZf67">
-    <mxGraphModel dx="1030" dy="527" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="400" math="0" shadow="0">
+    <mxGraphModel dx="785" dy="451" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="Pmbyek_wukpfelbYyEqh-1" collapsed="1" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" value="app.py (root)" vertex="1">
-          <mxGeometry height="30" width="140" x="460" y="40" as="geometry">
-            <mxRectangle height="160" width="160" x="320" y="40" as="alternateBounds" />
+        <mxCell id="vumMSBhquHKpwhP54YH0-1" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="Pmbyek_wukpfelbYyEqh-5">
+          <mxGeometry relative="1" x="-0.25" as="geometry">
+            <mxPoint x="450" y="70" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-15" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="55" as="sourcePoint" />
+            <mxPoint x="370" y="55" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-4" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="blog.py (forsíða)" vertex="1">
-          <mxGeometry height="160" width="160" x="320" y="120" as="geometry">
+          <mxGeometry height="160" width="160" x="240" y="120" as="geometry">
             <mxRectangle height="30" width="140" x="200" y="240" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-7" parent="Pmbyek_wukpfelbYyEqh-4" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Hér birtast póstar frá notendum og myndir sem þeir geta birt" vertex="1">
-          <mxGeometry height="30" width="120" x="20" y="50" as="geometry" />
+          <mxGeometry height="30" width="120" x="20" y="65" as="geometry" />
         </mxCell>
-        <mxCell id="Pmbyek_wukpfelbYyEqh-5" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="api.py (undirsíða)" vertex="1">
-          <mxGeometry height="160" width="160" x="560" y="120" as="geometry">
+        <mxCell id="vumMSBhquHKpwhP54YH0-13" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="vumMSBhquHKpwhP54YH0-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pmbyek_wukpfelbYyEqh-5" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="api.py&amp;nbsp;" vertex="1">
+          <mxGeometry height="160" width="160" x="480" y="120" as="geometry">
             <mxRectangle height="30" width="140" x="440" y="240" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="Pmbyek_wukpfelbYyEqh-17" parent="Pmbyek_wukpfelbYyEqh-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Yfirlit&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="60" x="50" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-21" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="559.7777777777778" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-23" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;labelPadding=0 4;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="290.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-8" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="layout (extends)" vertex="1">
-          <mxGeometry height="65" width="400" x="320" y="510" as="geometry">
+          <mxGeometry height="160" width="160" x="480" y="352" as="geometry">
             <mxRectangle height="30" width="140" x="200" y="240" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Pmbyek_wukpfelbYyEqh-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="API efnisyfirlit, API leit og Innskráning (útskráning)&amp;nbsp;" vertex="1">
-          <mxGeometry height="30" width="350" x="340" y="540" as="geometry" />
+        <mxCell id="Pmbyek_wukpfelbYyEqh-9" parent="Pmbyek_wukpfelbYyEqh-8" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;ul&gt;&lt;li&gt;API efnisyfirlit (Flokkar),&amp;nbsp;&lt;/li&gt;&lt;li&gt;&lt;b&gt;API leit&amp;nbsp;&lt;/b&gt;&amp;nbsp;&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;Innskráning (útskráning)&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Nýskráning&lt;/b&gt;&amp;nbsp;&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;Footer (Höf. Hýsing ofl.)&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="30" width="175" x="-20" y="74" as="geometry" />
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Admin&amp;nbsp;" vertex="1">
-          <mxGeometry height="160" width="160" x="320" y="320" as="geometry">
+          <mxGeometry height="160" width="160" x="240" y="480" as="geometry">
             <mxRectangle height="30" width="140" x="200" y="240" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Pmbyek_wukpfelbYyEqh-11" parent="Pmbyek_wukpfelbYyEqh-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Yfirlit yfir notendur og alla pósta&lt;div&gt;admin getur eytt notendum og póstum&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="120" x="20" y="60" as="geometry" />
+        <mxCell id="Pmbyek_wukpfelbYyEqh-11" parent="Pmbyek_wukpfelbYyEqh-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Yfirlit yfir notendur og alla pósta&lt;div&gt;&lt;br&gt;&lt;div&gt;admin getur eytt notendum og póstum&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="120" x="20" y="75" as="geometry" />
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-12" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Profile" vertex="1">
-          <mxGeometry height="160" width="160" x="560" y="320" as="geometry">
+          <mxGeometry height="160" width="160" x="240" y="300" as="geometry">
             <mxRectangle height="30" width="140" x="200" y="240" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-13" parent="Pmbyek_wukpfelbYyEqh-12" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Notendur skrifa pósta og hlaða inn myndum" vertex="1">
-          <mxGeometry height="30" width="120" x="20" y="50" as="geometry" />
+          <mxGeometry height="30" width="120" x="20" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-4" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="Pmbyek_wukpfelbYyEqh-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-6" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;labelPadding=0 4;exitX=1.008;exitY=0.353;exitDx=0;exitDy=0;exitPerimeter=0;">
+          <mxGeometry relative="1" x="0.0151" as="geometry">
+            <mxPoint x="240" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-10" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;defaultLabelBackgroundColor=page;labelPadding=0 4;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="Pmbyek_wukpfelbYyEqh-10">
+          <mxGeometry relative="1" x="0.3967" as="geometry">
+            <Array as="points">
+              <mxPoint x="90" y="460" />
+              <mxPoint x="90" y="600" />
+            </Array>
+            <mxPoint x="230" y="700" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-14" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" value="" vertex="1">
-          <mxGeometry height="170" width="130" x="120" y="200" as="geometry" />
+          <mxGeometry height="170" width="130" x="40" y="290" as="geometry" />
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;json&lt;/b&gt;&lt;div&gt;.users&lt;/div&gt;&lt;div&gt;.posts&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="60" x="150" y="260" as="geometry" />
+          <mxGeometry height="30" width="60" x="75" y="360" as="geometry" />
         </mxCell>
-        <mxCell id="Pmbyek_wukpfelbYyEqh-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Text" vertex="1">
-          <mxGeometry height="30" width="60" x="580" y="170" as="geometry" />
+        <mxCell id="vumMSBhquHKpwhP54YH0-2" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="Pmbyek_wukpfelbYyEqh-4">
+          <mxGeometry relative="1" x="-0.1448" as="geometry">
+            <mxPoint x="415" y="70" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-5" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-9" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.6;entryY=1.018;entryDx=0;entryDy=0;entryPerimeter=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="Pmbyek_wukpfelbYyEqh-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-11" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Nánari upplýsingar" vertex="1">
+          <mxGeometry height="160" width="160" x="680" y="120" as="geometry">
+            <mxRectangle height="30" width="140" x="440" y="240" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-12" parent="vumMSBhquHKpwhP54YH0-11" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Notandi&amp;nbsp; nær í nánari upplýsingar" vertex="1">
+          <mxGeometry height="30" width="120" x="20" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-16" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="" vertex="1">
+          <mxGeometry height="80" width="80" x="400" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="app.py" vertex="1">
+          <mxGeometry height="30" width="60" x="410" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-20" edge="1" parent="1" source="vumMSBhquHKpwhP54YH0-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;labelPadding=0 4;entryX=0.145;entryY=1;entryDx=0;entryDy=-4.35;entryPerimeter=0;" target="Pmbyek_wukpfelbYyEqh-14">
+          <mxGeometry relative="1" x="-0.0229" as="geometry">
+            <mxPoint x="60" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-18" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Nýskráning" vertex="1">
+          <mxGeometry height="160" width="160" x="480" y="585" as="geometry">
+            <mxRectangle height="30" width="140" x="200" y="240" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-24" parent="vumMSBhquHKpwhP54YH0-18" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;ul&gt;&lt;li&gt;Nafn:&lt;/li&gt;&lt;li&gt;Lykilorð:&lt;/li&gt;&lt;li&gt;Lykilorð endurtekið&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="30" width="160" x="-10" y="63" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
