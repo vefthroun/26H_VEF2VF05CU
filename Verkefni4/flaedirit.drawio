@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Page-1" id="GMKI_xNHeipOZf3wZf67">
-    <mxGraphModel dx="1358" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="400" math="0" shadow="0">
+    <mxGraphModel dx="1636" dy="941" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -39,12 +39,17 @@
             <mxPoint x="559.7777777777778" y="580" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-23" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;labelPadding=0 4;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="290.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-8" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="layout (extends)" vertex="1">
           <mxGeometry height="160" width="160" x="480" y="360" as="geometry">
             <mxRectangle height="30" width="140" x="200" y="240" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Pmbyek_wukpfelbYyEqh-9" parent="Pmbyek_wukpfelbYyEqh-8" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;ul&gt;&lt;li&gt;API efnisyfirlit (Flokkar),&amp;nbsp;&lt;/li&gt;&lt;li&gt;API leit&amp;nbsp;&amp;nbsp;&lt;/li&gt;&lt;li&gt;Innskráning (útskráning)&lt;br&gt;&lt;/li&gt;&lt;li&gt;Nýskráning&lt;/li&gt;&lt;li&gt;layout er á öllum síðum&amp;nbsp;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+        <mxCell id="Pmbyek_wukpfelbYyEqh-9" parent="Pmbyek_wukpfelbYyEqh-8" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;ul&gt;&lt;li&gt;API efnisyfirlit (Flokkar),&amp;nbsp;&lt;/li&gt;&lt;li&gt;&lt;b&gt;API leit&amp;nbsp;&lt;/b&gt;&amp;nbsp;&lt;/li&gt;&lt;li&gt;Innskráning (útskráning)&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Nýskráning&lt;/b&gt;&lt;/li&gt;&lt;li&gt;layout er á öllum síðum&amp;nbsp;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
           <mxGeometry height="30" width="175" x="-20" y="59" as="geometry" />
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Admin&amp;nbsp;" vertex="1">
