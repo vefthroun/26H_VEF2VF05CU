@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Page-1" id="GMKI_xNHeipOZf3wZf67">
-    <mxGraphModel dx="943" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="400" math="0" shadow="0">
+    <mxGraphModel dx="1358" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -34,13 +34,18 @@
         <mxCell id="Pmbyek_wukpfelbYyEqh-17" parent="Pmbyek_wukpfelbYyEqh-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Yfirlit&amp;nbsp;" vertex="1">
           <mxGeometry height="30" width="60" x="50" y="60" as="geometry" />
         </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-21" edge="1" parent="1" source="Pmbyek_wukpfelbYyEqh-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="559.7777777777778" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-8" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="layout (extends)" vertex="1">
-          <mxGeometry height="120" width="160" x="570" y="360" as="geometry">
+          <mxGeometry height="160" width="160" x="480" y="360" as="geometry">
             <mxRectangle height="30" width="140" x="200" y="240" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Pmbyek_wukpfelbYyEqh-9" parent="Pmbyek_wukpfelbYyEqh-8" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="API efnisyfirlit, API leit og&amp;nbsp;&lt;div&gt;Innskráning (útskráning)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;layout er á öllum síðum&amp;nbsp;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="150" x="5" y="45" as="geometry" />
+        <mxCell id="Pmbyek_wukpfelbYyEqh-9" parent="Pmbyek_wukpfelbYyEqh-8" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;ul&gt;&lt;li&gt;API efnisyfirlit (Flokkar),&amp;nbsp;&lt;/li&gt;&lt;li&gt;API leit&amp;nbsp;&amp;nbsp;&lt;/li&gt;&lt;li&gt;Innskráning (útskráning)&lt;br&gt;&lt;/li&gt;&lt;li&gt;Nýskráning&lt;/li&gt;&lt;li&gt;layout er á öllum síðum&amp;nbsp;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="30" width="175" x="-20" y="59" as="geometry" />
         </mxCell>
         <mxCell id="Pmbyek_wukpfelbYyEqh-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Admin&amp;nbsp;" vertex="1">
           <mxGeometry height="160" width="160" x="240" y="480" as="geometry">
@@ -107,6 +112,16 @@
         </mxCell>
         <mxCell id="vumMSBhquHKpwhP54YH0-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="app.py" vertex="1">
           <mxGeometry height="30" width="60" x="410" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-20" edge="1" parent="1" source="vumMSBhquHKpwhP54YH0-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;labelPadding=0 4;entryX=0.145;entryY=1;entryDx=0;entryDy=-4.35;entryPerimeter=0;" target="Pmbyek_wukpfelbYyEqh-14">
+          <mxGeometry relative="1" x="-0.0229" as="geometry">
+            <mxPoint x="60" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vumMSBhquHKpwhP54YH0-18" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Nýskráning" vertex="1">
+          <mxGeometry height="160" width="160" x="480" y="585" as="geometry">
+            <mxRectangle height="30" width="140" x="200" y="240" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
