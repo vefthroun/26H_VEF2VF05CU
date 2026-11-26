@@ -52,3 +52,6 @@
      * yfirlit yfir notendur. Hægt er að eyða notendum
      * yfirlit yfir alla pósta. Hægt er að eyða póstum
 
+#### Flæðirit
+
+![Flæðirit Draw.io SVG](flaedirit.drawio.svg)
